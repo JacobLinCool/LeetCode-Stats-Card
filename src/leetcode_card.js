@@ -12,8 +12,8 @@ function leetcode_card(data, parameters) {
 <text class="sub" text-anchor="end" transform="translate(485, 35)" style="font-size: 18px;">#${data.profile.ranking > 100000 ? "100000+" : data.profile.ranking}</text>
 
 <g transform="translate(30, 80)">
-    <circle cx="40" cy="40" r="40" stroke="lightgray" stroke-width="5" />
-    <circle cx="40" cy="40" r="40" stroke="#FFA116" stroke-width="5" stroke-linecap="round" stroke-dasharray="${80 * Math.PI * (data.problem.all.solved / data.problem.all.total)} 1000" transform-origin="40px 40px" transform="rotate(-90)" />
+    <circle cx="40" cy="40" r="40" stroke="lightgray" stroke-width="6" />
+    <circle cx="40" cy="40" r="40" stroke="#FFA116" stroke-width="6" stroke-linecap="round" stroke-dasharray="${80 * Math.PI * (data.problem.all.solved / data.problem.all.total)} 1000" transform-origin="40px 40px" transform="rotate(-90)" />
     <g>
         <text x="40" y="40" style="font-size: 28px;" alignment-baseline="central" dominant-baseline="central" text-anchor="middle">${data.problem.all.solved}</text>
     </g>
