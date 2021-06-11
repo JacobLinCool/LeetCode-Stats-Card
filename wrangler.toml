@@ -1,0 +1,11 @@
+name = "leetcode-card"
+type = "webpack"
+account_id = "b1c3d1b89f9131a84a0f1f6a973232f1"
+workers_dev = true
+route = ""
+zone_id = ""
+webpack_config = "webpack.config.js"
+kv_namespaces = []
+
+[triggers]
+crons = []
