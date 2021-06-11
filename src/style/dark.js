@@ -26,7 +26,7 @@ const dark_style = [
     [
         "circle.circle_bg, line.progress_bg",
         {
-            stroke: "rgb(220, 220, 220)",
+            stroke: "rgb(64, 64, 64)",
         },
     ],
 ];

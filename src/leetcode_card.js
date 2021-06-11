@@ -16,7 +16,7 @@ function leetcode_card(data, parameters) {
     }</text>
 
 <g transform="translate(30, 85)">
-    <circle class="circle_bg" cx="40" cy="40" r="40" stroke="lightgray" stroke-width="6" />
+    <circle class="circle_bg" cx="40" cy="40" r="40" stroke="#e5e5e5" stroke-width="6" />
     <circle class="circle" cx="40" cy="40" r="40" stroke="#FFA116" stroke-width="6" stroke-linecap="round" stroke-dasharray="${
         80 * Math.PI * (data.problem.all.solved / data.problem.all.total)
     } 1000" transform-origin="40px 40px" />
@@ -33,7 +33,7 @@ function leetcode_card(data, parameters) {
         <text class="sub solved" text-anchor="end" transform="translate(300, 0)" style="font-size: 16px;">${data.problem.easy.solved} / ${
         data.problem.easy.total
     }</text>
-        <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" stroke="lightgray" stroke-width="4" stroke-linecap="round" />
+        <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" stroke="#e5e5e5" stroke-width="4" stroke-linecap="round" />
         <line class="progress" x1="0" y1="10" x2="300" y2="10" stroke="#5cb85c" stroke-width="4" stroke-dasharray="${
             300 * (data.problem.easy.solved / data.problem.easy.total)
         } 1000" stroke-linecap="round" />
@@ -43,7 +43,7 @@ function leetcode_card(data, parameters) {
         <text class="sub solved" text-anchor="end" transform="translate(300, 0)" style="font-size: 16px;">${data.problem.medium.solved} / ${
         data.problem.medium.total
     }</text>
-        <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" stroke="lightgray" stroke-width="4" stroke-linecap="round" />
+        <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" stroke="#e5e5e5" stroke-width="4" stroke-linecap="round" />
         <line class="progress" x1="0" y1="10" x2="300" y2="10" stroke="#f0ad4e" stroke-width="4" stroke-dasharray="${
             300 * (data.problem.medium.solved / data.problem.medium.total)
         } 1000" stroke-linecap="round" />
@@ -53,7 +53,7 @@ function leetcode_card(data, parameters) {
         <text class="sub solved" text-anchor="end" transform="translate(300, 0)" style="font-size: 16px;">${data.problem.hard.solved} / ${
         data.problem.hard.total
     }</text>
-        <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" stroke="lightgray" stroke-width="4" stroke-linecap="round" />
+        <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" stroke="#e5e5e5" stroke-width="4" stroke-linecap="round" />
         <line class="progress" x1="0" y1="10" x2="300" y2="10" stroke="#d9534f" stroke-width="4" stroke-dasharray="${
             300 * (data.problem.hard.solved / data.problem.hard.total)
         } 1000" stroke-linecap="round" />
