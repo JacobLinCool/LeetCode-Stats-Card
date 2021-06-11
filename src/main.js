@@ -35,16 +35,26 @@ async function handle_request(event) {
 
         // if no cache
         if (!response) {
-            const data = await leetcode_data(final_parameters.username);
-            console.log("Leetcode Data", data);
+            try {
+                const data = await leetcode_data(final_parameters.username);
+                console.log("Leetcode Data", data);
 
-            response = new Response(leetcode_card(data, final_parameters), {
-                headers: {
-                    "Content-Type": "image/svg+xml; charset=utf-8",
-                    "Cache-Control": "s-maxage=60",
-                },
-            });
-            cors_header(response.headers);
+                response = new Response(leetcode_card(data, final_parameters), {
+                    headers: {
+                        "Content-Type": "image/svg+xml; charset=utf-8",
+                        "Cache-Control": "s-maxage=60",
+                    },
+                });
+                cors_header(response.headers);
+            } catch (err) {
+                return new Response("User Not Found", {
+                    headers: {
+                        "Content-Type": "text/plain; charset=utf-8",
+                    },
+                    status: 404,
+                    statusText: "Not Found",
+                });
+            }
 
             // async update cache
             event.waitUntil(cache.put(cache_key, response.clone()));
