@@ -1,7 +1,9 @@
 const default_parameters = {
     username: null,
     style: "default",
-    animation: true
+    animation: true,
+    width: 500,
+    height: 200,
 };
 
 function parameters(search) {

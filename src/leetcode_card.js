@@ -3,7 +3,7 @@ import { leetcode_icon } from "./img.js";
 import { style } from "./style.js";
 
 function leetcode_card(data, parameters) {
-    const [svg_start_tag, svg_close_tag] = svg_tag();
+    const [svg_start_tag, svg_close_tag] = svg_tag(parameters.width, parameters.height);
     return `${svg_start_tag}
 <style>${style(parameters)}</style>
 <rect id="background" stroke="lightgray" stroke-width="1" width="498" height="198" x="0.5" y="0.5" rx="4" />
