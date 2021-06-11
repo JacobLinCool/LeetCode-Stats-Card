@@ -17,7 +17,7 @@ function leetcode_card(data, parameters) {
     <circle class="circle_bg" cx="40" cy="40" r="40" stroke="lightgray" stroke-width="6" />
     <circle class="circle" cx="40" cy="40" r="40" stroke="#FFA116" stroke-width="6" stroke-linecap="round" stroke-dasharray="${
         80 * Math.PI * (data.problem.all.solved / data.problem.all.total)
-    } 1000" transform-origin="40px 40px" transform="rotate(-90)" />
+    } 1000" transform-origin="40px 40px" />
     <g>
         <text id="total_solved" x="40" y="40" style="font-size: 28px;" alignment-baseline="central" dominant-baseline="central" text-anchor="middle">${
             data.problem.all.solved

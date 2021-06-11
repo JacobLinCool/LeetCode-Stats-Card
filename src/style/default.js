@@ -13,6 +13,13 @@ const default_style = [
             fill: "rgb(128, 128, 128)",
         },
     ],
+    [
+        "circle.circle",
+        {
+            "transform-box": "fill-box",
+            transform: "rotate(-90deg)",
+        },
+    ],
 ];
 
 export { default_style };
