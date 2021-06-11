@@ -6,7 +6,9 @@ function leetcode_card(data, parameters) {
     const [svg_start_tag, svg_close_tag] = svg_tag(parameters.width, parameters.height);
     return `${svg_start_tag}
 <style>${style(parameters)}</style>
-<rect id="background" stroke="lightgray" stroke-width="1" width="498" height="198" x="0.5" y="0.5" rx="4" />
+<rect id="background" stroke="lightgray" stroke-width="${parameters.border}" width="${500 - parameters.border}" height="${200 - parameters.border}" x="${
+        parameters.border / 2
+    }" y="${parameters.border / 2}" rx="4" />
 <g id="icon" transform="translate(20, 15)">${leetcode_icon(30, 30)}</g>
 <text id="username" transform="translate(65, 40)" style="font-size: 24px;">${data.username}</text>
 <text id="rank" class="sub" text-anchor="end" transform="translate(480, 40)" style="font-size: 18px;">#${

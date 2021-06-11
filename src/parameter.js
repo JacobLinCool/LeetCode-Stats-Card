@@ -4,6 +4,7 @@ const default_parameters = {
     animation: true,
     width: 500,
     height: 200,
+    border: 1,
 };
 
 function parameters(search) {
