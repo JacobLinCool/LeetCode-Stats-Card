@@ -3,7 +3,7 @@ A simple tool for every leetcoder.
 
 Show your leetcode stats on your GitHub profile or your website!
 
-[![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool)](https://leetcode-card.jacob.workers.dev/)
+[![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=default)](https://leetcode-card.jacob.workers.dev/)
 
 ## Usage
 Just copy the code below, paste it into your readme.md, and change the value of `username`.
@@ -36,7 +36,7 @@ Key         |Description                           |Default Value    |Required
 `animation` |Enable Animation: `true` or `false`   |`true`           | NO
 
 ### Styles
-Now we only 2 styles. If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles is welcome!
+Now we only have 2 styles. If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
 
 #### Default
 ![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=default)
