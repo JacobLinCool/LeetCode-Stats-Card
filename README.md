@@ -1,7 +1,7 @@
-# leetcode stats card
-A simple tool for every leetcoder.
+# LeetCode Stats Card
+A simple tool for every LeetCoder.
 
-Show your leetcode stats on your GitHub profile or your website!
+Show your LeetCode stats on your GitHub profile or your website!
 
 [![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=default)](https://leetcode-card.jacob.workers.dev/)
 
@@ -21,7 +21,7 @@ Want hyperlink? Try this:
 ```
 
 ### Endpoint
-The endpoint of this awesome toll is: 
+The endpoint of this awesome tool is: 
 
 [https://leetcode-card.jacob.workers.dev/](https://leetcode-card.jacob.workers.dev/)
 
