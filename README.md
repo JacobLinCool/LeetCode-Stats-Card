@@ -34,6 +34,7 @@ Key         |Description                           |Default Value    |Required
 `width`     |Card Width: `Number`                  |`500`            | NO
 `height`    |Card Height: `Number`                 |`200`            | NO
 `animation` |Enable Animation: `true` or `false`   |`true`           | NO
+`border`    |Border Width: `Number`                |`1`              | NO
 
 ### Styles
 Now we only have 2 styles (and 1 beta style). If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
