@@ -21,16 +21,29 @@ async function handle_request(event) {
     console.log("Final Parameters", final_parameters);
 
     if (final_parameters.username) {
-        const data = await leetcode_data(final_parameters.username);
-        console.log("Leetcode Data", data);
+        // contruct cache key
+        const cache_key = new Request(request.url, request);
+        const cache = caches.default;
 
-        let response = new Response(leetcode_card(data, final_parameters), {
-            headers: {
-                "content-type": "image/svg+xml; charset=utf-8",
-            },
-        });
-        cors_header(response.headers);
+        // check cache
+        let response = await cache.match(cache_key);
 
+        // if no cache
+        if (!response) {
+            const data = await leetcode_data(final_parameters.username);
+            console.log("Leetcode Data", data);
+
+            response = new Response(leetcode_card(data, final_parameters), {
+                headers: {
+                    "Content-Type": "image/svg+xml; charset=utf-8",
+                    "Cache-Control": "s-maxage=60",
+                },
+            });
+            cors_header(response.headers);
+
+            // async update cache
+            event.waitUntil(cache.put(cache_key, response.clone()));
+        }
         return response;
     } else
         return new Response(html, {
