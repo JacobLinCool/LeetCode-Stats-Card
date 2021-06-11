@@ -3,6 +3,8 @@ A simple tool for every LeetCoder.
 
 Show your LeetCode stats on your GitHub profile or your website!
 
+[Try It Now](https://leetcode-card.jacob.workers.dev/)
+
 [![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=)](https://leetcode-card.jacob.workers.dev/)
 
 ## Usage
