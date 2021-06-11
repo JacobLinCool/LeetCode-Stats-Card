@@ -36,10 +36,13 @@ Key         |Description                           |Default Value    |Required
 `animation` |Enable Animation: `true` or `false`   |`true`           | NO
 
 ### Styles
-Now we only have 2 styles. If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
+Now we only have 2 styles (and 1 beta style). If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
 
 #### Default
 ![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=default)
 
 #### Dark
 ![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=dark)
+
+#### Auto (Beta)
+![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=auto)

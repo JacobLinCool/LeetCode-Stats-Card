@@ -10,6 +10,16 @@ function style(parameters) {
             .join("")}} `;
     });
 
+    if (parameters.style == "auto") {
+        css += `@media (prefers-color-scheme: dark) { `;
+        dark_style.forEach((rule) => {
+            css += `${rule[0]}{${Object.entries(rule[1])
+                .map((pair) => pair[0] + ":" + pair[1] + ";")
+                .join("")}} `;
+        });
+        css += `} `;
+    }
+
     if (parameters.style == "dark") {
         dark_style.forEach((rule) => {
             css += `${rule[0]}{${Object.entries(rule[1])
