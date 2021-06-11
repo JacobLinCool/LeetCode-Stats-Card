@@ -5,7 +5,7 @@ Show your LeetCode stats on your GitHub profile or your website!
 
 [Try It Now](https://leetcode-card.jacob.workers.dev/)
 
-[![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=)](https://leetcode-card.jacob.workers.dev/)
+[![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&update=20210612)](https://leetcode-card.jacob.workers.dev/)
 
 ## Usage
 Just copy the code below, paste it into your readme.md, and change the value of `username`.
@@ -42,10 +42,10 @@ Key         |Description                           |Default Value    |Required
 Now we only have 2 styles (and 1 beta style). If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
 
 #### Default
-![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=)
+![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=default&update=20210612)
 
 #### Dark
-![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=dark)
+![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=dark&update=20210612)
 
 #### Auto (Beta)
-![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=auto)
+![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=auto&update=20210612)
