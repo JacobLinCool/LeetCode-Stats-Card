@@ -8,3 +8,5 @@ const html = `
     </body>
 </html>
 `;
+
+export { html };
