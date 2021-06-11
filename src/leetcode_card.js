@@ -2,14 +2,42 @@ import { svg_tag } from "./svg.js";
 import { leetcode_icon } from "./img.js";
 import { style } from "./style.js";
 
-function leetcode_card(data) {
+function leetcode_card(data, parameters) {
     const [svg_start_tag, svg_close_tag] = svg_tag();
     return `${svg_start_tag}
-<style>${style()}</style>
-<rect id="main_rect" width="498" height="198" x="0.5" y="0.5" rx="4" />
+<style>${style(parameters.style)}</style>
+<rect id="background" stroke="lightgray" stroke-width="1" width="498" height="198" x="0.5" y="0.5" rx="4" />
 <g transform="translate(15, 10)">${leetcode_icon(30, 30)}</g>
-<text transform="translate(60, 40)" fill="rgb(38, 38, 38)">JacobLinCool</text>
-<g id="body">
+<text transform="translate(60, 35)" style="font-size: 24px;">${data.username}</text>
+<text class="sub" text-anchor="end" transform="translate(485, 35)" style="font-size: 18px;">#${data.profile.ranking > 100000 ? "100000+" : data.profile.ranking}</text>
+
+<g transform="translate(30, 80)">
+    <circle cx="40" cy="40" r="40" stroke="lightgray" stroke-width="5" />
+    <circle cx="40" cy="40" r="40" stroke="#FFA116" stroke-width="5" stroke-linecap="round" stroke-dasharray="${80 * Math.PI * (data.problem.all.solved / data.problem.all.total)} 1000" transform-origin="40px 40px" transform="rotate(-90)" />
+    <g>
+        <text x="40" y="40" style="font-size: 28px;" alignment-baseline="central" dominant-baseline="central" text-anchor="middle">${data.problem.all.solved}</text>
+    </g>
+</g>
+
+<g transform="translate(160, 75)">
+    <g transform="translate(0, 0)">
+        <text style="font-size: 18px;">Easy</text>
+        <text class="sub" text-anchor="end" transform="translate(300, 0)" style="font-size: 16px;">${data.problem.easy.solved} / ${data.problem.easy.total}</text>
+        <line x1="0" y1="10" x2="300" y2="10" stroke="lightgray" stroke-width="4" stroke-linecap="round" />
+        <line x1="0" y1="10" x2="300" y2="10" stroke="#5cb85c" stroke-width="4" stroke-dasharray="${300 * (data.problem.easy.solved / data.problem.easy.total)} 1000" stroke-linecap="round" />
+    </g>
+    <g transform="translate(0, 40)">
+        <text style="font-size: 18px;">Medium</text>
+        <text class="sub" text-anchor="end" transform="translate(300, 0)" style="font-size: 16px;">${data.problem.medium.solved} / ${data.problem.medium.total}</text>
+        <line x1="0" y1="10" x2="300" y2="10" stroke="lightgray" stroke-width="4" stroke-linecap="round" />
+        <line x1="0" y1="10" x2="300" y2="10" stroke="#f0ad4e" stroke-width="4" stroke-dasharray="${300 * (data.problem.medium.solved / data.problem.medium.total)} 1000" stroke-linecap="round" />
+    </g>
+    <g transform="translate(0, 80)">
+        <text style="font-size: 18px;">Hard</text>
+        <text class="sub" text-anchor="end" transform="translate(300, 0)" style="font-size: 16px;">${data.problem.hard.solved} / ${data.problem.hard.total}</text>
+        <line x1="0" y1="10" x2="300" y2="10" stroke="lightgray" stroke-width="4" stroke-linecap="round" />
+        <line x1="0" y1="10" x2="300" y2="10" stroke="#d9534f" stroke-width="4" stroke-dasharray="${300 * (data.problem.hard.solved / data.problem.hard.total)} 1000" stroke-linecap="round" />
+    </g>
 </g>
 ${svg_close_tag}`;
 }

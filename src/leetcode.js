@@ -3,7 +3,7 @@ const baseurl = "https://leetcode.com";
 async function get_csrf() {
     const cookies_raw = await fetch(`https://leetcode.com/`, {
         headers: {
-            "user-agent": "Mozilla/5.0 GitHub Action",
+            "user-agent": "Mozilla/5.0 Leetcode Stats Card v1",
         },
     }).then((res) => res.headers.get("set-cookie"));
     const csrf_token = cookies_raw
@@ -24,7 +24,7 @@ async function leetcode_data(username) {
             referer: `https://leetcode.com/${username}/`,
             cookie: `csrftoken=${csrf_token}; `,
             "x-csrftoken": csrf_token,
-            "user-agent": "Mozilla/5.0 GitHub Action",
+            "user-agent": "Mozilla/5.0 Leetcode Stats Card v1",
         },
         body: JSON.stringify({
             operationName: "getUserProfile",

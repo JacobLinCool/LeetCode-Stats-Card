@@ -24,7 +24,7 @@ async function handle_request(event) {
         const data = await leetcode_data(final_parameters.username);
         console.log("Leetcode Data", data);
 
-        let response = new Response(leetcode_card(data), {
+        let response = new Response(leetcode_card(data, final_parameters), {
             headers: {
                 "content-type": "image/svg+xml; charset=utf-8",
             },
