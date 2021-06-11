@@ -1,5 +1,11 @@
 const default_style = [
     [
+        "rect#background",
+        {
+            fill: "#ffffff",
+        },
+    ],
+    [
         "text",
         {
             "font-family": `"Segoe UI", "PingFang SC", Ubuntu, Sans-Serif`,
