@@ -1,8 +1,7 @@
 const default_parameters = {
     username: null,
     style: "default",
-    top: "4,icon,4,username|4,rank,4",
-    body: "total,detail",
+    animation: true
 };
 
 function parameters(search) {
