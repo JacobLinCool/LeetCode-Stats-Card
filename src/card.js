@@ -1,3 +1,4 @@
+/* This file is not using right now */
 import { leetcode_icon } from "./img.js";
 let grid = [
     {
