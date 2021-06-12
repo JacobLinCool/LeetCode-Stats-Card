@@ -29,15 +29,16 @@ The endpoint of this awesome tool is:
 
 ### Parameters
 
-Key         |Description                           |Default Value    |Required
----         |---                                   |---              |---
-`username`  |Your LeetCode Username                |`null`           | YES
-`style`     |Card Style: `default` or `dark`       |`default`        | NO
-`width`     |Card Width: `Number`                  |`500`            | NO
-`height`    |Card Height: `Number`                 |`200`            | NO
-`animation` |Enable Animation: `true` or `false`   |`true`           | NO
-`border`    |Border Width: `Number`                |`1`              | NO
-`extension` |Enable Extesion: `activity` or `null` |`null`           | NO
+Key              |Description                              |Default Value    |Required
+---              |---                                      |---              |---
+`username`       |Your LeetCode Username: `String`         |`null`           | YES
+`style`          |Card [Style](#styles): `String`          |`default`        | NO
+`width`          |Card Width: `Number`                     |`500`            | NO
+`height`         |Card Height: `Number`                    |`200`            | NO
+`animation`      |Enable Animation: `Boolean`              |`true`           | NO
+`border`         |Border Width: `Number`                   |`1`              | NO
+`border_radius`  |Border Radius: `Number`                  |`4`              | NO
+`extension`      |Enable [Extesion](#extensions): `String` |`null`           | NO
 
 ### Styles
 Now we only have 2 styles (and 1 beta style). If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!

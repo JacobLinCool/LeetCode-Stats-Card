@@ -10,7 +10,7 @@ function leetcode_card(data, parameters) {
 <g class="theme_${parameters.style}">
 <rect id="background" stroke="lightgray" stroke-width="${parameters.border}" width="${500 - parameters.border}" height="${
         (parameters.extension == "activity" ? 400 : 200) - parameters.border
-    }" x="${parameters.border / 2}" y="${parameters.border / 2}" rx="4" />
+    }" x="${parameters.border / 2}" y="${parameters.border / 2}" rx="${parameters.border_radius}" />
 <g id="icon" transform="translate(20, 15)">${leetcode_icon(30, 30)}</g>
 <text id="username" transform="translate(65, 40)" style="font-size: 24px;">${data.username}</text>
 <text id="rank" class="sub" text-anchor="end" transform="translate(480, 40)" style="font-size: 18px;">#${
@@ -65,7 +65,9 @@ ${
     parameters.extension == "activity"
         ? `
     <g id="extension" transform="translate(0, 200)">
-        <line x1="10" y1="0" x2="490" y2="0" stroke="lightgray" stroke-width="1"></line>
+        <line x1="10" y1="0" x2="490" y2="0" stroke="lightgray" stroke-width="1" style="${
+            parameters.animation ? `opacity: 0; animation: fade_in 1 0.3s 1.8s forwards;` : ""
+        }"></line>
         ${ext_activity(data, parameters)}
     </g>
     `
