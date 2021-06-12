@@ -54,7 +54,7 @@ const css = `
 function ext_activity(data, parameters) {
     let activities = data.activity.slice(0, 10);
     let svg = "";
-    svg += `<text x="20" y="20">Recent Activities</text>`;
+    svg += `<text x="20" y="20" style="${parameters.animation ? `opacity: 0; animation: fade_in 1 0.3s 1.7s forwards;` : ""}">Recent Activities</text>`;
     svg += `<foreignObject x="20" y="30" width="460" height="160"><div id="ext_flex_box" xmlns="http://www.w3.org/1999/xhtml">`;
     for (let i = 0; i < activities.length; i++) {
         let status = `Unknown`;
@@ -86,7 +86,7 @@ function ext_activity(data, parameters) {
         }
 
         svg += `
-            <div class="ext_submission_wrap">
+            <div class="ext_submission_wrap" style="${parameters.animation ? `opacity: 0; animation: fade_in 1 0.3s ${1.8 + 0.1 * i}s forwards;` : ""}">
                 <span class="ext_time sub_text">${activities[i].time.getMonth() + 1}/${activities[i].time.getDate()}</span>
                 <span class="ext_submission ${status}">${status}</span>
                 <span class="ext_lang">${activities[i].lang}</span>
