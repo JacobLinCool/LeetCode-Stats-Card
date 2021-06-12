@@ -31,7 +31,7 @@ const css = `
     background: rgb(76, 175, 80);
     color: #ffffff;
 }
-.ext_submission.WA, .ext_submission.RE, .ext_submission.TLE, .ext_submission.MLE {
+.ext_submission.WA, .ext_submission.TLE, .ext_submission.MLE, .ext_submission.OLE, .ext_submission.RE, .ext_submission.CE, .ext_submission.SE {
     background: rgb(233, 30, 99);
     color: #ffffff;
 }
@@ -71,8 +71,17 @@ function ext_activity(data, parameters) {
             case "Memory Limit Exceeded":
                 status = "MLE";
                 break;
+            case "Output Limit Exceeded":
+                status = "OLE";
+                break;
             case "Runtime Error":
                 status = "RE";
+                break;
+            case "Compile Error":
+                status = "CE";
+                break;
+            case "System Error":
+                status = "SE";
                 break;
         }
 

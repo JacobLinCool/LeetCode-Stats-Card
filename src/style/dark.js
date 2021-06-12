@@ -6,15 +6,17 @@ const dark_style = [
         },
     ],
     [
-        "rect#background",
+        "rect#background, .theme_background",
         {
             fill: "#101010",
+            background: "#101010",
         },
     ],
     [
-        "text",
+        "text, .text",
         {
             fill: "rgb(240, 240, 240)",
+            color: "rgb(240, 240, 240)",
         },
     ],
     [

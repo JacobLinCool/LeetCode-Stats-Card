@@ -1,16 +1,23 @@
 const default_style = [
     [
-        "rect#background",
+        ".leetcode_stats_card *",
         {
-            fill: "#ffffff",
+            "font-family": `"Segoe UI", "PingFang SC", Ubuntu, Sans-Serif`,
         },
     ],
     [
-        "text",
+        "rect#background, .theme_background",
         {
-            "font-family": `"Segoe UI", "PingFang SC", Ubuntu, Sans-Serif`,
+            fill: "#ffffff",
+            background: "#ffffff",
+        },
+    ],
+    [
+        "text, .text",
+        {
             "font-weight": "bold",
             fill: "rgb(38, 38, 38)",
+            color: "rgb(38, 38, 38)",
         },
     ],
     [
