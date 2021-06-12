@@ -15,15 +15,21 @@ const html = `
         <select id="style">
             <option value="default" selected>Default</option>
             <option value="dark">Dark</option>
-            <option value="auto">Auto</option>
+            <option value="auto">Auto (Beta)</option>
+        </select>
+        <select id="extension">
+            <option value="null" selected>No Extension</option>
+            <option value="activity">Activity (Beta)</option>
         </select>
         <div>
             <button onclick="preview()">Preview</button>
             <button onclick="go()">Go</button>
+            <button onclick="md()">Markdwon</button>
         </div>
         <div>
             <img id="preview" src="https://leetcode-card.jacob.workers.dev/?username=JacobLinCool"></img>
         </div>
+        <div style="height: 20px;"></div>
         <div>
             <a href="https://github.com/JacobLinCool/leetcode-stats-card">View on GitHub</a>
         </div>
@@ -64,12 +70,13 @@ const html = `
             }
             img {
                 width: 100%;
+                min-height: 128px;
             }
         </style>
         <script>
             function url() {
-                if(document.querySelector("#username").value.trim()) return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value;
-                else return location.origin + "/?username=JacobLinCool";
+                if(!document.querySelector("#username").value.trim()) document.querySelector("#username").value = "JacobLinCool";
+                return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value + "&extension=" + document.querySelector("#extension").value;
             }
             function preview() {
                 document.querySelector("#preview").src = url();
@@ -77,6 +84,10 @@ const html = `
             function go() {
                 let win = window.open();
                 win.location = url()
+            }
+            function md() {
+                let code = "![LeetCode Stats](" + url() + ")";
+                prompt("Markdown Code: ", code);
             }
         </script>
     </body>
