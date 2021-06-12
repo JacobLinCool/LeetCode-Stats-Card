@@ -3,7 +3,7 @@ const baseurl = "https://leetcode.com";
 async function get_csrf() {
     const cookies_raw = await fetch(`https://leetcode.com/`, {
         headers: {
-            "user-agent": "Mozilla/5.0 Leetcode Stats Card v1",
+            "user-agent": "Mozilla/5.0 LeetCode Stats Card",
         },
     }).then((res) => res.headers.get("set-cookie"));
     const csrf_token = cookies_raw
@@ -14,87 +14,102 @@ async function get_csrf() {
 }
 
 async function leetcode_data(username) {
-    const csrf_token = await get_csrf();
+    let cache_key = new Request(baseurl + "/graphql/" + username);
+    let cache = caches.default;
 
-    const leetcode_data_raw = await fetch("https://leetcode.com/graphql", {
-        method: "POST",
-        headers: {
-            "content-type": "application/json",
-            origin: "https://leetcode.com",
-            referer: `https://leetcode.com/${username}/`,
-            cookie: `csrftoken=${csrf_token}; `,
-            "x-csrftoken": csrf_token,
-            "user-agent": "Mozilla/5.0 Leetcode Stats Card v1",
-        },
-        body: JSON.stringify({
-            operationName: "getUserProfile",
-            variables: { username: username },
-            query: `
-            query getUserProfile($username: String!) {
-                allQuestionsCount {
-                    difficulty
-                    count
-                }
-                matchedUser(username: $username) {
-                    username
-                    socialAccounts
-                    githubUrl
-                    contributions {
-                        points
-                        questionCount
-                        testcaseCount
+    // check cache
+    let response = await cache.match(cache_key);
+
+    if (!response) {
+        const csrf_token = await get_csrf();
+
+        response = await fetch("https://leetcode.com/graphql", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+                origin: "https://leetcode.com",
+                referer: `https://leetcode.com/${username}/`,
+                cookie: `csrftoken=${csrf_token}; `,
+                "x-csrftoken": csrf_token,
+                "user-agent": "Mozilla/5.0 LeetCode Stats Card",
+            },
+            body: JSON.stringify({
+                operationName: "getUserProfile",
+                variables: { username: username },
+                query: `
+                query getUserProfile($username: String!) {
+                    allQuestionsCount {
+                        difficulty
+                        count
                     }
-                    profile {
-                        realName
-                        websites
-                        countryName
-                        skillTags
-                        company
-                        school
-                        starRating
-                        aboutMe
-                        userAvatar
-                        reputation
-                        ranking
-                    }
-                    submissionCalendar
-                    submitStats {
-                        acSubmissionNum {
-                            difficulty
-                            count
-                            submissions
+                    matchedUser(username: $username) {
+                        username
+                        socialAccounts
+                        githubUrl
+                        contributions {
+                            points
+                            questionCount
+                            testcaseCount
                         }
-                        totalSubmissionNum {
-                            difficulty
-                            count
-                            submissions
+                        profile {
+                            realName
+                            websites
+                            countryName
+                            skillTags
+                            company
+                            school
+                            starRating
+                            aboutMe
+                            userAvatar
+                            reputation
+                            ranking
+                        }
+                        submissionCalendar
+                        submitStats {
+                            acSubmissionNum {
+                                difficulty
+                                count
+                                submissions
+                            }
+                            totalSubmissionNum {
+                                difficulty
+                                count
+                                submissions
+                            }
+                        }
+                        badges {
+                            id
+                            displayName
+                            icon
+                            creationDate
+                        }
+                        upcomingBadges {
+                            name
+                            icon
+                        }
+                        activeBadge {
+                            id
                         }
                     }
-                    badges {
-                        id
-                        displayName
-                        icon
-                        creationDate
-                    }
-                    upcomingBadges {
-                        name
-                        icon
-                    }
-                    activeBadge {
-                        id
+                    recentSubmissionList(username: $username, limit: 10) {
+                        title
+                        titleSlug
+                        timestamp
+                        statusDisplay
+                        lang
                     }
                 }
-                recentSubmissionList(username: $username, limit: 10) {
-                    title
-                    titleSlug
-                    timestamp
-                    statusDisplay
-                    lang
-                }
-            }
-            `,
-        }),
-    }).then((res) => res.json());
+                `,
+            }),
+        });
+
+        response = new Response(response.body, response);
+        response.headers.append("Cache-Control", "s-maxage=60, maxage=60");
+
+        cache.put(cache_key, response.clone());
+    }
+
+    const leetcode_data_raw = await response.json();
 
     return {
         username: leetcode_data_raw.data.matchedUser.username,

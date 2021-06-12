@@ -43,7 +43,7 @@ async function handle_request(event) {
                 response = new Response(leetcode_card(data, final_parameters), {
                     headers: {
                         "Content-Type": "image/svg+xml; charset=utf-8",
-                        "Cache-Control": "s-maxage=60",
+                        "Cache-Control": "s-maxage=60, maxage=60",
                     },
                 });
                 cors_header(response.headers);
