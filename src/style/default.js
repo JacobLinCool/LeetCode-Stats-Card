@@ -3,6 +3,7 @@ const default_style = [
         ".leetcode_stats_card *",
         {
             "font-family": `"Segoe UI", "PingFang SC", Ubuntu, Sans-Serif`,
+            "transform-box": "fill-box",
         },
     ],
     [

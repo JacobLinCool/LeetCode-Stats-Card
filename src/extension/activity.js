@@ -1,4 +1,4 @@
-const css = `
+let css = `
 #ext_flex_box {
     height: 100%; 
     display: flex; 
@@ -86,7 +86,7 @@ function ext_activity(data, parameters) {
         }
 
         svg += `
-            <div class="ext_submission_wrap" style="${parameters.animation ? `opacity: 0; animation: fade_in 1 0.3s ${1.8 + 0.1 * i}s forwards;` : ""}">
+            <div class="ext_submission_wrap" style="animation-delay: ${(1.8 + 0.1 * i).toFixed(2)}s">
                 <span class="ext_time sub_text">${activities[i].time.getMonth() + 1}/${activities[i].time.getDate()}</span>
                 <span class="ext_submission ${status}">${status}</span>
                 <span class="ext_lang">${activities[i].lang}</span>
@@ -94,9 +94,11 @@ function ext_activity(data, parameters) {
             </div>
         `;
     }
+    
+    if(parameters.animation) css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`
+    svg += `<style>${css}</style>`;
     svg += `</div></foreignObject>`;
 
-    svg += `<style>${css}</style>`;
     return svg;
 }
 

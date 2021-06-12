@@ -23,6 +23,19 @@ function parameters(search) {
         custom_parameters.height = 400;
     }
 
+    if (custom_parameters.width !== undefined) {
+        custom_parameters.width = Number(custom_parameters.width);
+    }
+    if (custom_parameters.height !== undefined) {
+        custom_parameters.height = Number(custom_parameters.height);
+    }
+    if (custom_parameters.animation !== undefined) {
+        if (custom_parameters.animation === "false" || custom_parameters.animation === "0") custom_parameters.animation = false;
+        custom_parameters.animation = !!custom_parameters.animation;
+    }
+
+    console.log("Custom Parameters", custom_parameters);
+
     return Object.assign({}, default_parameters, custom_parameters);
 }
 

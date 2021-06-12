@@ -1,9 +1,9 @@
 const animations = `
 @keyframes fade_in {
-    0% {
+    from {
         opacity: 0;
     }
-    100% {
+    to {
         opacity: 1;
     }
 }
@@ -124,7 +124,7 @@ const animation_style = [
 ];
 
 for (let i = 0; i < animation_style.length; i++) {
-    animation_style[i][1].animation = `fade_in 1 0.3s ${0.1 * i}s forwards`;
+    animation_style[i][1].animation = `fade_in 0.3s ease ${(0.1 * i).toFixed(2)}s 1 forwards`;
 }
 
 export { animations, animation_style };
