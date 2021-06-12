@@ -3,6 +3,7 @@ import { parameters } from "./parameter.js";
 import { leetcode_data } from "./leetcode.js";
 import { cors_header } from "./header.js";
 import { leetcode_card } from "./leetcode_card.js";
+import { not_found_card } from "./404.js";
 
 async function main() {
     addEventListener("fetch", (event) => {
@@ -47,9 +48,9 @@ async function handle_request(event) {
                 });
                 cors_header(response.headers);
             } catch (err) {
-                return new Response("User Not Found", {
+                return new Response(not_found_card(final_parameters), {
                     headers: {
-                        "Content-Type": "text/plain; charset=utf-8",
+                        "Content-Type": "image/svg+xml; charset=utf-8",
                     },
                     status: 404,
                     statusText: "Not Found",
