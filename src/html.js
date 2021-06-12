@@ -68,7 +68,8 @@ const html = `
         </style>
         <script>
             function url() {
-                return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value;
+                if(document.querySelector("#username").value.trim()) return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value;
+                else return location.origin + "/?username=JacobLinCool";
             }
             function preview() {
                 document.querySelector("#preview").src = url();
