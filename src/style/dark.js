@@ -18,9 +18,10 @@ const dark_style = [
         },
     ],
     [
-        "text.sub",
+        "text.sub, .sub_text",
         {
             fill: "rgb(220, 220, 220)",
+            color: "rgb(220, 220, 220)",
         },
     ],
     [

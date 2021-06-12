@@ -84,6 +84,13 @@ async function leetcode_data(username) {
                         id
                     }
                 }
+                recentSubmissionList(username: $username, limit: 10) {
+                    title
+                    titleSlug
+                    timestamp
+                    statusDisplay
+                    lang
+                }
             }
             `,
         }),
@@ -141,6 +148,15 @@ async function leetcode_data(username) {
                 return badge;
             }),
         },
+        activity: leetcode_data_raw.data.recentSubmissionList.map((submission) => {
+            return {
+                title: submission.title,
+                problem: baseurl + "/problems/" + submission.titleSlug + "/",
+                lang: submission.lang,
+                time: new Date(parseInt(submission.timestamp) * 1000),
+                status: submission.statusDisplay,
+            };
+        }),
     };
 }
 

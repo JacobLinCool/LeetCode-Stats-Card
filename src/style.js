@@ -1,6 +1,7 @@
 import { default_style } from "./style/default.js";
 import { dark_style } from "./style/dark.js";
 import { animations, animation_style } from "./style/animation.js";
+import { extension_style } from "./style/extension.js";
 
 function style(parameters) {
     let css = "";
@@ -35,6 +36,14 @@ function style(parameters) {
                 .join("")}} `;
         });
         css += animations;
+    }
+
+    if (parameters.extension) {
+        extension_style.forEach((rule) => {
+            css += `${rule[0]}{${Object.entries(rule[1])
+                .map((pair) => pair[0] + ":" + pair[1] + ";")
+                .join("")}} `;
+        });
     }
 
     return css;

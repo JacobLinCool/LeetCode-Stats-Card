@@ -37,6 +37,7 @@ Key         |Description                           |Default Value    |Required
 `height`    |Card Height: `Number`                 |`200`            | NO
 `animation` |Enable Animation: `true` or `false`   |`true`           | NO
 `border`    |Border Width: `Number`                |`1`              | NO
+`extension` |Enable Extesion: `activity` or `null` |`null`           | NO
 
 ### Styles
 Now we only have 2 styles (and 1 beta style). If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
@@ -49,3 +50,9 @@ Now we only have 2 styles (and 1 beta style). If you have any great idea, please
 
 #### Auto (Beta)
 ![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&style=auto&update=20210612)
+
+### Extensions
+Extension is still a testing feature.
+But you can try it by adding `extension=activity` to the serach parameter.
+
+![Leetcode Stats](https://leetcode-card.jacob.workers.dev/?username=JacobLinCool&extension=activity&update=20210612)

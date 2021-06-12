@@ -14,9 +14,10 @@ const default_style = [
         },
     ],
     [
-        "text.sub",
+        "text.sub, .sub_text",
         {
             fill: "rgb(128, 128, 128)",
+            color: "rgb(128, 128, 128)",
         },
     ],
     [

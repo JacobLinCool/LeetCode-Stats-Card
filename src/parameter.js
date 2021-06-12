@@ -5,6 +5,7 @@ const default_parameters = {
     width: 500,
     height: 200,
     border: 1,
+    extension: null,
 };
 
 function parameters(search) {
@@ -13,6 +14,13 @@ function parameters(search) {
     [...search.entries()].forEach((pair) => {
         custom_parameters[pair[0]] = pair[1];
     });
+
+    if (custom_parameters.width !== undefined && Number(custom_parameters.height) < 400) {
+        custom_parameters.extension = false;
+    }
+    if (custom_parameters.extension == "activity" && custom_parameters.height === undefined) {
+        custom_parameters.height = 400;
+    }
 
     return Object.assign({}, default_parameters, custom_parameters);
 }
