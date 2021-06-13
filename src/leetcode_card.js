@@ -1,4 +1,4 @@
-import { svg_tag } from "./svg.js";
+import { svg_tag } from "./tag.js";
 import { leetcode_icon } from "./img.js";
 import { style } from "./style.js";
 import { append_extension } from "./extension.js";

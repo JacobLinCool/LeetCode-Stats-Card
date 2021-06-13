@@ -1,4 +1,4 @@
-import { html } from "./html.js";
+import { html } from "./demo_html.js";
 import { parameters } from "./parameter.js";
 import { leetcode_data } from "./leetcode.js";
 import { cors_header } from "./header.js";
