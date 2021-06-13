@@ -5,7 +5,7 @@ import { append_extension } from "./extension.js";
 
 function leetcode_card(data, parameters) {
     const [svg_start_tag, svg_close_tag] = svg_tag(parameters.width, parameters.height, 500, parameters.extension == "activity" ? 400 : 200);
-    let svg_data = `${svg_start_tag} <style>${style(parameters)}</style>
+    let svg_data = `${svg_start_tag}<title>${data.username} | LeetCode Stats Card</title><style>${style(parameters)}</style>
 <g class="leetcode_stats_card theme_${parameters.style}">
     <rect id="background" stroke="lightgray" stroke-width="${parameters.border}" width="${500 - parameters.border}" height="${
         (parameters.extension == "activity" ? 400 : 200) - parameters.border

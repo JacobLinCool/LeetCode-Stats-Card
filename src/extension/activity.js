@@ -24,7 +24,7 @@ let css = `
     margin: 0 6px 0 0;
 }
 .ext_time {
-    min-width: 48px;
+    min-width: 64px;
     padding: 0;
 }
 .ext_submission.AC {
@@ -87,15 +87,17 @@ function ext_activity(data, parameters) {
 
         svg += `
             <div class="ext_submission_wrap" style="animation-delay: ${(1.8 + 0.1 * i).toFixed(2)}s">
-                <span class="ext_time sub_text">${activities[i].time.getMonth() + 1}/${activities[i].time.getDate()}</span>
+                <span class="ext_time sub_text">${activities[i].time.getFullYear() % 100}.${activities[i].time.getMonth() + 1}.${activities[
+            i
+        ].time.getDate()}</span>
                 <span class="ext_submission ${status}">${status}</span>
                 <span class="ext_lang">${activities[i].lang}</span>
                 <a class="ext_link sub_text" target="_blank" href="${activities[i].problem}"><span>${activities[i].title}</span></a>
             </div>
         `;
     }
-    
-    if(parameters.animation) css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`
+
+    if (parameters.animation) css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`;
     svg += `<style>${css}</style>`;
     svg += `</div></foreignObject>`;
 

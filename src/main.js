@@ -44,6 +44,7 @@ async function handle_request(event) {
                     headers: {
                         "Content-Type": "image/svg+xml; charset=utf-8",
                         "Cache-Control": "s-maxage=60, maxage=60",
+                        "Content-Disposition": `inline; filename=${data.username}.stats.svg`
                     },
                 });
                 cors_header(response.headers);
