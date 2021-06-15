@@ -76,3 +76,5 @@ typings/
 .fusebox/
 
 worker/
+
+.DS_Store

@@ -5,7 +5,7 @@ import { append_extension } from "./extension.js";
 
 function leetcode_card(data, parameters) {
     const [svg_start_tag, svg_close_tag] = svg_tag(parameters.width, parameters.height, 500, parameters.extension == "activity" ? 400 : 200);
-    let svg_data = `${svg_start_tag}<title>${data.username} | LeetCode Stats Card</title><style>${style(parameters)}</style>
+    let svg_data = `${svg_start_tag}<title>${data.username} | LeetCode Stats Card</title><style>${style({ parameters, data })}</style>
 <g class="leetcode_stats_card theme_${parameters.style}">
     <rect id="background" stroke="lightgray" stroke-width="${parameters.border}" width="${500 - parameters.border}" height="${
         (parameters.extension == "activity" ? 400 : 200) - parameters.border
@@ -20,9 +20,7 @@ function leetcode_card(data, parameters) {
     <g id="body">
         <g id="total_solved_circle" transform="translate(30, 5)">
             <circle class="circle_bg" cx="40" cy="40" r="40" stroke-width="6" />
-            <circle class="circle" cx="40" cy="40" r="40" stroke="#ffa116" stroke-width="6" stroke-linecap="round" stroke-dasharray="${
-                80 * Math.PI * (data.problem.all.solved / data.problem.all.total)
-            } 1000" transform-origin="40px 40px" />
+            <circle class="circle" cx="40" cy="40" r="40" stroke="#ffa116" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 1000" transform-origin="40px 40px" />
             <g>
                 <text id="total_solved" x="40" y="40" style="font-size: 28px;" alignment-baseline="central" dominant-baseline="central" text-anchor="middle">${
                     data.problem.all.solved

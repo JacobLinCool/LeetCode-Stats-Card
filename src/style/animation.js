@@ -127,4 +127,11 @@ for (let i = 0; i < animation_style.length; i++) {
     animation_style[i][1].animation = `fade_in 0.3s ease ${(0.1 * i).toFixed(2)}s 1 forwards`;
 }
 
-export { animations, animation_style };
+function circle_animation(selector, len = 0, delay = 0) {
+    const R = Math.floor(Math.random() * 1000);
+    const animation = `@keyframes circle_${R} { 0% { opacity: 0; stroke-dasharray: 0 1000; } 50% { opacity: 1; } 100% { opacity: 1; stroke-dasharray: ${len} 1000; } }`;
+    const style = `${selector} { animation: circle_${R} 1.2s ease ${delay}s 1 forwards }`;
+    return animation + style;
+}
+
+export { animations, animation_style, circle_animation };
