@@ -1,6 +1,6 @@
-name = "leetcode-card"
+name = "leetcode"
 type = "webpack"
-account_id = "b1c3d1b89f9131a84a0f1f6a973232f1"
+account_id = "897c203117fc45efa64b5eb52b3206e8"
 workers_dev = true
 route = ""
 zone_id = ""
