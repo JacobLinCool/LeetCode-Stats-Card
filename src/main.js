@@ -19,7 +19,7 @@ async function handle_request(event) {
     }
 
     // for favicon
-    if (request.url == "https://leetcode-card.jacob.workers.dev/favicon.ico") {
+    if (request.url == "https://leetcode.card.workers.dev/favicon.ico") {
         return Response.redirect("https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico", 301);
     }
 

@@ -27,7 +27,7 @@ const html = `
             <button onclick="md()">Markdwon</button>
         </div>
         <div>
-            <img id="preview" src="https://leetcode-card.jacob.workers.dev/?username=JacobLinCool"></img>
+            <img id="preview" src="https://leetcode.card.workers.dev/?username=JacobLinCool"></img>
         </div>
         <div style="height: 20px;"></div>
         <div>
