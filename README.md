@@ -79,10 +79,15 @@ You can choose which [Web Safe Font](https://www.w3schools.com/cssref/css_websaf
 
 You can also choose fonts on Google Fonts, but GitHub will block them and the font will fallback to default fonts.
 
+#### Some Examples
 ```md
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Garamond)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier New)
 ```
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Garamond)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier New)
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush Script MT)
+```
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush Script MT)
 
 ### Extensions
 Extension is still a testing feature.
