@@ -15,6 +15,7 @@ const html = `
         <select id="style">
             <option value="default" selected>Default</option>
             <option value="dark">Dark</option>
+            <option value="forest">Forest</option>
             <option value="wtf">WTF</option>
             <option value="auto">Auto (Beta)</option>
         </select>

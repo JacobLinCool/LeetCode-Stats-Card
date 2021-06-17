@@ -38,19 +38,25 @@ Key              |Description                              |Default Value    |Re
 `animation`      |Enable Animation: `Boolean`              |`true`           | NO
 `border`         |Border Width: `Number`                   |`1`              | NO
 `border_radius`  |Border Radius: `Number`                  |`4`              | NO
-`extension`      |Enable [Extension](#extensions): `String` |`null`           | NO
+`extension`      |Enable [Extension](#extensions): `String`|`null`           | NO
 
 ### Styles
-Now we only have 2 styles (and 1 beta style). If you have any great idea, please let me know. Also, any PR or Issue with cool features or styles are welcome!
+Now we have 5 styles. If you have any great idea, please let me know. Also, any PRs or Issues with cool features or styles are welcomed!
 
 #### Default
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=default&update=20210612)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=default)
 
 #### Dark
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=dark&update=20210612)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=dark)
 
-#### Auto (Beta)
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=auto&update=20210612)
+#### Auto
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=auto)
+
+#### Forest
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=forest)
+
+#### WTF
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=wtf)
 
 ### Extensions
 Extension is still a testing feature.

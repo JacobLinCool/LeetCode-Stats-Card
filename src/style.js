@@ -1,5 +1,6 @@
 import { default_style } from "./style/default.js";
 import { dark_style } from "./style/dark.js";
+import { forest_style } from "./style/forest.js";
 import { wtf_style } from "./style/wtf.js";
 import { animations, animation_style, circle_animation } from "./style/animation.js";
 import { extension_style } from "./style/extension.js";
@@ -23,6 +24,11 @@ function style({ data, parameters }) {
     if (parameters.style == "dark") {
         load_style(dark_style);
         console.log("Load Style: ", "dark");
+    }
+
+    if (parameters.style == "forest") {
+        load_style(forest_style);
+        console.log("Load Style: ", "forest");
     }
 
     if (parameters.style == "wtf") {
