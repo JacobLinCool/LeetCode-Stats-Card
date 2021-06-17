@@ -121,6 +121,12 @@ const animation_style = [
             opacity: 0,
         },
     ],
+    [
+        "#extension",
+        {
+            opacity: 0,
+        },
+    ],
 ];
 
 for (let i = 0; i < animation_style.length; i++) {

@@ -91,7 +91,7 @@ async function leetcode_data(username) {
                             id
                         }
                     }
-                    recentSubmissionList(username: $username, limit: 10) {
+                    recentSubmissionList(username: $username, limit: 5) {
                         title
                         titleSlug
                         timestamp

@@ -14,29 +14,30 @@ async function main() {
 
 async function handle_request(event) {
     const request = event.request;
-    if (request.method !== "GET") {
-        return new Response("Allowed Method: GET");
-    }
 
-    // for favicon
-    if (request.url == "https://leetcode.card.workers.dev/favicon.ico") {
+    // Block Unacceptable Method
+    if (request.method !== "GET") return new Response("Allowed Method: GET");
+
+    // For Favicon
+    if (request.url == "https://leetcode.card.workers.dev/favicon.ico")
         return Response.redirect("https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico", 301);
-    }
 
+    // Construct Parameters
     const final_parameters = parameters(new URL(request.url).searchParams);
     console.log("Final Parameters", final_parameters);
 
     if (final_parameters.username) {
-        // contruct cache key
+        // Contruct Cache Key
         const cache_key = new Request(request.url, request);
         const cache = caches.default;
 
-        // check cache
+        // Check Cache
         let response = await cache.match(cache_key);
 
-        // if no cache
+        // If No Cache
         if (!response) {
             try {
+                // Get Data
                 const data = await leetcode_data(final_parameters.username);
                 console.log("Leetcode Data", data);
 
@@ -44,9 +45,11 @@ async function handle_request(event) {
                     headers: {
                         "Content-Type": "image/svg+xml; charset=utf-8",
                         "Cache-Control": "s-maxage=60, maxage=60",
-                        "Content-Disposition": `inline; filename=${data.username}.stats.svg`
+                        "Content-Disposition": `inline; filename=${data.username}.stats.svg`,
                     },
                 });
+
+                // Add CORS Headers
                 cors_header(response.headers);
             } catch (err) {
                 return new Response(not_found_card(final_parameters), {
@@ -58,7 +61,7 @@ async function handle_request(event) {
                 });
             }
 
-            // async update cache
+            // Async Update Cache
             event.waitUntil(cache.put(cache_key, response.clone()));
         }
         return response;
