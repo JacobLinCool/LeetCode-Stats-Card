@@ -17,6 +17,9 @@ const html = `
             <option value="dark">Dark</option>
             <option value="auto">Auto (Beta)</option>
         </select>
+        <select id="font">
+            <option value="" selected>Default</option>
+        </select>
         <select id="extension">
             <option value="null" selected>No Extension</option>
             <option value="activity">Activity (Beta)</option>
@@ -74,9 +77,11 @@ const html = `
             }
         </style>
         <script>
+            get_fonts();
+            
             function url() {
                 if(!document.querySelector("#username").value.trim()) document.querySelector("#username").value = "JacobLinCool";
-                return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value + "&extension=" + document.querySelector("#extension").value;
+                return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value + "&font=" + document.querySelector("#font").value + "&extension=" + document.querySelector("#extension").value;
             }
             function preview() {
                 document.querySelector("#preview").src = url();
@@ -88,6 +93,22 @@ const html = `
             function md() {
                 let code = "![LeetCode Stats](" + url() + ")";
                 prompt("Markdown Code: ", code);
+            }
+            function get_fonts() {
+                fetch("https://raw.githubusercontent.com/JacobLinCool/LeetCode-Stats-Card/main/google-fonts-list.json").then(r => r.json()).then(list => {
+                    let select = document.querySelector("#font");
+                    Object.entries(list).forEach([type, fonts] => {
+                        let optgroup = document.createElement("optgroup");
+                        optgroup.label = type[0].toUpperCase() + type.substr(1);
+                        fonts.forEach(font => {
+                            let option = document.createElement("option");
+                            option.innerHTML = font;
+                            option.value = font;
+                            optgroup.appendChild(option);
+                        })
+                        select.appendChild(optgroup);
+                    });
+                })
             }
         </script>
     </body>

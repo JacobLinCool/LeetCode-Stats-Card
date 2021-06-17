@@ -11,11 +11,13 @@ function leetcode_card(data, parameters) {
         (parameters.extension == "activity" ? 400 : 200) - parameters.border
     }" x="${parameters.border / 2}" y="${parameters.border / 2}" rx="${parameters.border_radius}" />
     <g id="head">
-        <g id="icon" transform="translate(20, 15)">${leetcode_icon(30, 30)}</g>
-        <text id="username" transform="translate(65, 40)" style="font-size: 24px;">${data.username}</text>
-        <text id="rank" class="sub" text-anchor="end" transform="translate(480, 40)" style="font-size: 18px;">#${
-            data.profile.ranking > 100000 ? "100000+" : data.profile.ranking
-        }</text>
+        <a href="https://leetcode.com/${data.username}/" target="_blank">
+            <g id="icon" transform="translate(20, 15)">${leetcode_icon(30, 30)}</g>
+            <text id="username" transform="translate(65, 40)" style="font-size: 24px;">${data.username}</text>
+            <text id="rank" class="sub" text-anchor="end" transform="translate(480, 40)" style="font-size: 18px;">#${
+                data.profile.ranking > 100000 ? "100000+" : data.profile.ranking
+            }</text>
+        </a>
     </g>
     <g id="body">
         <g id="total_solved_circle" transform="translate(30, 5)">
