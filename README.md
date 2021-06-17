@@ -81,13 +81,13 @@ You can also choose fonts on Google Fonts, but GitHub will block them and the fo
 
 #### Some Examples
 ```md
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier New)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier%20New)
 ```
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier New)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier%20New)
 ```md
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush Script MT)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush%20Script%20MT)
 ```
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush Script MT)
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush%20Script%20MT)
 
 ### Extensions
 Extension is still a testing feature.
