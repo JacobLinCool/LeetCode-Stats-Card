@@ -97,7 +97,7 @@ const html = `
             function get_fonts() {
                 fetch("https://raw.githubusercontent.com/JacobLinCool/LeetCode-Stats-Card/main/google-fonts-list.json").then(r => r.json()).then(list => {
                     let select = document.querySelector("#font");
-                    Object.entries(list).forEach([type, fonts] => {
+                    Object.entries(list).forEach(([type, fonts]) => {
                         let optgroup = document.createElement("optgroup");
                         optgroup.label = type[0].toUpperCase() + type.substr(1);
                         fonts.forEach(font => {
