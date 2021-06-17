@@ -30,6 +30,9 @@ function parameters(search) {
     if (custom_parameters.height !== undefined) {
         custom_parameters.height = Number(custom_parameters.height);
     }
+    if (custom_parameters.style !== undefined) {
+        custom_parameters.style = custom_parameters.style.toLowerCase();
+    }
     if (custom_parameters.animation !== undefined) {
         if (custom_parameters.animation === "false" || custom_parameters.animation === "0") custom_parameters.animation = false;
         custom_parameters.animation = !!custom_parameters.animation;
