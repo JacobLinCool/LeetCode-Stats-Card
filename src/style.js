@@ -5,6 +5,14 @@ import { extension_style } from "./style/extension.js";
 
 function style({ data, parameters }) {
     let css = "";
+
+    if (parameters.font) {
+        css += `@import url('https://fonts.googleapis.com/css2?family=${decodeURIComponent(parameters.font).replace(
+            / /g,
+            "+"
+        )}&amp;display=swap'); g.leetcode_stats_card * {font-family: "${decodeURIComponent(parameters.font)}"; }`;
+    }
+
     default_style.forEach((rule) => {
         css += `${rule[0]}{${Object.entries(rule[1])
             .map((pair) => pair[0] + ":" + pair[1] + ";")

@@ -6,6 +6,7 @@ const default_parameters = {
     height: 200,
     border: 1,
     border_radius: 4,
+    font: null,
     extension: null,
 };
 
