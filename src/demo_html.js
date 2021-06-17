@@ -15,9 +15,10 @@ const html = `
         <select id="style">
             <option value="default" selected>Default</option>
             <option value="dark">Dark</option>
+            <option value="wtf">WTF</option>
             <option value="auto">Auto (Beta)</option>
         </select>
-        <select id="font">
+        <select id="font" style="display: none;">
             <option value="" selected>Default</option>
         </select>
         <select id="extension">
