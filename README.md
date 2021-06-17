@@ -3,7 +3,7 @@ A simple tool for every LeetCoder.
 
 Show your LeetCode stats on your GitHub profile or your website!
 
-[Try It Now](https://leetcode.card.workers.dev/)
+[Playground: Try It Now](https://leetcode.card.workers.dev/)
 
 [![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&update=20210612)](https://leetcode.card.workers.dev/)
 
@@ -44,22 +44,39 @@ Key              |Description                              |Default Value    |Re
 Now we have 5 styles. If you have any great idea, please let me know. Also, any PRs or Issues with cool features or styles are welcomed!
 
 #### Default
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=default)
+```
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=default)
 
 #### Dark
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=dark)
+```
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=dark)
 
 #### Auto
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=auto)
+```
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=auto)
 
 #### Forest
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=forest)
+```
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=forest)
 
 #### WTF
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=wtf)
+```
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=wtf)
 
 ### Extensions
 Extension is still a testing feature.
 But you can try it by adding `extension=activity` to the serach parameter.
-
-![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&extension=activity&update=20210612)
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&extension=activity)
+```
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&extension=activity)
