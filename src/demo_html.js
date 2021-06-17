@@ -13,14 +13,24 @@ const html = `
         <h1>LeetCode Stats Card</h1>
         <input id="username" placeholder="Your LeetCode Username">
         <select id="style">
-            <option value="default" selected>Default</option>
+            <option value="default" selected>Default Style</option>
             <option value="dark">Dark</option>
             <option value="forest">Forest</option>
             <option value="wtf">WTF</option>
             <option value="auto">Auto (Beta)</option>
         </select>
-        <select id="font" style="display: none;">
-            <option value="" selected>Default</option>
+        <select id="font">
+            <option value="" selected>Default ("Segoe UI", "PingFang SC", Ubuntu, Sans-Serif)</option>
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Brush Script MT">Brush Script MT</option>
         </select>
         <select id="extension">
             <option value="null" selected>No Extension</option>
@@ -79,7 +89,7 @@ const html = `
             }
         </style>
         <script>
-            get_fonts();
+            // get_fonts();
             
             function url() {
                 if(!document.querySelector("#username").value.trim()) document.querySelector("#username").value = "JacobLinCool";

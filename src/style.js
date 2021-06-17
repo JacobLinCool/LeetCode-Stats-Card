@@ -9,7 +9,7 @@ let css = "";
 
 function style({ data, parameters }) {
     if (parameters.font) {
-        css += `g.leetcode_stats_card * {font-family: "${decodeURIComponent(parameters.font)}"; } `;
+        css += `g.leetcode_stats_card * {font-family: "${decodeURIComponent(parameters.font)}", "Segoe UI", "PingFang SC", Ubuntu, Sans-Serif; } `;
     }
 
     load_style(default_style);
