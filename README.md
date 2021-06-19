@@ -1,7 +1,9 @@
 # LeetCode Stats Card
+[![CodeFactor](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card/badge)](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card)
+
 A simple tool for every LeetCoder.
 
-Show your LeetCode stats on your GitHub profile or your website!
+Show your dynamically generated LeetCode stats on your GitHub profile or your website!
 
 [Playground: Try It Now](https://leetcode.card.workers.dev/)
 
