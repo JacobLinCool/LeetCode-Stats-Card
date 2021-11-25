@@ -42,6 +42,7 @@ Key              |Description                              |Default Value    |Re
 `border`         |Border Width: `Number`                   |`1`              | NO
 `border_radius`  |Border Radius: `Number`                  |`4`              | NO
 `extension`      |Enable [Extension](#extensions): `String`|`null`           | NO
+`show_rank`       |Display/Hide rank: `Boolean`             |`true`           | NO
 
 ### Styles
 Now we have 5 styles. If you have any great idea, please let me know. Also, any PRs or Issues with cool features or styles are welcomed!

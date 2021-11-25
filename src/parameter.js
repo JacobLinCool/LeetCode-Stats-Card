@@ -8,6 +8,7 @@ const default_parameters = {
     border_radius: 4,
     font: null,
     extension: null,
+    show_rank: true
 };
 
 function parameters(search) {
@@ -36,6 +37,10 @@ function parameters(search) {
     if (custom_parameters.animation !== undefined) {
         if (custom_parameters.animation === "false" || custom_parameters.animation === "0") custom_parameters.animation = false;
         custom_parameters.animation = !!custom_parameters.animation;
+    }
+    if (custom_parameters.show_rank !== undefined) {
+        if (custom_parameters.show_rank === "false" || custom_parameters.show_rank === "0") custom_parameters.show_rank = false;
+        custom_parameters.show_rank = !!custom_parameters.show_rank;
     }
 
     console.log("Custom Parameters", custom_parameters);
