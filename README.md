@@ -1,4 +1,5 @@
 # LeetCode Stats Card
+
 [![CodeFactor](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card/badge)](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card)
 
 A simple tool for every LeetCoder.
@@ -10,6 +11,7 @@ Show your dynamically generated LeetCode stats on your GitHub profile or your we
 [![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&update=20210612)](https://leetcode.card.workers.dev/)
 
 ## Usage
+
 Just copy the code below, paste it into your readme.md, and change the value of `username`.
 
 ```md
@@ -25,7 +27,8 @@ Want hyperlink? Try this:
 ```
 
 ### Endpoint
-The endpoint of this awesome tool is: 
+
+The endpoint of this awesome tool is:
 
 [https://leetcode.card.workers.dev/](https://leetcode.card.workers.dev/)
 
@@ -42,60 +45,79 @@ Key              |Description                              |Default Value    |Re
 `border`         |Border Width: `Number`                   |`1`              | NO
 `border_radius`  |Border Radius: `Number`                  |`4`              | NO
 `extension`      |Enable [Extension](#extensions): `String`|`null`           | NO
-`show_rank`       |Display/Hide rank: `Boolean`             |`true`           | NO
+`show_rank`      |Display/Hide rank: `Boolean`             |`true`           | NO
 
 ### Styles
+
 Now we have 5 styles. If you have any great idea, please let me know. Also, any PRs or Issues with cool features or styles are welcomed!
 
 #### Default
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=default)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=default)
 
 #### Dark
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=dark)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=dark)
 
 #### Auto
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=auto)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=auto)
 
 #### Forest
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=forest)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=forest)
 
 #### WTF
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=wtf)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&style=wtf)
 
 ### Fonts
+
 You can choose which [Web Safe Font](https://www.w3schools.com/cssref/css_websafe_fonts.asp) you want to display on the card.
 
 You can also choose fonts on Google Fonts, but GitHub will block them and the font will fallback to default fonts.
 
 #### Some Examples
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier%20New)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Courier%20New)
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush%20Script%20MT)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&font=Brush%20Script%20MT)
 
 ### Extensions
+
 Extension is still a testing feature.
 But you can try it by adding `extension=activity` to the serach parameter.
+
 ```md
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&extension=activity)
 ```
+
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&extension=activity)
