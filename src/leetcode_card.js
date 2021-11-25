@@ -22,11 +22,10 @@ ${
         <a href="https://leetcode.com/${data.username}/" target="_blank">
             <g id="icon" transform="translate(20, 15)">${leetcode_icon(30, 30)}</g>
             <text id="username" transform="translate(65, 40)" style="font-size: 24px;">${data.username}</text>
-            ${parameters.showRank ? 
+            ${parameters.show_rank ? 
                 `<text id="rank" class="sub" text-anchor="end" transform="translate(480, 40)" style="font-size: 18px;">#${
                     data.profile.ranking > 100000 ? "100000+" : data.profile.ranking
-                }</text>` : ""
-            }
+                }</text>` : ""}
         </a>
     </g>
     <g id="body">
