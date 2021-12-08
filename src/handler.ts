@@ -16,11 +16,17 @@ async function card_response(config: Required<IConfig>): Promise<Response> {
     try {
         console.log("Config", config);
 
+        const GET_DATA_START = Date.now();
         const data = await get_leetcode_data(config.username);
+        const GET_DATA_END = Date.now();
+        console.log("GET_DATA_TIME", GET_DATA_END - GET_DATA_START);
         console.log("Data", data);
 
+        const MAKE_CARD_START = Date.now();
         const card = new Card(config, data);
         const svg = card.export_svg();
+        const MAKE_CARD_END = Date.now();
+        console.log("MAKE_CARD_TIME", MAKE_CARD_END - MAKE_CARD_START);
 
         return new Response(svg, {
             headers: {
