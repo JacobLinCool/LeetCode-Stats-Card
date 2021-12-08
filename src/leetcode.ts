@@ -1,4 +1,3 @@
-import type { Caches } from "service-worker-mock";
 import type * as LeetCodeAPI from "./leetcode_api";
 import type { LeetCodeData } from "./types";
 
@@ -26,13 +25,15 @@ async function get_csrf() {
 }
 
 async function get_leetcode_data(username: string): Promise<LeetCodeData> {
-    const cache_key = new Request(baseurl + "/graphql/" + username);
-    const cache = (caches as unknown as Caches).default;
+    const cache_key = baseurl + "/graphql/" + username;
+    const cache = await caches.open("leetcode");
 
     // check cache
     let response = await cache.match(cache_key);
 
-    if (!response) {
+    if (response) {
+        console.log("Cache Hit", response.url, response.headers.get("date"));
+    } else {
         const csrf_token = await get_csrf();
 
         response = await fetch("https://leetcode.com/graphql", {
@@ -116,7 +117,7 @@ async function get_leetcode_data(username: string): Promise<LeetCodeData> {
         });
 
         response = new Response(response.body, response);
-        response.headers.append("Cache-Control", "s-maxage=60, maxage=60");
+        response.headers.append("Cache-Control", "max-age=60");
 
         cache.put(cache_key, response.clone());
     }
