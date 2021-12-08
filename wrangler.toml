@@ -1,11 +1,13 @@
 name = "leetcode"
-type = "webpack"
+type = "javascript"
 account_id = "897c203117fc45efa64b5eb52b3206e8"
+zone_id = ""
 workers_dev = true
 route = ""
-zone_id = ""
-webpack_config = "webpack.config.js"
+compatibility_date = "2021-12-07"
 kv_namespaces = []
 
-[triggers]
-crons = []
+[build]
+command = "npm install && npm run build"
+[build.upload]
+format = "service-worker"

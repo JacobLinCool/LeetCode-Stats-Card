@@ -1,3 +1,6 @@
+import { font_list } from "./font";
+import { theme_list } from "./theme";
+
 const html = `
 <!DOCTYPE html>
 <html>
@@ -12,16 +15,12 @@ const html = `
     <body>
         <h1>LeetCode Stats Card</h1>
         <input id="username" placeholder="Your LeetCode Username">
-        <select id="style">
-            <option value="default" selected>Default Style</option>
-            <option value="dark">Dark</option>
-            <option value="forest">Forest</option>
-            <option value="wtf">WTF</option>
-            <option value="auto">Auto (Beta)</option>
+        <select id="theme">
+            ${theme_list.map((theme, i) => `<option value="${theme}" ${i === 0 ? "selected" : ""}>${theme}</option>`).join("")}
         </select>
         <select id="font">
-            <option value="" selected>Default ("Segoe UI", "PingFang SC", Ubuntu, Sans-Serif)</option>
-            <option value="Arial">Arial</option>
+            ${font_list.map((font, i) => `<option value="${font}" ${i === 0 ? "selected" : ""}>${font}</option>`).join("")}
+            <!-- <option value="Arial">Arial</option>
             <option value="Verdana">Verdana</option>
             <option value="Helvetica">Helvetica</option>
             <option value="Tahoma">Tahoma</option>
@@ -30,7 +29,9 @@ const html = `
             <option value="Georgia">Georgia</option>
             <option value="Garamond">Garamond</option>
             <option value="Courier New">Courier New</option>
-            <option value="Brush Script MT">Brush Script MT</option>
+            <option value="Brush Script MT">Brush Script MT</option> -->
+
+            <option value="">You can also use some "system font". Fallback: ("Segoe UI", "PingFang SC", Ubuntu, Sans-Serif)</option>
         </select>
         <select id="extension">
             <option value="null" selected>No Extension</option>
@@ -42,7 +43,7 @@ const html = `
             <button onclick="md()">Markdwon</button>
         </div>
         <div>
-            <img id="preview" src="https://leetcode.card.workers.dev/?username=JacobLinCool"></img>
+            <img id="preview" src="/JacobLinCool"></img>
         </div>
         <div style="height: 20px;"></div>
         <div>
@@ -89,11 +90,9 @@ const html = `
             }
         </style>
         <script>
-            // get_fonts();
-            
             function url() {
                 if(!document.querySelector("#username").value.trim()) document.querySelector("#username").value = "JacobLinCool";
-                return location.origin + "/?username=" + document.querySelector("#username").value.trim() + "&style=" + document.querySelector("#style").value + "&font=" + document.querySelector("#font").value + "&extension=" + document.querySelector("#extension").value;
+                return location.origin + "/" + document.querySelector("#username").value.trim() + "?theme=" + document.querySelector("#theme").value + "&font=" + document.querySelector("#font").value + "&extension=" + document.querySelector("#extension").value;
             }
             function preview() {
                 document.querySelector("#preview").src = url();
@@ -106,25 +105,9 @@ const html = `
                 let code = "![LeetCode Stats](" + url() + ")";
                 prompt("Markdown Code: ", code);
             }
-            function get_fonts() {
-                fetch("https://raw.githubusercontent.com/JacobLinCool/LeetCode-Stats-Card/main/google-fonts-list.json").then(r => r.json()).then(list => {
-                    let select = document.querySelector("#font");
-                    Object.entries(list).forEach(([type, fonts]) => {
-                        let optgroup = document.createElement("optgroup");
-                        optgroup.label = type[0].toUpperCase() + type.substr(1);
-                        fonts.forEach(font => {
-                            let option = document.createElement("option");
-                            option.innerHTML = font;
-                            option.value = font;
-                            optgroup.appendChild(option);
-                        })
-                        select.appendChild(optgroup);
-                    });
-                })
-            }
         </script>
     </body>
 </html>
 `;
 
-export { html };
+export default html;

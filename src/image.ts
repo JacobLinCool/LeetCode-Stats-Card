@@ -1,4 +1,4 @@
-function leetcode_icon(width = 25, height = 25) {
+function leetcode_icon(width = 25, height = 25): string {
     return `
     <svg id="leetcode_icon" width="${width}" height="${height}" viewBox="0 0 94 111" version="1.1"
         xmlns="http://www.w3.org/2000/svg"

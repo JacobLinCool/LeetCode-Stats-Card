@@ -1,3 +1,4 @@
+import type { LeetCodeData, IConfig } from "../types";
 let css = `
 #ext_flex_box {
     height: 100%; 
@@ -51,10 +52,12 @@ let css = `
 }
 `;
 
-function ext_activity(data, parameters) {
-    let activities = data.activity.slice(0, 10);
+function ext_activity(data: LeetCodeData, config: IConfig): string {
+    const activities = data.activity.slice(0, 10);
     let svg = "";
-    svg += `<text x="20" y="20" style="${parameters.animation ? `opacity: 0; animation: fade_in 1 0.3s 1.7s forwards;` : ""}">Recent Activities</text>`;
+    svg += `<text x="20" y="20" class="title" style="${
+        config.animation ? `opacity: 0; animation: fade_in 1 0.3s 1.7s forwards;` : ""
+    }">Recent Activities</text>`;
     svg += `<foreignObject x="20" y="30" width="460" height="160"><div id="ext_flex_box" xmlns="http://www.w3.org/1999/xhtml">`;
     for (let i = 0; i < activities.length; i++) {
         let status = `Unknown`;
@@ -87,21 +90,21 @@ function ext_activity(data, parameters) {
 
         svg += `
             <div class="ext_submission_wrap" style="animation-delay: ${(1.8 + 0.1 * i).toFixed(2)}s">
-                <span class="ext_time sub_text">${activities[i].time.getFullYear() % 100}.${activities[i].time.getMonth() + 1}.${activities[
+                <span class="ext_time subtitle">${activities[i].time.getFullYear() % 100}.${activities[i].time.getMonth() + 1}.${activities[
             i
         ].time.getDate()}</span>
                 <span class="ext_submission ${status}">${status}</span>
                 <span class="ext_lang">${activities[i].lang}</span>
-                <a class="ext_link sub_text" target="_blank" href="${activities[i].problem}"><span>${activities[i].title}</span></a>
+                <a class="ext_link subtitle" target="_blank" href="${activities[i].problem}"><span>${activities[i].title}</span></a>
             </div>
         `;
     }
 
-    if (parameters.animation) css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`;
+    if (config.animation) css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`;
     svg += `<style>${css}</style>`;
     svg += `</div></foreignObject>`;
 
     return svg;
 }
 
-export { ext_activity };
+export default ext_activity;

@@ -1,21 +1,33 @@
+import type { Caches } from "service-worker-mock";
+import type * as LeetCodeAPI from "./leetcode_api";
+import type { LeetCodeData } from "./types";
+
 const baseurl = "https://leetcode.com";
 
+function parse_cookie(cookie: string) {
+    return cookie
+        .split(";")
+        .map((x) => x.trim().split("="))
+        .reduce((acc, x) => {
+            acc[x[0]] = x[1];
+            return acc;
+        }, {} as Record<string, string>);
+}
+
 async function get_csrf() {
-    const cookies_raw = await fetch(`https://leetcode.com/`, {
+    const cookies_raw = (await fetch(`https://leetcode.com/`, {
         headers: {
             "user-agent": "Mozilla/5.0 LeetCode Stats Card",
         },
-    }).then((res) => res.headers.get("set-cookie"));
-    const csrf_token = cookies_raw
-        .split(";")
-        .map((x) => x.trim().split("="))
-        .find((x) => x[0].includes("csrftoken"))[1];
+    }).then((res) => res.headers.get("set-cookie"))) as string;
+
+    const csrf_token = parse_cookie(cookies_raw).csrftoken;
     return csrf_token;
 }
 
-async function leetcode_data(username) {
-    let cache_key = new Request(baseurl + "/graphql/" + username);
-    let cache = caches.default;
+async function get_leetcode_data(username: string): Promise<LeetCodeData> {
+    const cache_key = new Request(baseurl + "/graphql/" + username);
+    const cache = (caches as unknown as Caches).default;
 
     // check cache
     let response = await cache.match(cache_key);
@@ -109,7 +121,7 @@ async function leetcode_data(username) {
         cache.put(cache_key, response.clone());
     }
 
-    const leetcode_data_raw = await response.json();
+    const leetcode_data_raw = (await response.json()) as LeetCodeAPI.RootObject;
 
     return {
         username: leetcode_data_raw.data.matchedUser.username,
@@ -118,14 +130,16 @@ async function leetcode_data(username) {
             avatar: leetcode_data_raw.data.matchedUser.profile.userAvatar || null,
             about: leetcode_data_raw.data.matchedUser.profile.aboutMe,
             country: leetcode_data_raw.data.matchedUser.profile.countryName || null,
-            skills: leetcode_data_raw.data.matchedUser.profile.skillsTags,
+            skills: leetcode_data_raw.data.matchedUser.profile.skillTags,
             company: leetcode_data_raw.data.matchedUser.profile.company || null,
             school: leetcode_data_raw.data.matchedUser.profile.school || null,
             ranking: leetcode_data_raw.data.matchedUser.profile.ranking,
             reputation: leetcode_data_raw.data.matchedUser.profile.reputation,
         },
         social: {
-            website: leetcode_data_raw.data.matchedUser.profile.websites.length ? leetcode_data_raw.data.matchedUser.profile.websites[0] : null,
+            website: leetcode_data_raw.data.matchedUser.profile.websites.length
+                ? leetcode_data_raw.data.matchedUser.profile.websites[0]
+                : null,
             github: leetcode_data_raw.data.matchedUser.githubUrl || null,
         },
         contribution: {
@@ -136,20 +150,27 @@ async function leetcode_data(username) {
         calendar: JSON.parse(leetcode_data_raw.data.matchedUser.submissionCalendar),
         problem: {
             all: {
-                total: leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "All").count,
-                solved: leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "All").count,
+                total: (leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "All") || { count: 0 }).count,
+                solved: (leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "All") || { count: 0 })
+                    .count,
             },
             easy: {
-                total: leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "Easy").count,
-                solved: leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "Easy").count,
+                total: (leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "Easy") || { count: 0 }).count,
+                solved: (
+                    leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "Easy") || { count: 0 }
+                ).count,
             },
             medium: {
-                total: leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "Medium").count,
-                solved: leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "Medium").count,
+                total: (leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "Medium") || { count: 0 }).count,
+                solved: (
+                    leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "Medium") || { count: 0 }
+                ).count,
             },
             hard: {
-                total: leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "Hard").count,
-                solved: leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "Hard").count,
+                total: (leetcode_data_raw.data.allQuestionsCount.find((x) => x.difficulty === "Hard") || { count: 0 }).count,
+                solved: (
+                    leetcode_data_raw.data.matchedUser.submitStats.acSubmissionNum.find((x) => x.difficulty === "Hard") || { count: 0 }
+                ).count,
             },
         },
         badge: {
@@ -172,7 +193,7 @@ async function leetcode_data(username) {
                 status: submission.statusDisplay,
             };
         }),
-    };
+    } as LeetCodeData;
 }
 
-export { leetcode_data };
+export { get_leetcode_data };
