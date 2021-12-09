@@ -53,6 +53,7 @@
         "webpack-cli": "4.9.1"
     },
     "dependencies": {
-        "itty-router": "^2.4.5"
+        "itty-router": "^2.4.5",
+        "worker-font": "^0.0.3"
     }
 }

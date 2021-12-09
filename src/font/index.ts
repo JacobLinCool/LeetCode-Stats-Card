@@ -1,18 +1,18 @@
 import type { Tfont } from "../types";
-import baloo from "./baloo";
-import milonga from "./milonga";
-import patrick_hand from "./patrick_hand";
-import ruthie from "./ruthie";
-import source_code_pro from "./source_code_pro";
+import * as Baloo_2 from "worker-font/lib/fonts/Baloo_2";
+import * as Milonga from "worker-font/lib/fonts/Milonga";
+import * as Patrick_Hand from "worker-font/lib/fonts/Patrick_Hand";
+import * as Ruthie from "worker-font/lib/fonts/Ruthie";
+import * as Source_Code_Pro from "worker-font/lib/fonts/Source_Code_Pro";
 
 const font: {
     [key in Tfont]: string;
 } = {
-    baloo,
-    source_code_pro,
-    milonga,
-    patrick_hand,
-    ruthie,
+    baloo: Baloo_2.base64,
+    source_code_pro: Source_Code_Pro.base64,
+    milonga: Milonga.base64,
+    patrick_hand: Patrick_Hand.base64,
+    ruthie: Ruthie.base64,
 };
 
 const font_list = Object.keys(font) as Tfont[];
