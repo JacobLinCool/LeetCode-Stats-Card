@@ -58,6 +58,14 @@ export default {
     .hard_solved .progress {
         stroke: #d9534f;
     }
+    .title {
+        fill: #f0f0f0;
+        color: #f0f0f0;
+    }
+    .subtitle {
+        fill: #dcdcdc;
+        color: #dcdcdc;
+    }
     
     path#L {
         fill: #ffffff;
