@@ -1,7 +1,13 @@
 {
+    "ts-node": {
+        "transpileOnly": true,
+        "compilerOptions": {
+            "module": "commonjs",
+        }
+    },
     "compilerOptions": {
         "outDir": "./dist",
-        "module": "commonjs",
+        "module": "esnext",
         "target": "esnext",
         "lib": ["esnext"],
         "alwaysStrict": true,

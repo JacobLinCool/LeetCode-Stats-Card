@@ -2,10 +2,11 @@ const path = require("path");
 
 module.exports = {
     mode: "production",
-    entry: "./src/index.ts",
+    entry: "./src/cloudflare-worker/index.ts",
     output: {
         filename: "worker.js",
         path: path.join(__dirname, "dist"),
+        chunkFormat: "module",
     },
     devtool: "cheap-module-source-map",
     resolve: {
@@ -18,6 +19,13 @@ module.exports = {
                 loader: "ts-loader",
                 options: {
                     // transpileOnly: true,
+                },
+            },
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+                options: {
+                    sources: false,
                 },
             },
         ],

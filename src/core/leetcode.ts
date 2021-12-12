@@ -26,10 +26,10 @@ async function get_csrf() {
 
 async function get_leetcode_data(username: string): Promise<LeetCodeData> {
     const cache_key = baseurl + "/graphql/" + username;
-    const cache = await caches.open("leetcode");
+    const cache = caches ? await caches.open("leetcode") : null;
 
     // check cache
-    let response = await cache.match(cache_key);
+    let response = cache ? await cache.match(cache_key) : null;
 
     if (response) {
         console.log("Cache Hit", response.url, response.headers.get("date"));
@@ -119,7 +119,7 @@ async function get_leetcode_data(username: string): Promise<LeetCodeData> {
         response = new Response(response.body, response);
         response.headers.append("Cache-Control", "max-age=60");
 
-        cache.put(cache_key, response.clone());
+        cache && cache.put(cache_key, response.clone());
     }
 
     const leetcode_data_raw = (await response.json()) as LeetCodeAPI.RootObject;

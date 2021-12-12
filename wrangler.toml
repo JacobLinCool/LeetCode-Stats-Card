@@ -11,3 +11,11 @@ kv_namespaces = []
 command = "npm install && npm run build"
 [build.upload]
 format = "service-worker"
+
+
+# [build]
+# command = "npm install && npm run build"
+
+# [build.upload]
+# format = "modules"
+# main = "./index.mjs"

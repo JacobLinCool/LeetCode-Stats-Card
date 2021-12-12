@@ -21,11 +21,11 @@ function booleanize(value: string | boolean): boolean {
     return !F.includes(value.toLowerCase());
 }
 
-function cook(config: IRawConfig): IConfig {
+function cook(config: IRawConfig | IConfig): IConfig {
     const cooked: IConfig = {};
 
     cooked.username = config.username || "";
-    cooked.extension = config.extension === "null" ? null : config.extension;
+    cooked.extension = config.extension && config.extension !== "null" ? config.extension : null;
 
     // backwards compatibility
     if (config.style !== undefined && config.theme === undefined) {
@@ -63,7 +63,7 @@ function cook(config: IRawConfig): IConfig {
     return cooked;
 }
 
-function make_config(user_config: IRawConfig): Required<IConfig> {
+function make_config(user_config: IRawConfig | IConfig): Required<IConfig> {
     const config = { ...default_config, ...cook(user_config) };
 
     return config as Required<IConfig>;

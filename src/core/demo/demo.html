@@ -1,7 +1,3 @@
-import { font_list } from "./font";
-import { theme_list } from "./theme";
-
-const html = `
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,21 +12,10 @@ const html = `
         <h1>LeetCode Stats Card</h1>
         <input id="username" placeholder="Your LeetCode Username">
         <select id="theme">
-            ${theme_list.map((theme, i) => `<option value="${theme}" ${i === 0 ? "selected" : ""}>${theme}</option>`).join("")}
+            ${theme_options}
         </select>
         <select id="font">
-            ${font_list.map((font, i) => `<option value="${font}" ${i === 0 ? "selected" : ""}>${font}</option>`).join("")}
-            <!-- <option value="Arial">Arial</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Helvetica">Helvetica</option>
-            <option value="Tahoma">Tahoma</option>
-            <option value="Trebuchet MS">Trebuchet MS</option>
-            <option value="Times New Roman">Times New Roman</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Garamond">Garamond</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Brush Script MT">Brush Script MT</option> -->
-
+            ${font_options}
             <option value="">You can also use some "system font". Fallback: ("Segoe UI", "PingFang SC", Ubuntu, Sans-Serif)</option>
         </select>
         <select id="extension">
@@ -108,6 +93,3 @@ const html = `
         </script>
     </body>
 </html>
-`;
-
-export default html;

@@ -1,7 +1,12 @@
 {
-    "name": "leetcode-stats-card",
+    "name": "leetcode-card",
     "version": "1.0.0",
     "description": "Show your dynamically generated LeetCode stats on your GitHub profile or your website!",
+    "license": "MIT",
+    "author": {
+        "name": "JacobLinCool",
+        "email": "jacoblincool@gmail.com"
+    },
     "main": "dist/worker.js",
     "scripts": {
         "build": "webpack",
@@ -16,11 +21,6 @@
         "stats",
         "card"
     ],
-    "author": {
-        "name": "JacobLinCool",
-        "email": "jacoblincool@gmail.com"
-    },
-    "license": "MIT",
     "eslintConfig": {
         "root": true,
         "extends": [
@@ -33,15 +33,16 @@
         ]
     },
     "devDependencies": {
-        "@cloudflare/workers-types": "3.2.0",
+        "@cloudflare/workers-types": "^3.2.0",
         "@types/jest": "27.0.3",
-        "@types/node": "16.11.12",
+        "@types/node": "^16.11.12",
         "@types/service-worker-mock": "2.0.1",
         "@typescript-eslint/eslint-plugin": "5.6.0",
         "@typescript-eslint/parser": "5.6.0",
         "eslint": "8.4.1",
         "eslint-config-prettier": "8.3.0",
         "eslint-config-typescript": "3.0.0",
+        "html-loader": "^3.0.1",
         "jest": "27.4.3",
         "node-fetch": "2.6.6",
         "prettier": "2.5.1",
