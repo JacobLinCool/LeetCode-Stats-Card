@@ -76,7 +76,3 @@ export interface Data {
     matchedUser: User;
     recentSubmissionList: Submission[];
 }
-
-export interface RootObject {
-    data: Data;
-}
