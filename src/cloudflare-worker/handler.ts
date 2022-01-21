@@ -18,6 +18,7 @@ async function card_response(config: IRawConfig): Promise<Response> {
             "Content-Type": "image/svg+xml",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
+            "Cache-Control": "max-age=0, no-cache, no-store, must-revalidate",
         },
     });
 }
