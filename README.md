@@ -45,7 +45,8 @@ The endpoint of this awesome tool is:
 | `border`        | Border Width: `Number`                    | `1`           | NO       |
 | `border_radius` | Border Radius: `Number`                   | `4`           | NO       |
 | `extension`     | Enable [Extension](#extensions): `String` | `null`        | NO       |
-| `show_rank`     | Display/Hide rank: `Boolean`              | `true`        | NO       |
+| `show_rank`     | Display/Hide Rank: `Boolean`              | `true`        | NO       |
+| `cache`         | Cache Time (in second): `Number`          | `60`          | NO       |
 
 ### Themes
 
