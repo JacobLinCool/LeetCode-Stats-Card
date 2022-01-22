@@ -18,7 +18,7 @@ async function card_response(config: IRawConfig & CacheOption): Promise<Response
     const svg = await leetcode_card(config);
 
     const cache_time = parseInt(config.cache || "60") ?? 60;
-    const cache_header = `max-age=${cache_time}` + (cache_time <= 0 ? ", no-cache" : "");
+    const cache_header = `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : "");
 
     return new Response(svg, {
         headers: {
