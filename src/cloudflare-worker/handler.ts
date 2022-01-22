@@ -5,26 +5,33 @@ import leetcode_card from "../core";
 
 const router = Router();
 
+interface CacheOption {
+    cache?: string;
+}
+
 // favicon.ico
 router.get("/favicon.ico", async () => {
     return Response.redirect("https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico", 301);
 });
 
-async function card_response(config: IRawConfig): Promise<Response> {
+async function card_response(config: IRawConfig & CacheOption): Promise<Response> {
     const svg = await leetcode_card(config);
+
+    const cache_time = parseInt(config.cache || "60") ?? 60;
+    const cache_header = `max-age=${cache_time}` + (cache_time <= 0 ? ", no-cache" : "");
 
     return new Response(svg, {
         headers: {
             "Content-Type": "image/svg+xml",
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Allow-Credentials": "true",
-            "Cache-Control": "max-age=0, no-cache, no-store, must-revalidate",
+            "Cache-Control": cache_header,
         },
     });
 }
 
 // handle path variable
-router.get("/:username", async ({ params, query }: { params: { username: string }; query: IRawConfig }) => {
+router.get("/:username", async ({ params, query }: { params: { username: string }; query: IRawConfig & CacheOption }) => {
     query.username = params.username;
 
     return await card_response(query);
