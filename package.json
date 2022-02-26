@@ -39,7 +39,7 @@
         "@types/service-worker-mock": "2.0.1",
         "@typescript-eslint/eslint-plugin": "5.6.0",
         "@typescript-eslint/parser": "5.6.0",
-        "eslint": "8.4.1",
+        "eslint": "8.10.0",
         "eslint-config-prettier": "8.3.0",
         "eslint-config-typescript": "3.0.0",
         "html-loader": "^3.0.1",
