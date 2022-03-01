@@ -1,21 +1,18 @@
 name = "leetcode"
 type = "javascript"
 account_id = "897c203117fc45efa64b5eb52b3206e8"
-zone_id = ""
 workers_dev = true
-route = ""
-compatibility_date = "2021-12-07"
+compatibility_date = "2022-01-28"
 kv_namespaces = []
 
-[build]
-command = "npm install && npm run build"
 [build.upload]
-format = "service-worker"
+format = "modules"
+dir = "./dist"
+main = "./worker.js"
 
+[[build.upload.rules]]
+type = "ESModule"
+globs = ["**/*.js"]
 
-# [build]
-# command = "npm install && npm run build"
-
-# [build.upload]
-# format = "modules"
-# main = "./index.mjs"
+[build]
+command = "npm run -s build:worker"

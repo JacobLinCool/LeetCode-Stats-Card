@@ -2,7 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card/badge)](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card)
 
-A simple tool for every LeetCoder.
+A simple tool for every LeetCoder. Support both LeetCode and LeetCode CN.
 
 Show your dynamically generated LeetCode stats on your GitHub profile or your website!
 
@@ -47,6 +47,7 @@ The endpoint of this awesome tool is:
 | `extension`     | Enable [Extension](#extensions): `String` | `null`        | NO       |
 | `show_rank`     | Display/Hide Rank: `Boolean`              | `true`        | NO       |
 | `cache`         | Cache Time (in second): `Number`          | `60`          | NO       |
+| `site`          | Data source: `us` or `cn`                 | `us`          | NO       |
 
 ### Themes
 

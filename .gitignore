@@ -75,6 +75,5 @@ typings/
 # FuseBox cache
 .fusebox/
 
-worker/
-
-.DS_Store
+dist/
+**/.DS_Store

@@ -1,4 +1,4 @@
-import type { LeetCodeData, IConfig } from "../types";
+import type { LeetCodeData, IConfig } from "../types/types";
 let css = `
 #ext_flex_box {
     height: 100%; 
@@ -60,7 +60,7 @@ function ext_activity(data: LeetCodeData, config: IConfig): string {
     }">Recent Activities</text>`;
     svg += `<foreignObject x="20" y="30" width="460" height="160"><div id="ext_flex_box" xmlns="http://www.w3.org/1999/xhtml">`;
     for (let i = 0; i < activities.length; i++) {
-        let status = `Unknown`;
+        let status;
         switch (activities[i].status) {
             case "Accepted":
                 status = "AC";
@@ -86,21 +86,31 @@ function ext_activity(data: LeetCodeData, config: IConfig): string {
             case "System Error":
                 status = "SE";
                 break;
+            default:
+                status = "Unknown";
+                break;
         }
 
+        const time = new Date(activities[i].time);
+
         svg += `
-            <div class="ext_submission_wrap" style="animation-delay: ${(1.8 + 0.1 * i).toFixed(2)}s">
-                <span class="ext_time subtitle">${activities[i].time.getFullYear() % 100}.${activities[i].time.getMonth() + 1}.${activities[
-            i
-        ].time.getDate()}</span>
+            <div class="ext_submission_wrap" style="animation-delay: ${(1.8 + 0.1 * i).toFixed(
+                2,
+            )}s">
+                <span class="ext_time subtitle">${time.getFullYear() % 100}.${
+            time.getMonth() + 1
+        }.${time.getDate()}</span>
                 <span class="ext_submission ${status}">${status}</span>
                 <span class="ext_lang">${activities[i].lang}</span>
-                <a class="ext_link subtitle" target="_blank" href="${activities[i].problem}"><span>${activities[i].title}</span></a>
+                <a class="ext_link subtitle" target="_blank" href="${
+                    activities[i].problem
+                }"><span>${activities[i].title}</span></a>
             </div>
         `;
     }
 
-    if (config.animation) css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`;
+    if (config.animation)
+        css += `.ext_submission_wrap { animation: fade_in 0.3s ease 1 backwards; }`;
     svg += `<style>${css}</style>`;
     svg += `</div></foreignObject>`;
 

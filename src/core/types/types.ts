@@ -16,6 +16,7 @@ export interface IConfig {
     font?: Tfont;
     extension?: string | null;
     show_rank?: boolean;
+    site?: "us" | "cn";
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
@@ -32,6 +33,7 @@ export interface IRawConfig {
     font?: string;
     extension?: string;
     show_rank?: string;
+    site?: string;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;

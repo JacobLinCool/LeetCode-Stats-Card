@@ -1,4 +1,4 @@
-import type { IThemeConfig, RequiredRecursive, Ttheme } from "../types";
+import type { IThemeConfig, RequiredRecursive, Ttheme } from "../types/types";
 import default_theme from "./default";
 import dark from "./dark";
 import auto from "./auto";
@@ -22,13 +22,17 @@ const theme_list = Object.keys(theme) as Ttheme[];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function theme_merge(original: any, patch: any) {
     for (const key of Object.keys(patch)) {
-        if (patch[key] instanceof Object) Object.assign(patch[key], theme_merge(original[key], patch[key]));
+        if (patch[key] instanceof Object)
+            Object.assign(patch[key], theme_merge(original[key], patch[key]));
     }
     return { ...original, ...patch };
 }
 
 function get_theme(theme_name: Ttheme): string {
-    const theme_config = theme_merge(theme.default, theme[theme_name]) as RequiredRecursive<IThemeConfig>;
+    const theme_config = theme_merge(
+        theme.default,
+        theme[theme_name],
+    ) as RequiredRecursive<IThemeConfig>;
     return `
 .background {
     stroke: ${theme_config.colors.border};

@@ -1,6 +1,6 @@
-import type { IRawConfig } from "../core/types";
+import type { IRawConfig } from "../core/types/types";
 import { Router } from "itty-router";
-import demo from "../core/demo";
+import demo from "./demo";
 import leetcode_card from "../core";
 
 const router = Router();
@@ -11,14 +11,18 @@ interface CacheOption {
 
 // favicon.ico
 router.get("/favicon.ico", async () => {
-    return Response.redirect("https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico", 301);
+    return Response.redirect(
+        "https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico",
+        301,
+    );
 });
 
 async function card_response(config: IRawConfig & CacheOption): Promise<Response> {
     const svg = await leetcode_card(config);
 
     const cache_time = parseInt(config.cache || "60") ?? 60;
-    const cache_header = `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : "");
+    const cache_header =
+        `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : ", public");
 
     return new Response(svg, {
         headers: {
@@ -31,11 +35,20 @@ async function card_response(config: IRawConfig & CacheOption): Promise<Response
 }
 
 // handle path variable
-router.get("/:username", async ({ params, query }: { params: { username: string }; query: IRawConfig & CacheOption }) => {
-    query.username = params.username;
+router.get(
+    "/:username",
+    async ({
+        params,
+        query,
+    }: {
+        params: { username: string };
+        query: IRawConfig & CacheOption;
+    }) => {
+        query.username = params.username;
 
-    return await card_response(query);
-});
+        return await card_response(query);
+    },
+);
 
 // handle query string
 router.get("*", async ({ query }: { query: IRawConfig }) => {

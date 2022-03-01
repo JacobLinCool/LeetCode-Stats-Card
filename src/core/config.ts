@@ -1,4 +1,4 @@
-import type { IRawConfig, IConfig, Ttheme, Tfont } from "./types";
+import type { IRawConfig, IConfig, Ttheme, Tfont } from "./types/types";
 import { theme_list } from "./theme";
 
 const default_config: IConfig = {
@@ -26,6 +26,7 @@ function cook(config: IRawConfig | IConfig): IConfig {
 
     cooked.username = config.username || "";
     cooked.extension = config.extension && config.extension !== "null" ? config.extension : null;
+    cooked.site = config.site?.toLowerCase() === "cn" ? "cn" : "us";
 
     // backwards compatibility
     if (config.style !== undefined && config.theme === undefined) {
