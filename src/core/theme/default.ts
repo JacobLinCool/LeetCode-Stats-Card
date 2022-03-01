@@ -1,4 +1,4 @@
-import type { IThemeConfig } from "../types";
+import type { IThemeConfig } from "../types/types";
 
 export default {
     colors: {

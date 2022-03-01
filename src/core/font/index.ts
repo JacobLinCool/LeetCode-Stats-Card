@@ -1,4 +1,4 @@
-import type { Tfont } from "../types";
+import type { Tfont } from "../types/types";
 import * as Baloo_2 from "worker-font/lib/fonts/Baloo_2";
 import * as Milonga from "worker-font/lib/fonts/Milonga";
 import * as Patrick_Hand from "worker-font/lib/fonts/Patrick_Hand";

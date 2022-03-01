@@ -1,4 +1,4 @@
-import type { IConfig, LeetCodeData } from "./types";
+import type { IConfig, LeetCodeData } from "./types/types";
 import { get_font } from "./font";
 import { get_theme } from "./theme";
 import { leetcode_icon } from "./image";
@@ -12,9 +12,9 @@ class Card {
 
     constructor(private config: Required<IConfig>, private data: LeetCodeData) {
         this.svg = {
-            start: `<svg xmlns="http://www.w3.org/2000/svg" width="${config.width}" height="${config.height}" viewBox="0 0 ${500} ${
-                config.extension ? 400 : 200
-            }" fill="none">`,
+            start: `<svg xmlns="http://www.w3.org/2000/svg" width="${config.width}" height="${
+                config.height
+            }" viewBox="0 0 ${500} ${config.extension ? 400 : 200}" fill="none">`,
             end: `</svg>`,
         };
 
@@ -26,24 +26,37 @@ class Card {
         const card_body = this.get_svg_body();
         const card_style = this.get_svg_style();
 
-        const card = this.svg.start + `<title>${this.data.username} | LeetCode Stats Card</title>` + card_body + card_style + this.svg.end;
+        const card =
+            this.svg.start +
+            `<title>${this.data.username} | LeetCode Stats Card</title>` +
+            card_body +
+            card_style +
+            this.svg.end;
         return card;
     }
 
     private get_svg_body(): string {
         const card_body = `
 <g class="leetcode_stats_card theme_${this.config.theme}">
-    <rect class="background" stroke-width="${this.config.border}" width="${500 - this.config.border}" height="${
-            (this.config.extension ? 400 : 200) - this.config.border
-        }" x="${this.config.border / 2}" y="${this.config.border / 2}" rx="${this.config.border_radius}" />
+    <rect class="background" stroke-width="${this.config.border}" width="${
+            500 - this.config.border
+        }" height="${(this.config.extension ? 400 : 200) - this.config.border}" x="${
+            this.config.border / 2
+        }" y="${this.config.border / 2}" rx="${this.config.border_radius}" />
     <g class="head">
-        <a href="https://leetcode.com/${this.data.username}/" target="_blank">
+        <a href="${
+            this.config.site === "cn" ? "https://leetcode-cn.com/u" : "https://leetcode.com"
+        }/${this.data.username}/" target="_blank">
             <g class="icon" transform="translate(20, 15)">${leetcode_icon(30, 30)}</g>
-            <text class="username" transform="translate(65, 40)" style="font-size: 24px;">${this.data.username}</text>
+            <text class="username" transform="translate(65, 40)" style="font-size: 24px;">${
+                this.data.username
+            }</text>
             ${
                 this.config.show_rank
                     ? `<text class="ranking" text-anchor="end" transform="translate(480, 40)" style="font-size: 18px;">#${
-                          this.data.profile.ranking > 100000 ? "100000+" : this.data.profile.ranking
+                          this.data.profile.ranking >= 100000
+                              ? "100000+"
+                              : this.data.profile.ranking
                       }</text>`
                     : ""
             }
@@ -64,7 +77,9 @@ class Card {
         <g class="solved_details" transform="translate(160, 0)">
             <g class="easy_solved" transform="translate(0, 0)">
                 <text class="difficulty">Easy</text>
-                <text class="sub solved">${this.data.problem.easy.solved} / ${this.data.problem.easy.total}</text>
+                <text class="sub solved">${this.data.problem.easy.solved} / ${
+            this.data.problem.easy.total
+        }</text>
                 <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" />
                 <line class="progress" x1="0" y1="10" x2="300" y2="10" stroke-dasharray="${
                     300 * (this.data.problem.easy.solved / this.data.problem.easy.total)
@@ -72,7 +87,9 @@ class Card {
             </g>
             <g class="medium_solved" transform="translate(0, 40)">
                 <text class="difficulty">Medium</text>
-                <text class="sub solved">${this.data.problem.medium.solved} / ${this.data.problem.medium.total}</text>
+                <text class="sub solved">${this.data.problem.medium.solved} / ${
+            this.data.problem.medium.total
+        }</text>
                 <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" />
                 <line class="progress" x1="0" y1="10" x2="300" y2="10" stroke-dasharray="${
                     300 * (this.data.problem.medium.solved / this.data.problem.medium.total)
@@ -80,7 +97,9 @@ class Card {
             </g>
             <g class="hard_solved" transform="translate(0, 80)">
                 <text class="difficulty">Hard</text>
-                <text class="sub solved">${this.data.problem.hard.solved} / ${this.data.problem.hard.total}</text>
+                <text class="sub solved">${this.data.problem.hard.solved} / ${
+            this.data.problem.hard.total
+        }</text>
                 <line class="progress_bg" x1="0" y1="10" x2="300" y2="10" />
                 <line class="progress" x1="0" y1="10" x2="300" y2="10" stroke-dasharray="${
                     300 * (this.data.problem.hard.solved / this.data.problem.hard.total)
@@ -137,7 +156,10 @@ class Card {
             this.theme +
             "</style>" +
             (this.config.animation
-                ? `<style>${get_animation_css(this.data.problem.all.solved / this.data.problem.all.total, 1)}</style>`
+                ? `<style>${get_animation_css(
+                      this.data.problem.all.solved / this.data.problem.all.total,
+                      1,
+                  )}</style>`
                 : "");
 
         return card_style;
@@ -162,16 +184,6 @@ function get_404_card(config: IConfig): Card {
                 school: "",
                 reputation: 0,
             },
-            social: {
-                github: "",
-                website: "",
-            },
-            contribution: {
-                point: 0,
-                question: 0,
-                testcase: 0,
-            },
-            calendar: {},
             problem: {
                 all: {
                     solved: 0,
@@ -190,12 +202,8 @@ function get_404_card(config: IConfig): Card {
                     total: 0,
                 },
             },
-            badge: {
-                owned: [],
-                upcoming: [],
-            },
             activity: [],
-        },
+        } as any,
     );
 }
 

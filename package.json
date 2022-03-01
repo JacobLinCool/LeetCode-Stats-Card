@@ -1,19 +1,25 @@
 {
     "name": "leetcode-card",
-    "version": "1.0.0",
+    "version": "1.0.0-dev.1",
     "description": "Show your dynamically generated LeetCode stats on your GitHub profile or your website!",
     "license": "MIT",
     "author": {
         "name": "JacobLinCool",
         "email": "jacoblincool@gmail.com"
     },
-    "main": "dist/worker.js",
+    "main": "lib/index.js",
+    "files": [
+        "lib"
+    ],
     "scripts": {
-        "build": "webpack",
+        "test": "jest --config jestconfig.json --coverage",
+        "prepare": "npm run build",
         "dev": "wrangler dev",
-        "format": "prettier --write  \"*.{json,js}\" \"src/**/*.{js,ts}\" \"test/**/*.{js,ts}\"",
-        "lint": "eslint --max-warnings=0 src && prettier --check \"*.{json,js}\" \"src/**/*.{js,ts}\" \"test/**/*.{js,ts}\"",
-        "test": "jest --config jestconfig.json --verbose",
+        "build:worker": "esbuild src/cloudflare-worker/index.ts --outfile=dist/worker.js --bundle --minify --format=esm --loader:.html=text",
+        "build:package": "esbuild src/core/index.ts --outfile=lib/index.js --bundle --minify --format=esm",
+        "build": "npm run build:worker && npm run build:package",
+        "format": "prettier --write '**/*.{js,ts,jsx,tsx,json,yml,yaml,md,html}' '!dist' '!coverage'",
+        "lint": "eslint .",
         "push": "wrangler publish"
     },
     "keywords": [
@@ -28,34 +34,29 @@
             "prettier"
         ],
         "ignorePatterns": [
-            "webpack.config.js",
-            "dist/worker.js"
+            "dist/**.js",
+            "lib/**.js"
         ]
     },
-    "devDependencies": {
-        "@cloudflare/workers-types": "^3.2.0",
-        "@types/jest": "27.0.3",
-        "@types/node": "^16.11.12",
-        "@types/service-worker-mock": "2.0.1",
-        "@typescript-eslint/eslint-plugin": "5.6.0",
-        "@typescript-eslint/parser": "5.6.0",
-        "eslint": "8.4.1",
-        "eslint-config-prettier": "8.3.0",
-        "eslint-config-typescript": "3.0.0",
-        "html-loader": "^3.0.1",
-        "jest": "27.4.3",
-        "node-fetch": "2.6.6",
-        "prettier": "2.5.1",
-        "service-worker-mock": "2.0.5",
-        "ts-jest": "27.1.1",
-        "ts-loader": "9.2.6",
-        "typescript": "4.5.2",
-        "webpack": "5.65.0",
-        "webpack-cli": "4.9.1"
-    },
     "dependencies": {
-        "itty-router": "^2.4.5",
-        "leetcode-query": "^0.0.3",
-        "worker-font": "^0.0.4"
+        "itty-router": "2.5.1",
+        "leetcode-query": "0.0.6",
+        "worker-font": "0.0.4"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^3.4.0",
+        "@cloudflare/wrangler": "^1.19.8",
+        "@types/jest": "^27.4.1",
+        "@types/node": "^17.0.21",
+        "@typescript-eslint/eslint-plugin": "^5.13.0",
+        "@typescript-eslint/parser": "^5.13.0",
+        "esbuild": "^0.14.23",
+        "eslint": "^8.10.0",
+        "eslint-config-prettier": "^8.4.0",
+        "jest": "^27.5.1",
+        "prettier": "^2.5.1",
+        "ts-jest": "^27.1.3",
+        "tsup": "^5.11.13",
+        "typescript": "^4.6.2"
     }
 }

@@ -1,10 +1,4 @@
 {
-    "ts-node": {
-        "transpileOnly": true,
-        "compilerOptions": {
-            "module": "commonjs",
-        }
-    },
     "compilerOptions": {
         "outDir": "./dist",
         "module": "esnext",
@@ -16,8 +10,8 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "esModuleInterop": true,
-        "types": ["@cloudflare/workers-types", "@types/jest", "@types/service-worker-mock"]
+        "types": ["@cloudflare/workers-types", "@types/jest"]
     },
     "include": ["src"],
-    "exclude": ["node_modules", "dist", "test"]
+    "exclude": ["node_modules", "dist", "tsup.config.ts"]
 }
