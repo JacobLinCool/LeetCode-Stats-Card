@@ -5,6 +5,7 @@ import auto from "./auto";
 import forest from "./forest";
 import wtf from "./wtf";
 import nord from "./nord";
+import unicorn from "./unicorn";
 
 const theme: {
     [key in Ttheme]: IThemeConfig;
@@ -15,6 +16,7 @@ const theme: {
     forest,
     wtf,
     nord,
+    unicorn,
 };
 
 const theme_list = Object.keys(theme) as Ttheme[];
@@ -28,12 +30,13 @@ function theme_merge(original: any, patch: any) {
     return { ...original, ...patch };
 }
 
-function get_theme(theme_name: Ttheme): string {
+function get_theme(theme_name: Ttheme): { css: string; svg: string } {
     const theme_config = theme_merge(
         theme.default,
         theme[theme_name],
     ) as RequiredRecursive<IThemeConfig>;
-    return `
+    return {
+        css: `
 .background {
     stroke: ${theme_config.colors.border};
     fill: ${theme_config.colors.background};
@@ -99,7 +102,9 @@ function get_theme(theme_name: Ttheme): string {
     color: ${theme_config.colors.ranking};
 }
 ${theme_config.css}
-    `;
+    `,
+        svg: theme_config.svg,
+    };
 }
 
 export { get_theme, theme_list };
