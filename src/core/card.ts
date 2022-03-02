@@ -9,6 +9,7 @@ class Card {
     private svg: { start: string; end: string };
     private font: string;
     private theme: string;
+    private theme_injection: string;
 
     constructor(private config: Required<IConfig>, private data: LeetCodeData) {
         this.svg = {
@@ -19,7 +20,9 @@ class Card {
         };
 
         this.font = get_font(config.font);
-        this.theme = get_theme(config.theme);
+        const theme = get_theme(config.theme);
+        this.theme = theme.css;
+        this.theme_injection = theme.svg;
     }
 
     export_svg(): string {
@@ -108,7 +111,9 @@ class Card {
         </g>
     </g>
     ${this.config.extension ? append_extension(this.data, this.config) : ""}
-</g>`;
+</g>
+${this.theme_injection || ""}
+`;
 
         return card_body;
     }

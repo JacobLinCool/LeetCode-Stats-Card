@@ -1,4 +1,4 @@
-export type Ttheme = "default" | "dark" | "auto" | "nord" | "forest" | "wtf";
+export type Ttheme = "default" | "dark" | "auto" | "nord" | "forest" | "wtf" | "unicorn";
 export type Tfont = "baloo" | "milonga" | "patrick_hand" | "ruthie" | "source_code_pro" | string;
 
 export type RequiredRecursive<T> = {
@@ -68,6 +68,7 @@ export interface IThemeConfig {
         };
     };
     css?: string;
+    svg?: string;
 }
 
 export interface LeetCodeProfile {
