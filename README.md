@@ -101,6 +101,14 @@ Now we have 5 themes. If you have any great idea, please let me know. Also, any 
 
 ![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&theme=wtf)
 
+#### Unicorn
+
+```md
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&theme=unicorn)
+```
+
+![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&theme=unicorn)
+
 ### Fonts
 
 #### Baloo
