@@ -76,4 +76,5 @@ typings/
 .fusebox/
 
 dist/
+lib/
 **/.DS_Store
