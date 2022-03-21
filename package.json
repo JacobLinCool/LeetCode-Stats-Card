@@ -40,7 +40,7 @@
     },
     "dependencies": {
         "itty-router": "2.5.1",
-        "leetcode-query": "0.0.6",
+        "leetcode-query": "0.0.8",
         "worker-font": "0.0.4"
     },
     "devDependencies": {
