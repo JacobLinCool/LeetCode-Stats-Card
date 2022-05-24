@@ -1,9 +1,9 @@
 import type { Tfont } from "../types/types";
-import * as Baloo_2 from "worker-font/lib/fonts/Baloo_2";
-import * as Milonga from "worker-font/lib/fonts/Milonga";
-import * as Patrick_Hand from "worker-font/lib/fonts/Patrick_Hand";
-import * as Ruthie from "worker-font/lib/fonts/Ruthie";
-import * as Source_Code_Pro from "worker-font/lib/fonts/Source_Code_Pro";
+import * as Baloo_2 from "nano-font/lib/fonts/Baloo_2";
+import * as Milonga from "nano-font/lib/fonts/Milonga";
+import * as Patrick_Hand from "nano-font/lib/fonts/Patrick_Hand";
+import * as Ruthie from "nano-font/lib/fonts/Ruthie";
+import * as Source_Code_Pro from "nano-font/lib/fonts/Source_Code_Pro";
 
 const font: {
     [key in Tfont]: string;
