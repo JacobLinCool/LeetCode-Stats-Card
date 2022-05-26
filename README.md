@@ -10,6 +10,21 @@ Show your dynamically generated LeetCode stats on your GitHub profile or your we
 
 [![Leetcode Stats](https://leetcode.card.workers.dev/?username=JacobLinCool&update=20210612)](https://leetcode.card.workers.dev/)
 
+> New version is coming soon!
+>
+> New features:
+>
+> - [x] Load remote CSS stylesheets.
+> - [x] Hide any thing on the card if you don't want to show it.
+> - [x] Refactor activity extension, with all themes support.
+> - [ ] Enable all 1300+ Google Fonts.
+> - [ ] Any thoughts? [Let me know!](https://github.com/JacobLinCool/LeetCode-Stats-Card/issues/new)
+>
+> Playground: <https://leetcard.jacoblin.cool/>
+>
+> New Version Preview:
+> ![new preview](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn&extension=activity&border=0)
+
 ## Usage
 
 Just copy the code below, paste it into your readme.md, and change the value of `username`.
