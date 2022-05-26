@@ -26,6 +26,7 @@ Show your dynamically generated LeetCode stats on your GitHub profile or your we
 >
 > [![new preview](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn&extension=activity&border=0)](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn&extension=activity&border=0)
 
+
 ## Usage
 
 Just copy the code below, paste it into your readme.md, and change the value of `username`.
