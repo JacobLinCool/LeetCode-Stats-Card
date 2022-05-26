@@ -1,21 +1,46 @@
-import type { IConfig, IRawConfig } from "./types/types";
-import { make_config } from "./config";
-import { get_leetcode_data } from "./leetcode";
-import Card, { get_404_card } from "./card";
+import { MemoryCache } from "./cache";
+import { Generator } from "./card";
+import { ActivityExtension } from "./exts/activity";
+import { AnimationExtension } from "./exts/animation";
+import { FontExtension } from "./exts/font";
+import { RemoteStyleExtension } from "./exts/remote-style";
+import { ThemeExtension } from "./exts/theme";
+import { Config } from "./types";
 
-export async function leetcode_card(config: IRawConfig | IConfig) {
-    const merged_config = make_config(config);
-    try {
-        const data = await get_leetcode_data(merged_config.username, merged_config.site);
-        const card = new Card(merged_config, data);
-        const svg = card.export_svg();
-        return svg;
-    } catch (err) {
-        console.error("Error", JSON.stringify(err), JSON.stringify(merged_config, null, 2));
-        const card = get_404_card(merged_config);
-        const svg = card.export_svg();
-        return svg;
-    }
+/**
+ * The default in-memory cache instance.
+ */
+export const cache = new MemoryCache();
+
+/**
+ * Generate a card.
+ * @param config The configuration of the card
+ * @returns The card (svg)
+ */
+export async function generate(config: Partial<Config>): Promise<string> {
+    const generator = new Generator(cache);
+    return await generator.generate({
+        username: "jacoblincool",
+        site: "us",
+        width: 500,
+        height: 200,
+        css: [],
+        extensions: [FontExtension, AnimationExtension, ThemeExtension],
+        animation: true,
+        font: "baloo_2",
+        theme: "light",
+        ...config,
+    });
 }
 
-export default leetcode_card;
+export default generate;
+export {
+    MemoryCache,
+    Generator,
+    Config,
+    ActivityExtension,
+    AnimationExtension,
+    FontExtension,
+    ThemeExtension,
+    RemoteStyleExtension,
+};

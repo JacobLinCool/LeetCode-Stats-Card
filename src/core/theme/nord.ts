@@ -1,35 +1,29 @@
-import type { IThemeConfig } from "../types/types";
+import { Theme } from "./_theme";
 
-export default {
-    colors: {
-        background: "#2E3440",
-        border: "#3B4252",
-        username: "#ECEFF4",
-        ranking: "#D8DEE9",
-        total_solved_number: "#ECEFF4",
-        total_solved_ring_background: "#434C5E",
-        total_solved_ring_foreground: "#D08770",
-        easy: {
-            text: "#ECEFF4",
-            number: "#D8DEE9",
-            progress_background: "#434C5E",
-            progress_foreground: "#A3BE8C",
-        },
-        medium: {
-            text: "#ECEFF4",
-            number: "#D8DEE9",
-            progress_background: "#434C5E",
-            progress_foreground: "#EBCB8B",
-        },
-        hard: {
-            text: "#ECEFF4",
-            number: "#D8DEE9",
-            progress_background: "#434C5E",
-            progress_foreground: "#BF616A",
-        },
+const nord = [
+    "#2e3440",
+    "#3b4252",
+    "#434c5e",
+    "#4c566a",
+    "#d8dee9",
+    "#e5e9f0",
+    "#eceff4",
+    "#8fbcbb",
+    "#88c0d0",
+    "#81a1c1",
+    "#5e81ac",
+    "#bf616a",
+    "#d08770",
+    "#ebcb8b",
+    "#a3be8c",
+    "#b48ead",
+] as const;
+
+export default Theme({
+    palette: {
+        bg: nord.slice(0, 4),
+        text: nord.slice(4, 7).reverse(),
+        color: [nord[12], nord[14], nord[13], nord[11]],
     },
-    css: `
-path#L {
-    fill: #ECEFF4;
-}`,
-} as IThemeConfig;
+    css: `#L{fill:${nord[6]}}`,
+});
