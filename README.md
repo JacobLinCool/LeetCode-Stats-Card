@@ -23,7 +23,8 @@ Show your dynamically generated LeetCode stats on your GitHub profile or your we
 > Playground: <https://leetcard.jacoblin.cool/>
 >
 > New Version Preview:
-> ![new preview](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn&extension=activity&border=0)
+>
+> [![new preview](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn&extension=activity&border=0)](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn&extension=activity&border=0)
 
 ## Usage
 
