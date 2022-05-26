@@ -78,7 +78,7 @@ function sanitize(config: Record<string, string>): Config {
             styles.push(
                 `#background{stroke-width:${size};width:${generator.config.width - size}px;height:${
                     generator.config.height - size
-                }px}`,
+                }px;transform:translate(${size / 2}px,${size / 2}px)}`,
             );
         });
     }
