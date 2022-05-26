@@ -1,8 +1,9 @@
 {
     "name": "leetcode-card",
-    "version": "1.0.0-dev.1",
+    "version": "1.0.0-dev.2",
     "description": "Show your dynamically generated LeetCode stats on your GitHub profile or your website!",
     "license": "MIT",
+    "type": "module",
     "author": {
         "name": "JacobLinCool",
         "email": "jacoblincool@gmail.com"
@@ -16,7 +17,7 @@
         "prepare": "npm run build",
         "dev": "wrangler dev",
         "build:worker": "esbuild src/cloudflare-worker/index.ts --outfile=dist/worker.js --bundle --minify --format=esm --loader:.html=text",
-        "build:package": "esbuild src/core/index.ts --outfile=lib/index.js --bundle --minify --format=esm",
+        "build:package": "esbuild src/core/index.ts --outfile=lib/index.js --bundle --format=esm",
         "build": "npm run build:worker && npm run build:package",
         "format": "prettier --write '**/*.{js,ts,jsx,tsx,json,yml,yaml,md,html}' '!dist' '!coverage'",
         "lint": "eslint .",
@@ -41,11 +42,12 @@
     "dependencies": {
         "itty-router": "2.6.1",
         "leetcode-query": "0.2.1",
-        "nano-font": "0.2.1"
+        "nano-font": "0.3.0"
     },
     "devDependencies": {
         "@cloudflare/workers-types": "^3.11.0",
         "@cloudflare/wrangler": "^1.19.12",
+        "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/jest": "^27.5.1",
         "@types/node": "^17.0.35",
         "@typescript-eslint/eslint-plugin": "^5.26.0",
