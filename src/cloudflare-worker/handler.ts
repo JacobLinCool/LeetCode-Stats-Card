@@ -1,15 +1,19 @@
-import type { IRawConfig } from "../core/types/types";
 import { Router } from "itty-router";
+import {
+    ActivityExtension,
+    AnimationExtension,
+    Config,
+    FontExtension,
+    Generator,
+    RemoteStyleExtension,
+    ThemeExtension,
+} from "../core";
+import { Cache } from "./cache";
 import demo from "./demo";
-import leetcode_card from "../core";
+import { booleanize, normalize } from "./utils";
 
 const router = Router();
 
-interface CacheOption {
-    cache?: string;
-}
-
-// favicon.ico
 router.get("/favicon.ico", async () => {
     return Response.redirect(
         "https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico",
@@ -17,14 +21,105 @@ router.get("/favicon.ico", async () => {
     );
 });
 
-async function card_response(config: IRawConfig & CacheOption): Promise<Response> {
-    const svg = await leetcode_card(config);
+function sanitize(config: Record<string, string>): Config {
+    const sanitized: Config = {
+        username: "jacoblincool",
+        site: "us",
+        width: 500,
+        height: 200,
+        css: [],
+        extensions: [FontExtension, AnimationExtension, ThemeExtension],
+        font: "baloo_2",
+        animation: true,
+        theme: { light: "light", dark: "dark" },
+    };
+
+    if (!config.username?.trim()) {
+        throw new Error("Missing username");
+    }
+    sanitized.username = config.username.trim();
+
+    if (config.site?.trim().toLowerCase() === "cn") {
+        sanitized.site = "cn";
+    }
+
+    if (config.width?.trim()) {
+        sanitized.width = parseInt(config.width.trim()) ?? 500;
+    }
+
+    if (config.height?.trim()) {
+        sanitized.height = parseInt(config.height.trim()) ?? 200;
+    }
+
+    if (config.theme?.trim()) {
+        const themes = config.theme.trim().split(",");
+        if (themes.length === 1 || themes[1] === "") {
+            sanitized.theme = themes[0].trim();
+        } else {
+            sanitized.theme = { light: themes[0].trim(), dark: themes[1].trim() };
+        }
+    }
+
+    if (config.font?.trim()) {
+        sanitized.font = normalize(config.font.trim());
+    }
+
+    if (config.animation?.trim()) {
+        sanitized.animation = booleanize(config.animation.trim());
+    }
+
+    if (config.ext === "activity" || config.extension === "activity") {
+        sanitized.extensions.push(ActivityExtension);
+    }
+
+    if (config.border) {
+        const size = parseFloat(config.border) ?? 1;
+        sanitized.extensions.push(() => (generator, data, body, styles) => {
+            styles.push(
+                `#background{stroke-width:${size};width:${generator.config.width - size}px;height:${
+                    generator.config.height - size
+                }px}`,
+            );
+        });
+    }
+
+    if (config.radius) {
+        const size = parseFloat(config.radius) ?? 1;
+        sanitized.css.push(`#background{rx:${size}px}`);
+    }
+
+    if (config.hide) {
+        const targets = config.hide.split(",").map((x) => x.trim());
+        sanitized.css.push(...targets.map((x) => `#${x}{display:none}`));
+    }
+
+    if (config.sheets) {
+        sanitized.sheets = config.sheets.split(",").map((x) => x.trim());
+        sanitized.extensions.push(RemoteStyleExtension);
+    }
+
+    return sanitized;
+}
+
+async function generate(config: Record<string, string>): Promise<Response> {
+    const generator = new Generator(new Cache());
+    generator.verbose = true;
+
+    let sanitized: Config;
+    try {
+        sanitized = sanitize(config);
+    } catch (err) {
+        return new Response((err as Error).message, {
+            status: 400,
+        });
+    }
+    console.log("sanitized config", JSON.stringify(sanitized, null, 4));
 
     const cache_time = parseInt(config.cache || "60") ?? 60;
     const cache_header =
         `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : ", public");
 
-    return new Response(svg, {
+    return new Response(await generator.generate(sanitized), {
         headers: {
             "Content-Type": "image/svg+xml",
             "Access-Control-Allow-Origin": "*",
@@ -37,21 +132,14 @@ async function card_response(config: IRawConfig & CacheOption): Promise<Response
 // handle path variable
 router.get(
     "/:username",
-    async ({
-        params,
-        query,
-    }: {
-        params: { username: string };
-        query: IRawConfig & CacheOption;
-    }) => {
+    async ({ params, query }: { params: { username: string }; query: Record<string, string> }) => {
         query.username = params.username;
-
-        return await card_response(query);
+        return await generate(query);
     },
 );
 
 // handle query string
-router.get("*", async ({ query }: { query: IRawConfig }) => {
+router.get("*", async ({ query }: { query: Record<string, string> }) => {
     if (!query.username) {
         return new Response(demo, {
             headers: {
@@ -62,17 +150,13 @@ router.get("*", async ({ query }: { query: IRawConfig }) => {
         });
     }
 
-    return await card_response(query);
+    return await generate(query);
 });
-
-// 405 for post requests
-router.post("*", () => new Response("Method Not Allowed.", { status: 405 }));
 
 // 404 for all other routes
 router.all("*", () => new Response("Not Found.", { status: 404 }));
 
-export async function handle_request(request: Request): Promise<Response> {
+export async function handle(request: Request): Promise<Response> {
     console.log(`${request.method} ${request.url}`);
-
     return router.handle(request);
 }
