@@ -23,13 +23,13 @@ export class Generator {
         const start_time = Date.now();
         this.log("generating card for", config.username, config.site);
 
-        const cached: string | null = await this.cache.get(`card-${JSON.stringify(config)}`);
-        if (cached) {
-            this.log("card cache hit");
-            return cached;
-        } else {
-            this.log("card cache miss");
-        }
+        // const cached: string | null = await this.cache.get(`card-${JSON.stringify(config)}`);
+        // if (cached) {
+        //     this.log("card cache hit");
+        //     return cached;
+        // } else {
+        //     this.log("card cache miss");
+        // }
 
         this.config = config;
 
@@ -39,7 +39,7 @@ export class Generator {
 
         const result = await this.hydrate(await data, body, await Promise.all(extensions));
         this.log(`card generated in ${Date.now() - start_time}ms`);
-        this.cache.put(`card-${JSON.stringify(config)}`, result);
+        // this.cache.put(`card-${JSON.stringify(config)}`, result);
         return result;
     }
 
