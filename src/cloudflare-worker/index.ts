@@ -1,4 +1,4 @@
-import { handle_request } from "./handler";
+import { handle } from "./handler";
 
 export default {
     async fetch(
@@ -7,11 +7,10 @@ export default {
         context: ExecutionContext,
     ): Promise<Response> {
         try {
-            // return new Response("");
-            return handle_request(request);
+            return await handle(request);
         } catch (err) {
             console.error(err);
-            return new Response((<Error>err).message, {
+            return new Response((err as Error).message, {
                 status: 500,
                 headers: { "Content-Type": "text/plain" },
             });
