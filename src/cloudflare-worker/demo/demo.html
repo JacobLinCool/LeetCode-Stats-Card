@@ -33,9 +33,13 @@
             <button onclick="md()">Markdwon</button>
         </div>
         <div><img id="preview" /></div>
-        <div style="height: 20px"></div>
-        <div>
-            <a href="https://github.com/JacobLinCool/leetcode-stats-card">View on GitHub</a>
+        <div style="margin-top: 20px">
+            <a
+                href="https://github.com/JacobLinCool/LeetCode-Stats-Card"
+                target="_blank"
+                style="color: royalblue; text-decoration: none"
+                >Documentation on GitHub</a
+            >
         </div>
         <style>
             html,
@@ -86,12 +90,12 @@
                 return (
                     location.origin +
                     "/" +
-                    value("username") +
+                    encodeURIComponent(value("username")) +
                     "?theme=" +
-                    value("theme") +
+                    encodeURIComponent(value("theme")) +
                     "&font=" +
-                    value("font") +
-                    (value("extension") ? "&ext=" + value("extension") : "")
+                    encodeURIComponent(value("font")) +
+                    (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "")
                 );
             }
             function preview() {
