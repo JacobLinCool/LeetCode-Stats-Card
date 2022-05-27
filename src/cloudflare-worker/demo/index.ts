@@ -1,6 +1,8 @@
-import { supported as fonts } from "../../core/exts/font";
 import { supported as themes } from "../../core/exts/theme";
 import html from "./demo.html";
+import { fonts } from "./google-fonts";
+
+const selected_font = Math.floor(Math.random() * fonts.length);
 
 export default html
     .replace(
@@ -8,16 +10,20 @@ export default html
         Object.keys(themes)
             .map(
                 (theme, i) =>
-                    `<option value="${theme}" ${i === 0 ? "selected" : ""}>${theme}</option>`,
+                    `<option value="${theme}" ${
+                        theme === "light" ? "selected" : ""
+                    }>${theme}</option>`,
             )
             .join(""),
     )
     .replace(
         "${font_options}",
-        Object.keys(fonts)
+        fonts
             .map(
                 (font, i) =>
-                    `<option value="${font}" ${i === 0 ? "selected" : ""}>${font}</option>`,
+                    `<option value="${font}" ${
+                        i === selected_font ? "selected" : ""
+                    }>${font}</option>`,
             )
             .join(""),
     );

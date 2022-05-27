@@ -24,7 +24,7 @@
             ${font_options}
         </select>
         <select id="extension">
-            <option value="null" selected>No Extension</option>
+            <option value="" selected>No Extension</option>
             <option value="activity">Activity</option>
         </select>
         <div>
@@ -32,7 +32,7 @@
             <button onclick="go()">Go</button>
             <button onclick="md()">Markdwon</button>
         </div>
-        <div><img id="preview" src="/JacobLinCool" /></div>
+        <div><img id="preview" /></div>
         <div style="height: 20px"></div>
         <div>
             <a href="https://github.com/JacobLinCool/leetcode-stats-card">View on GitHub</a>
@@ -80,19 +80,18 @@
             }
         </style>
         <script>
+            preview();
             function url() {
-                if (!document.querySelector("#username").value.trim())
-                    document.querySelector("#username").value = "JacobLinCool";
+                if (!value("username")) document.querySelector("#username").value = "JacobLinCool";
                 return (
                     location.origin +
                     "/" +
-                    document.querySelector("#username").value.trim() +
+                    value("username") +
                     "?theme=" +
-                    document.querySelector("#theme").value +
+                    value("theme") +
                     "&font=" +
-                    document.querySelector("#font").value +
-                    "&extension=" +
-                    document.querySelector("#extension").value
+                    value("font") +
+                    (value("extension") ? "&ext=" + value("extension") : "")
                 );
             }
             function preview() {
@@ -105,6 +104,9 @@
             function md() {
                 let code = "![LeetCode Stats](" + url() + ")";
                 prompt("Markdown Code: ", code);
+            }
+            function value(id) {
+                return document.querySelector("#" + id).value.trim() || "";
             }
         </script>
     </body>
