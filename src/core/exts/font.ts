@@ -14,10 +14,43 @@ export const supported: Record<string, { name: string; base64: string }> = {
     source_code_pro: Source_Code_Pro,
 };
 
-export function FontExtension(generator: Generator): Extension {
+const remote_base = "https://cdn.jsdelivr.net/gh/JacobLinCool/nano-font@json/";
+
+export async function FontExtension(generator: Generator): Promise<Extension> {
+    const config = generator.config;
+    let names: string[] = [];
+    if (Array.isArray(config.fonts)) {
+        names = config.fonts.filter((font) => !supported[font.toLowerCase()]);
+    } else if (typeof config.font === "string" && !supported[config.font.toLowerCase()]) {
+        names = [config.font];
+    }
+
+    await Promise.all(
+        names.map(async (name) => {
+            try {
+                const url = `${remote_base}${name.replace(/\s+/g, "_")}.json`;
+                const cached = await generator.cache.get(url);
+                if (cached) {
+                    supported[name.toLowerCase()] = cached;
+                    generator.log(`Loaded cached font ${name}`);
+                } else {
+                    const res = await fetch(url);
+                    if (res.ok) {
+                        const data = await res.json<{ name: string; base64: string }>();
+                        supported[name.toLowerCase()] = { name, base64: data.base64 };
+                        generator.log(`Loaded remote font ${name}`);
+                        generator.cache.put(url, data);
+                    } else {
+                        return;
+                    }
+                }
+            } catch {}
+        }),
+    );
+
     return async (generator, data, body, styles) => {
-        if (Array.isArray(generator.config.fonts)) {
-            const list = generator.config.fonts.map((font: string) => {
+        if (Array.isArray(config.fonts)) {
+            const list = config.fonts.map((font: string) => {
                 if (supported[font.toLowerCase()]) {
                     return supported[font.toLowerCase()];
                 } else {
@@ -25,13 +58,13 @@ export function FontExtension(generator: Generator): Extension {
                 }
             });
             styles.push(css(list));
-        } else if (typeof generator.config.font === "string") {
-            const font = supported[generator.config.font.toLowerCase()];
+        } else if (typeof config.font === "string") {
+            const font = supported[config.font.toLowerCase()];
 
             if (font) {
                 styles.push(css([font]));
             } else {
-                styles.push(css([{ name: generator.config.font }]));
+                styles.push(css([{ name: config.font }]));
             }
         }
     };
