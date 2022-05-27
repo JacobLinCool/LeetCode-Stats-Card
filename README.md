@@ -17,7 +17,7 @@ Show your dynamically generated LeetCode stats on your GitHub profile or your we
 > - [x] Load remote CSS stylesheets.
 > - [x] Hide any thing on the card if you don't want to show it.
 > - [x] Refactor activity extension, with all themes support.
-> - [ ] Enable all 1300+ Google Fonts.
+> - [x] Enable all 1300+ Google Fonts.
 > - [ ] Any thoughts? [Let me know!](https://github.com/JacobLinCool/LeetCode-Stats-Card/issues/new)
 >
 > Playground: <https://leetcard.jacoblin.cool/>
