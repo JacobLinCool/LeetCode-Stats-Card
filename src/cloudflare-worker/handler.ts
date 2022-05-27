@@ -39,6 +39,17 @@ function sanitize(config: Record<string, string>): Config {
     }
     sanitized.username = config.username.trim();
 
+    // #region backward compatibility
+    if (config.border_radius) {
+        const size = parseFloat(config.border_radius) ?? 1;
+        sanitized.css.push(`#background{rx:${size}px}`);
+    }
+
+    if (config.show_rank && booleanize(config.show_rank) === false) {
+        sanitized.css.push(`#ranking{display:none}`);
+    }
+    // #endregion
+
     if (config.site?.trim().toLowerCase() === "cn") {
         sanitized.site = "cn";
     }
