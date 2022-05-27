@@ -122,7 +122,7 @@ export class Generator {
             }
         }
 
-        const root = Root(this.config);
+        const root = Root(this.config, data);
         if (!root.children) {
             root.children = [];
         }

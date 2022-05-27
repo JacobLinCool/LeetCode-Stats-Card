@@ -1,7 +1,7 @@
 import { Item, svg_attrs } from "./item";
 import { Config, FetchedData } from "./types";
 
-export function Root(config: Config) {
+export function Root(config: Config, data: FetchedData) {
     return new Item({
         type: "svg",
         attr: {
@@ -13,6 +13,10 @@ export function Root(config: Config) {
         },
         style: { fill: "none" },
         children: [
+            new Item({
+                type: "title",
+                content: `${data?.profile.username || config.username} | LeetCode Stats Card`,
+            }),
             new Item({
                 type: "style",
                 attr: { id: "default-colors" },
