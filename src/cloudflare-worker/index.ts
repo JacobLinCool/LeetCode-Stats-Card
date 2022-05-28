@@ -1,4 +1,5 @@
 import { handle } from "./handler";
+import Header from "./headers";
 
 export default {
     async fetch(
@@ -12,7 +13,7 @@ export default {
             console.error(err);
             return new Response((err as Error).message, {
                 status: 500,
-                headers: { "Content-Type": "text/plain" },
+                headers: new Header().add("cors", "text"),
             });
         }
     },

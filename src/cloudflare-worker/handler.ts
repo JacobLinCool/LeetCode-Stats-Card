@@ -10,6 +10,7 @@ import {
 } from "../core";
 import { Cache } from "./cache";
 import demo from "./demo";
+import Header from "./headers";
 import { booleanize, normalize } from "./utils";
 
 const router = Router();
@@ -130,14 +131,10 @@ async function generate(config: Record<string, string>): Promise<Response> {
     const cache_header =
         `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : ", public");
 
-    return new Response(await generator.generate(sanitized), {
-        headers: {
-            "Content-Type": "image/svg+xml",
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Credentials": "true",
-            "Cache-Control": cache_header,
-        },
-    });
+    const headers = new Header().add("cors", "svg");
+    headers.set("cache-control", cache_header);
+
+    return new Response(await generator.generate(sanitized), { headers });
 }
 
 // handle path variable
@@ -153,11 +150,7 @@ router.get(
 router.get("*", async ({ query }: { query: Record<string, string> }) => {
     if (!query.username) {
         return new Response(demo, {
-            headers: {
-                "Content-Type": "text/html",
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Credentials": "true",
-            },
+            headers: new Header().add("cors", "html"),
         });
     }
 
