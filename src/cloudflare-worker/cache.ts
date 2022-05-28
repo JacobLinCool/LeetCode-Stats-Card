@@ -3,7 +3,7 @@ import { Cache as Base } from "../core/types";
 export class Cache implements Base {
     private cache;
 
-    constructor() {
+    constructor(private expiration = 60) {
         this.cache = caches.open("leetcode");
     }
 
@@ -11,13 +11,16 @@ export class Cache implements Base {
         key = this.urlify(key);
 
         if (value instanceof Response) {
-            value.headers.set("Cache-Control", `public, max-age=${options?.expire ?? 60}`);
+            value.headers.set(
+                "Cache-Control",
+                `public, max-age=${options?.expire ?? this.expiration}`,
+            );
             await (await this.cache).put(key, value);
         } else {
             const dummy: Response = new Response(JSON.stringify(value), {
                 headers: {
                     "Content-Type": "application/x-custom-data",
-                    "Cache-Control": `public, max-age=${options?.expire ?? 60}`,
+                    "Cache-Control": `public, max-age=${options?.expire ?? this.expiration}`,
                 },
             });
 
@@ -39,6 +42,12 @@ export class Cache implements Base {
         }
 
         return null;
+    }
+
+    async delete(key: string) {
+        key = this.urlify(key);
+
+        return (await this.cache).delete(key);
     }
 
     private urlify(key: string) {

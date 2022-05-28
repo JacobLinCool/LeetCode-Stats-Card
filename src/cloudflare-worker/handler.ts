@@ -33,6 +33,7 @@ function sanitize(config: Record<string, string>): Config {
         font: "baloo_2",
         animation: true,
         theme: { light: "light", dark: "dark" },
+        cache: 60,
     };
 
     if (!config.username?.trim()) {
@@ -110,13 +111,14 @@ function sanitize(config: Record<string, string>): Config {
         sanitized.extensions.push(RemoteStyleExtension);
     }
 
+    if (config.cache && parseInt(config.cache) >= 0 && parseInt(config.cache) <= 60 * 60 * 24 * 7) {
+        sanitized.cache = parseInt(config.cache);
+    }
+
     return sanitized;
 }
 
 async function generate(config: Record<string, string>): Promise<Response> {
-    const generator = new Generator(new Cache());
-    generator.verbose = true;
-
     let sanitized: Config;
     try {
         sanitized = sanitize(config);
@@ -130,6 +132,9 @@ async function generate(config: Record<string, string>): Promise<Response> {
     const cache_time = parseInt(config.cache || "60") ?? 60;
     const cache_header =
         `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : ", public");
+
+    const generator = new Generator(new Cache(sanitized.cache));
+    generator.verbose = true;
 
     const headers = new Header().add("cors", "svg");
     headers.set("cache-control", cache_header);
@@ -155,6 +160,18 @@ router.get("*", async ({ query }: { query: Record<string, string> }) => {
     }
 
     return await generate(query);
+});
+
+router.delete("/:site/:username", async ({ params }) => {
+    if (params?.site && params?.username) {
+        const site = params.site.toLowerCase();
+        const username = params.username.toLowerCase();
+        const cache = new Cache(60);
+        return new Response(
+            JSON.stringify({ success: await cache.delete(`data-${username}-${site}`) }, null, 4),
+            { headers: new Header().add("cors", "json") },
+        );
+    }
 });
 
 // 404 for all other routes
