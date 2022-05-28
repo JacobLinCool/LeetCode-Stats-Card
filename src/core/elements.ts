@@ -330,3 +330,19 @@ export const selectors = [
     "#hard-solved-bg",
     "#hard-solved-progress",
 ] as const;
+
+export function Gradient(id: string, colors: [string, number][], ratio = 0) {
+    return new Item({
+        type: "linearGradient",
+        attr: {
+            id,
+            x1: 0,
+            y1: 0,
+            x2: Math.round(Math.cos(ratio) * 100) / 100,
+            y2: Math.round(Math.sin(ratio) * 100) / 100,
+        },
+        children: colors.map((color) => {
+            return new Item({ type: "stop", attr: { offset: color[1], "stop-color": color[0] } });
+        }),
+    });
+}
