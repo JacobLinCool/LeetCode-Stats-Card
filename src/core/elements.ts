@@ -290,8 +290,10 @@ export function Gradient(id: string, colors: Record<string, string>, ratio = 0) 
             x2: Math.round(Math.cos(ratio) * 100) / 100,
             y2: Math.round(Math.sin(ratio) * 100) / 100,
         },
-        children: Object.entries(colors).map(([offset, color]) => {
-            return new Item("stop", { attr: { offset, "stop-color": color } });
-        }),
+        children: Object.entries(colors)
+            .sort((a, b) => a[0].localeCompare(b[0]))
+            .map(([offset, color]) => {
+                return new Item("stop", { attr: { offset, "stop-color": color } });
+            }),
     });
 }
