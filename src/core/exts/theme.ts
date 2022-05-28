@@ -18,7 +18,7 @@ export const supported: Record<string, Theme> = {
 };
 
 export function ThemeExtension(generator: Generator): Extension {
-    return async (generator, data, body, styles) => {
+    return async function Theme(generator, data, body, styles) {
         if (!generator.config?.theme) {
             return;
         }

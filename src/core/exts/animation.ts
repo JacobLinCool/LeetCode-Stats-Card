@@ -26,7 +26,7 @@ const order: typeof selectors[number][] = [
 ];
 
 export function AnimationExtension(generator: Generator): Extension {
-    return async (generator, data, body, styles) => {
+    return async function Animation(generator, data, body, styles) {
         if (generator.config.animation === false) {
             return;
         }

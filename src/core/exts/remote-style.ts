@@ -27,7 +27,7 @@ export function RemoteStyleExtension(generator: Generator): Extension {
         );
     }
 
-    return async (generator, data, body, styles) => {
+    return async function RemoteStyle(generator, data, body, styles) {
         for (const css of externals) {
             styles.push(await css);
         }

@@ -38,7 +38,7 @@ const langs: Record<string, string> = {
 };
 
 export function ActivityExtension(generator: Generator): Extension {
-    return async (generator, data, body, styles) => {
+    return async function Activity(generator, data, body, styles) {
         if (generator.config.height < 400) {
             generator.config.height = 400;
         }
