@@ -14,7 +14,7 @@ specifiers:
   itty-router: 2.6.1
   jest: ^27.5.1
   leetcode-query: 0.2.1
-  nano-font: 0.3.0
+  nano-font: 0.3.1
   prettier: ^2.6.2
   ts-jest: ^27.1.5
   tsup: ^5.12.8
@@ -23,7 +23,7 @@ specifiers:
 dependencies:
   itty-router: 2.6.1
   leetcode-query: 0.2.1
-  nano-font: 0.3.0
+  nano-font: 0.3.1
 
 devDependencies:
   '@cloudflare/workers-types': 3.11.0
@@ -3059,8 +3059,8 @@ packages:
       thenify-all: 1.6.0
     dev: true
 
-  /nano-font/0.3.0:
-    resolution: {integrity: sha512-jQJKkeaZ4CgHF8fD09hxQ5L+0RTyLE/zyzETHgeCWV2D7ycIWXyrmPOXdHthbBo2DLhvOQx2gD/7jBAtK123jw==}
+  /nano-font/0.3.1:
+    resolution: {integrity: sha512-tQMeygnnQYVYXj8PtylXojkBrPMcDrz0az9JFeHSqz1LWEeoFPwb5/1qvBhe3hvvyVWeLkSbzHcw3OvE3LjX4g==}
     dev: false
 
   /natural-compare/1.4.0:
