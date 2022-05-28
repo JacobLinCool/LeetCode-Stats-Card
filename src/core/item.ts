@@ -1,5 +1,7 @@
 import { Item as Base } from "./types";
 
+let counter = 0;
+
 export class Item implements Base {
     public type: string;
     public attr: Record<string, string[] | string | number>;
@@ -8,23 +10,27 @@ export class Item implements Base {
     public children?: Item[];
     public content?: string;
 
-    constructor({
+    constructor(
         type = "g",
-        attr = {},
-        style = {},
-        single = false,
-        children = [],
-        content = undefined,
-    }: {
-        type?: string;
-        attr?: Record<string, string[] | string | number>;
-        style?: Record<string, string | number>;
-        single?: boolean;
-        children?: Item[];
-        content?: string;
-    } = {}) {
+        {
+            id,
+            attr = {},
+            style = {},
+            single = false,
+            children = [],
+            content = undefined,
+        }: {
+            id?: string;
+            attr?: Record<string, string[] | string | number>;
+            style?: Record<string, string | number>;
+            single?: boolean;
+            children?: Item[];
+            content?: string;
+        } = {},
+    ) {
         this.type = type;
         this.attr = attr;
+        this.attr.id = id || this.attr.id;
         this.style = style;
         this.single = single;
         this.children = children;
@@ -33,7 +39,7 @@ export class Item implements Base {
 
     public stringify(): string {
         if (!this.attr.id) {
-            this.attr.id = `_${Math.random().toString(36).substring(2, 9)}`;
+            this.attr.id = `_${(++counter).toString(36)}`;
         }
         const attr = Object.entries(this.attr)
             .map(([key, value]) => `${key}="${Array.isArray(value) ? value.join(" ") : value}"`)
@@ -46,7 +52,7 @@ export class Item implements Base {
 
     public css(): string {
         if (!this.attr.id) {
-            this.attr.id = `_${Math.random().toString(36).substring(2, 9)}`;
+            this.attr.id = `_${(++counter).toString(36)}`;
         }
 
         if (Object.keys(this.style).length === 0) {
