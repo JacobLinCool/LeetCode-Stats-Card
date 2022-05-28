@@ -25,12 +25,23 @@ export class Generator {
 
         this.config = config;
 
-        const extensions = this.config.extensions.map((init) => init(this)) ?? [];
-        const data = this.fetch(config.username, config.site);
+        const extensions =
+            this.config.extensions.map(async (init) => {
+                const start = Date.now();
+                const ext = await init(this);
+                this.log(`extension "${ext.name}" initialized in ${Date.now() - start} ms`);
+                return ext;
+            }) ?? [];
+        const data = (async () => {
+            const start = Date.now();
+            const data = await this.fetch(config.username, config.site);
+            this.log(`user data fetched in ${Date.now() - start} ms`);
+            return data;
+        })();
         const body = this.body();
 
         const result = await this.hydrate(await data, body, await Promise.all(extensions));
-        this.log(`card generated in ${Date.now() - start_time}ms`);
+        this.log(`card generated in ${Date.now() - start_time} ms`);
         return result;
     }
 
@@ -116,9 +127,11 @@ export class Generator {
 
         for (const extension of extensions) {
             try {
+                const start = Date.now();
                 await extension(this, data, body, ext_styles);
+                this.log(`extension "${extension.name}" hydrated in ${Date.now() - start} ms`);
             } catch (err) {
-                this.log("Extension Failed", err);
+                this.log(`extension "${extension.name}" failed`, err);
             }
         }
 
