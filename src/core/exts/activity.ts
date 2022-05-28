@@ -1,4 +1,5 @@
 import { Generator } from "../card";
+import { Gradient } from "../elements";
 import { Item } from "../item";
 import { Extension } from "../types";
 
@@ -71,30 +72,11 @@ export function ActivityExtension(generator: Generator): Extension {
                 new Item({
                     type: "defs",
                     children: [
-                        new Item({
-                            type: "linearGradient",
-                            attr: {
-                                id: "ext-activity-mask-gradient",
-                                x1: "0",
-                                y1: "0",
-                                x2: "1",
-                                y2: "0",
-                            },
-                            children: [
-                                new Item({
-                                    type: "stop",
-                                    attr: { offset: "0%", "stop-color": "#fff" },
-                                }),
-                                new Item({
-                                    type: "stop",
-                                    attr: { offset: "85%", "stop-color": "#fff" },
-                                }),
-                                new Item({
-                                    type: "stop",
-                                    attr: { offset: "100%", "stop-color": "#000" },
-                                }),
-                            ],
-                        }),
+                        Gradient("ext-activity-mask-gradient", [
+                            ["#fff", 0],
+                            ["#fff", 0.85],
+                            ["#000", 1],
+                        ]),
                         new Item({
                             type: "mask",
                             attr: { id: "ext-activity-mask" },

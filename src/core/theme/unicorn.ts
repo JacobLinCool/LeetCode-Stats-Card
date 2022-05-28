@@ -1,3 +1,4 @@
+import { Gradient } from "../elements";
 import { Item } from "../item";
 import { Theme } from "./_theme";
 
@@ -11,42 +12,16 @@ export default Theme({
     extends: new Item({
         type: "defs",
         children: [
-            new Item({
-                type: "linearGradient",
-                attr: { id: "g-bg", x1: "0", y1: "0", x2: "1", y2: "0" },
-                children: [
-                    new Item({
-                        type: "stop",
-                        attr: { offset: "0%", "stop-color": "#dbeafe" },
-                    }),
-                    new Item({
-                        type: "stop",
-                        attr: { offset: "50%", "stop-color": "#e0e7ff" },
-                    }),
-                    new Item({
-                        type: "stop",
-                        attr: { offset: "100%", "stop-color": "#fae8ff" },
-                    }),
-                ],
-            }),
-            new Item({
-                type: "linearGradient",
-                attr: { id: "g-text", x1: "0", y1: "0", x2: "1", y2: "0" },
-                children: [
-                    new Item({
-                        type: "stop",
-                        attr: { offset: "0%", "stop-color": "#2563eb" },
-                    }),
-                    new Item({
-                        type: "stop",
-                        attr: { offset: "50%", "stop-color": "#4f46e5" },
-                    }),
-                    new Item({
-                        type: "stop",
-                        attr: { offset: "100%", "stop-color": "#d946ef" },
-                    }),
-                ],
-            }),
+            Gradient("g-bg", [
+                ["#dbeafe", 0],
+                ["#e0e7ff", 0.5],
+                ["#fae8ff", 1],
+            ]),
+            Gradient("g-text", [
+                ["#2563eb", 0],
+                ["#4f46e5", 0.5],
+                ["#d946ef", 1],
+            ]),
         ],
     }),
 });
