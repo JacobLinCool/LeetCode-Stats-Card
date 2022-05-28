@@ -72,11 +72,11 @@ export function ActivityExtension(generator: Generator): Extension {
                 new Item({
                     type: "defs",
                     children: [
-                        Gradient("ext-activity-mask-gradient", [
-                            ["#fff", 0],
-                            ["#fff", 0.85],
-                            ["#000", 1],
-                        ]),
+                        Gradient("ext-activity-mask-gradient", {
+                            0: "#fff",
+                            0.85: "#fff",
+                            1: "#000",
+                        }),
                         new Item({
                             type: "mask",
                             attr: { id: "ext-activity-mask" },

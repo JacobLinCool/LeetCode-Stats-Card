@@ -12,16 +12,8 @@ export default Theme({
     extends: new Item({
         type: "defs",
         children: [
-            Gradient("g-bg", [
-                ["#dbeafe", 0],
-                ["#e0e7ff", 0.5],
-                ["#fae8ff", 1],
-            ]),
-            Gradient("g-text", [
-                ["#2563eb", 0],
-                ["#4f46e5", 0.5],
-                ["#d946ef", 1],
-            ]),
+            Gradient("g-bg", { 0: "#dbeafe", 0.5: "#e0e7ff", 1: "#fae8ff" }),
+            Gradient("g-text", { 0: "#2563eb", 0.5: "#4f46e5", 1: "#d946ef" }),
         ],
     }),
 });

@@ -331,7 +331,7 @@ export const selectors = [
     "#hard-solved-progress",
 ] as const;
 
-export function Gradient(id: string, colors: [string, number][], ratio = 0) {
+export function Gradient(id: string, colors: Record<string, string>, ratio = 0) {
     return new Item({
         type: "linearGradient",
         attr: {
@@ -341,8 +341,8 @@ export function Gradient(id: string, colors: [string, number][], ratio = 0) {
             x2: Math.round(Math.cos(ratio) * 100) / 100,
             y2: Math.round(Math.sin(ratio) * 100) / 100,
         },
-        children: colors.map((color) => {
-            return new Item({ type: "stop", attr: { offset: color[1], "stop-color": color[0] } });
+        children: Object.entries(colors).map(([offset, color]) => {
+            return new Item({ type: "stop", attr: { offset, "stop-color": color } });
         }),
     });
 }
