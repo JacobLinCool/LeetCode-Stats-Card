@@ -155,7 +155,7 @@ export class Generator {
             styles.push(...this.config.css);
         }
 
-        root.children.push(new Item({ type: "style", content: styles.join("\n") }));
+        root.children.push(new Item("style", { content: styles.join("\n") }));
 
         return root.stringify();
     }

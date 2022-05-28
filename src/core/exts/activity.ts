@@ -45,20 +45,17 @@ export function ActivityExtension(generator: Generator): Extension {
 
         const submissions = data.submissions.slice(0, 5);
 
-        const extension = new Item({
-            type: "g",
-            attr: { id: "ext-activity" },
+        const extension = new Item("g", {
+            id: "ext-activity",
             style: { transform: `translate(0px, 200px)` },
             children: [
-                new Item({
-                    type: "line",
+                new Item("line", {
                     attr: { x1: 10, y1: 0, x2: generator.config.width - 20, y2: 0 },
                     style: { stroke: "var(--bg-1)", "stroke-width": 1 },
                 }),
-                new Item({
-                    type: "text",
+                new Item("text", {
                     content: "Recent Activities",
-                    attr: { id: "ext-activity-title" },
+                    id: "ext-activity-title",
                     style: {
                         transform: `translate(20px, 20px)`,
                         fill: "var(--text-0)",
@@ -69,20 +66,17 @@ export function ActivityExtension(generator: Generator): Extension {
                                 : "",
                     },
                 }),
-                new Item({
-                    type: "defs",
+                new Item("defs", {
                     children: [
                         Gradient("ext-activity-mask-gradient", {
                             0: "#fff",
                             0.85: "#fff",
                             1: "#000",
                         }),
-                        new Item({
-                            type: "mask",
-                            attr: { id: "ext-activity-mask" },
+                        new Item("mask", {
+                            id: "ext-activity-mask",
                             children: [
-                                new Item({
-                                    type: "rect",
+                                new Item("rect", {
                                     style: {
                                         fill: "url(#ext-activity-mask-gradient)",
                                         width: `${generator.config.width - 225 - 20}px`,
@@ -92,12 +86,10 @@ export function ActivityExtension(generator: Generator): Extension {
                                 }),
                             ],
                         }),
-                        new Item({
-                            type: "clipPath",
-                            attr: { id: "ext-activity-clip" },
+                        new Item("clipPath", {
+                            id: "ext-activity-clip",
                             children: [
-                                new Item({
-                                    type: "rect",
+                                new Item("rect", {
                                     style: {
                                         width: `${generator.config.width - 225 - 20}px`,
                                         height: "24px",
@@ -116,10 +108,9 @@ export function ActivityExtension(generator: Generator): Extension {
             const time = new Date(submissions[i].time);
 
             extension.children?.push(
-                new Item({
-                    type: "a",
+                new Item("a", {
+                    id: `ext-activity-item-${i}`,
                     attr: {
-                        id: `ext-activity-item-${i}`,
                         href: `https://leetcode.${
                             generator.config.site === "us" ? "com" : "cn"
                         }/submissions/detail/${submissions[i].id}/`,
@@ -133,8 +124,7 @@ export function ActivityExtension(generator: Generator): Extension {
                                 : "",
                     },
                     children: [
-                        new Item({
-                            type: "text",
+                        new Item("text", {
                             content: `${time.getFullYear() % 100}.${
                                 time.getMonth() + 1
                             }.${time.getDate()}`,
@@ -147,8 +137,7 @@ export function ActivityExtension(generator: Generator): Extension {
                                 "alignment-baseline": "middle",
                             },
                         }),
-                        new Item({
-                            type: "rect",
+                        new Item("rect", {
                             style: {
                                 transform: `translate(85px, -14px)`,
                                 fill: `var(--color-${status === "AC" ? "1" : "3"})`,
@@ -157,8 +146,7 @@ export function ActivityExtension(generator: Generator): Extension {
                                 rx: 4,
                             },
                         }),
-                        new Item({
-                            type: "text",
+                        new Item("text", {
                             content: status,
                             style: {
                                 transform: `translate(100px, 0)`,
@@ -167,8 +155,7 @@ export function ActivityExtension(generator: Generator): Extension {
                                 "alignment-baseline": "middle",
                             },
                         }),
-                        new Item({
-                            type: "text",
+                        new Item("text", {
                             content: (langs[submissions[i].lang] || submissions[i].lang).slice(
                                 0,
                                 12,
@@ -180,8 +167,7 @@ export function ActivityExtension(generator: Generator): Extension {
                                 "alignment-baseline": "middle",
                             },
                         }),
-                        new Item({
-                            type: "text",
+                        new Item("text", {
                             content: submissions[i].title,
                             style: {
                                 "clip-path": "url(#ext-activity-clip)",
