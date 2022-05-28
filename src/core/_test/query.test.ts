@@ -34,7 +34,7 @@ function test_types(data: FetchedData) {
         expect(typeof submission.status).toBe("string");
         expect(typeof submission.title).toBe("string");
         expect(typeof submission.lang).toBe("string");
-        expect(submission.time).toBeInstanceOf(Date);
+        expect(submission.time).toBeGreaterThan(0);
     }
 
     if (data.contest) {
