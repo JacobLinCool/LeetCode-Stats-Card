@@ -47,7 +47,7 @@ export class Generator {
 
     protected async fetch(username: string, site: "us" | "cn"): Promise<FetchedData> {
         this.log("fetching", username, site);
-        const cache_key = `data-${username}-${site}`;
+        const cache_key = `data-${username.toLowerCase()}-${site.toLowerCase()}`;
 
         const cached: FetchedData | null = await this.cache.get(cache_key);
         if (cached) {
