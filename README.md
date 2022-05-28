@@ -77,9 +77,9 @@ Use a comma to separate the light and dark theme.
 
 #### `font` (default: `Baloo_2`)
 
-Card font, you can use all most all fonts on Google Fonts.
+Card font, you can use almost all fonts on [Google Fonts](https://fonts.google.com/).
 
-It is case-insensitive, and you can use `font=dancing_script` or `font=Dancing%20Script`.
+It is case-insensitive, and you can use `font=dancing_script` or `font=Dancing%20Script` to get the same result.
 
 ```md
 ![](https://leetcard.jacoblin.cool/jacoblincool?font=Dancing_Script)
@@ -233,7 +233,7 @@ Now we have 6 themes. If you have any great idea, please feel free to open a PR!
 
 ### Fonts
 
-You can now use all fonts on [Google Fonts](https://fonts.google.com/).
+You can now use almost all fonts on [Google Fonts](https://fonts.google.com/).
 
 Some examples:
 
