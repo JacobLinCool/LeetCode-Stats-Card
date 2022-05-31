@@ -15,7 +15,7 @@ LeetCode and LeetCode CN are both supported.
 - 📈 Clean and simple LeetCode stats, for both `us` and `cn` sites
 - 🎨 Multiple themes and 1,300+ fonts - [Theme](#theme-default-lightdark), [Font](#font-default-baloo_2)
 - 🪄 Fully customizable using CSS - [Custom Stylesheets](#sheets-default-)
-- ⚡️ Fast and globally edge network - [Cloudflare Workers](https://workers.cloudflare.com/)
+- ⚡️ Fast and global edge network - [Cloudflare Workers](https://workers.cloudflare.com/)
 - 🚫 No tracking, controlable cache - [Cache](#cache-default-60)
 - 🍀 Open source - [MIT License](./LICENSE)
 
