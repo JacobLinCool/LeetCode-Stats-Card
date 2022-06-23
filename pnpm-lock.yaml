@@ -16,7 +16,7 @@ specifiers:
   nano-font: 0.3.1
   prettier: ^2.7.1
   ts-jest: ^27.1.5
-  tsup: ^5.12.9
+  tsup: 6.1.2
   typescript: ^4.7.3
   wrangler: ^2.0.12
 
@@ -38,7 +38,7 @@ devDependencies:
   jest: 27.5.1
   prettier: 2.7.1
   ts-jest: 27.1.5_4eskmkhs3h3jopslhh7m4rcxbe
-  tsup: 5.12.9_typescript@4.7.3
+  tsup: 6.1.2_typescript@4.7.3
   typescript: 4.7.3
   wrangler: 2.0.12
 
@@ -4164,8 +4164,9 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tsup/5.12.9_typescript@4.7.3:
-    resolution: {integrity: sha512-dUpuouWZYe40lLufo64qEhDpIDsWhRbr2expv5dHEMjwqeKJS2aXA/FPqs1dxO4T6mBojo7rvo3jP9NNzaKyDg==}
+  /tsup/6.1.2_typescript@4.7.3:
+    resolution: {integrity: sha512-Hw4hKDHaAQkm2eVavlArEOrAPA93bziRDamdfwaNs0vXQdUUFfItvUWY0L/F6oQQMVh6GvjQq1+HpDXw8UKtPA==}
+    engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
       '@swc/core': ^1
