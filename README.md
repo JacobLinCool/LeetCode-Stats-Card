@@ -133,17 +133,25 @@ Hide elements on the card, it is a comma-separated list of element ids.
 
 Extension, it is a comma-separated list of extension names.
 
-Now there is only a notable extension: `activity`.
+Now there is only two notable extension: `activity` and `contest`.
+
+NOTICE: You can only use one of `activity` and `contest` at a time now, maybe they can be used together in the future.
 
 > But actually animation, font, theme, and external stylesheet are all implemented by extensions and enabled by default.
 
-Want to contribute a `contest` or `nyan-cat` extension? PR is welcome!
+Want to contribute a `nyan-cat` extension? PR is welcome!
 
 ```md
 ![](https://leetcard.jacoblin.cool/jacoblincool?ext=activity)
 ```
 
 [![](https://leetcard.jacoblin.cool/jacoblincool?ext=activity)](https://leetcard.jacoblin.cool/jacoblincool?ext=activity)
+
+```md
+![](https://leetcard.jacoblin.cool/lapor?ext=contest)
+```
+
+[![](https://leetcard.jacoblin.cool/lapor?ext=contest)](https://leetcard.jacoblin.cool/lapor?ext=contest)
 
 #### `cache` (default: `60`)
 
@@ -263,11 +271,15 @@ Some examples:
 
 ### Extensions
 
-Now there is only a notable extension: `activity`.
+Extension, it is a comma-separated list of extension names.
+
+Now there is only two notable extension: `activity` and `contest`.
+
+NOTICE: You can only use one of `activity` and `contest` at a time now, maybe they can be used together in the future.
 
 > But actually animation, font, theme, and external stylesheet are all implemented by extensions and enabled by default.
 
-Want to contribute a `contest` or `nyan-cat` extension? PR is welcome!
+Want to contribute a `nyan-cat` extension? PR is welcome!
 
 #### `activity`
 
@@ -278,3 +290,13 @@ Show your recent submissions.
 ```
 
 [![Leetcode Stats](https://leetcard.jacoblin.cool/JacobLinCool?ext=activity)](https://leetcard.jacoblin.cool/JacobLinCool?ext=activity)
+
+#### `contest`
+
+Show your contest rating history.
+
+```md
+![Leetcode Stats](https://leetcard.jacoblin.cool/lapor?ext=contest)
+```
+
+[![Leetcode Stats](https://leetcard.jacoblin.cool/lapor?ext=contest)](https://leetcard.jacoblin.cool/lapor?ext=contest)
