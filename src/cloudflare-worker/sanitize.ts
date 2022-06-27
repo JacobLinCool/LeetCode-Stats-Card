@@ -2,6 +2,7 @@ import {
     ActivityExtension,
     AnimationExtension,
     Config,
+    ContestExtension,
     FontExtension,
     RemoteStyleExtension,
     ThemeExtension,
@@ -69,6 +70,8 @@ export function sanitize(config: Record<string, string>): Config {
 
     if (config.ext === "activity" || config.extension === "activity") {
         sanitized.extensions.push(ActivityExtension);
+    } else if (config.ext === "contest" || config.extension === "contest") {
+        sanitized.extensions.push(ContestExtension);
     }
 
     if (config.border) {
