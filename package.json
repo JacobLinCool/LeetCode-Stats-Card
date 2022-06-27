@@ -41,7 +41,7 @@
     },
     "dependencies": {
         "itty-router": "2.6.1",
-        "leetcode-query": "0.2.1",
+        "leetcode-query": "0.2.2",
         "nano-font": "0.3.1"
     },
     "devDependencies": {

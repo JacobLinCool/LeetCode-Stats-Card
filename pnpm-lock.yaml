@@ -12,7 +12,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   itty-router: 2.6.1
   jest: 28.1.1
-  leetcode-query: 0.2.1
+  leetcode-query: 0.2.2
   nano-font: 0.3.1
   prettier: ^2.7.1
   ts-jest: 28.0.5
@@ -22,7 +22,7 @@ specifiers:
 
 dependencies:
   itty-router: 2.6.1
-  leetcode-query: 0.2.1
+  leetcode-query: 0.2.2
   nano-font: 0.3.1
 
 devDependencies:
@@ -3048,8 +3048,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /leetcode-query/0.2.1:
-    resolution: {integrity: sha512-UZW8Njpld/41riZWa7Zix7d+ePfvGZqwPyel345Acy1CsVgVxl/DUhz9FhuzAS2iQWnm5AJo36kVYsOLZlrdYA==}
+  /leetcode-query/0.2.2:
+    resolution: {integrity: sha512-hc6XT3S60H2A8+VmGlt7z/xtL6NUv7DeRYgdbc43NANgxcLZJy9Tt5do1Yp/r9W/bXYh2oQ20pRoMel+EQznnQ==}
     dependencies:
       node-fetch: 2.6.7
     transitivePeerDependencies:
