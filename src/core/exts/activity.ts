@@ -50,7 +50,7 @@ export function ActivityExtension(generator: Generator): Extension {
             style: { transform: `translate(0px, 200px)` },
             children: [
                 new Item("line", {
-                    attr: { x1: 10, y1: 0, x2: generator.config.width - 20, y2: 0 },
+                    attr: { x1: 10, y1: 0, x2: generator.config.width - 10, y2: 0 },
                     style: { stroke: "var(--bg-1)", "stroke-width": 1 },
                 }),
                 new Item("text", {
