@@ -2,6 +2,7 @@ import { MemoryCache } from "./cache";
 import { Generator } from "./card";
 import { ActivityExtension } from "./exts/activity";
 import { AnimationExtension } from "./exts/animation";
+import { ContestExtension } from "./exts/contest";
 import { FontExtension } from "./exts/font";
 import { RemoteStyleExtension } from "./exts/remote-style";
 import { ThemeExtension } from "./exts/theme";
@@ -40,6 +41,7 @@ export {
     Config,
     ActivityExtension,
     AnimationExtension,
+    ContestExtension,
     FontExtension,
     ThemeExtension,
     RemoteStyleExtension,
