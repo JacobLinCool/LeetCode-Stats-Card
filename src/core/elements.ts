@@ -141,9 +141,9 @@ export function TotalSolved(total: number, solved: number) {
             new Item("circle", {
                 id: "total-solved-bg",
                 style: {
-                    cx: 40,
-                    cy: 40,
-                    r: 40,
+                    cx: "40px",
+                    cy: "40px",
+                    r: "40px",
                     stroke: "var(--bg-1)",
                     "stroke-width": "6px",
                 },
@@ -151,9 +151,9 @@ export function TotalSolved(total: number, solved: number) {
             new Item("circle", {
                 id: "total-solved-ring",
                 style: {
-                    cx: 40,
-                    cy: 40,
-                    r: 40,
+                    cx: "40px",
+                    cy: "40px",
+                    r: "40px",
                     transform: "rotate(-90deg)",
                     "transform-origin": "40px 40px",
                     "stroke-dasharray": `${(80 * Math.PI * solved) / total} 10000`,
