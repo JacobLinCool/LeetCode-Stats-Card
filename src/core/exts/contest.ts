@@ -169,8 +169,7 @@ export function ContestExtension(generator: Generator): Extension {
                             href: image,
                         },
                         style: {
-                            x: 300,
-                            y: 10,
+                            transform: "translate(300px, 10px)",
                             width: "48px",
                             height: "48px",
                             opacity: generator.config.animation !== false ? 0 : 1,
