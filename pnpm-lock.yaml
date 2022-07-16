@@ -15,7 +15,7 @@ specifiers:
   leetcode-query: 0.2.3
   nano-font: 0.3.1
   prettier: ^2.7.1
-  ts-jest: 28.0.5
+  ts-jest: 28.0.7
   tsup: 6.1.2
   typescript: ^4.7.3
   wrangler: ^2.0.12
@@ -37,7 +37,7 @@ devDependencies:
   eslint-config-prettier: 8.5.0_eslint@8.17.0
   jest: 28.1.1_@types+node@17.0.45
   prettier: 2.7.1
-  ts-jest: 28.0.5_2ih6mhnbbo36qhykyzpxb3hawu
+  ts-jest: 28.0.7_2ih6mhnbbo36qhykyzpxb3hawu
   tsup: 6.1.2_typescript@4.7.3
   typescript: 4.7.3
   wrangler: 2.0.12
@@ -3817,18 +3817,21 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-jest/28.0.5_2ih6mhnbbo36qhykyzpxb3hawu:
-    resolution: {integrity: sha512-Sx9FyP9pCY7pUzQpy4FgRZf2bhHY3za576HMKJFs+OnQ9jS96Du5vNsDKkyedQkik+sEabbKAnCliv9BEsHZgQ==}
+  /ts-jest/28.0.7_2ih6mhnbbo36qhykyzpxb3hawu:
+    resolution: {integrity: sha512-wWXCSmTwBVmdvWrOpYhal79bDpioDy4rTT+0vyUnE3ZzM7LOAAGG9NXwzkEL/a516rQEgnMmS/WKP9jBPCVJyA==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
       '@babel/core': '>=7.0.0-beta.0 <8'
+      '@jest/types': ^28.0.0
       babel-jest: ^28.0.0
       esbuild: '*'
       jest: ^28.0.0
       typescript: '>=4.3'
     peerDependenciesMeta:
       '@babel/core':
+        optional: true
+      '@jest/types':
         optional: true
       babel-jest:
         optional: true
