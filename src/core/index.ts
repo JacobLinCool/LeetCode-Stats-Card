@@ -4,6 +4,7 @@ import { ActivityExtension } from "./exts/activity";
 import { AnimationExtension } from "./exts/animation";
 import { ContestExtension } from "./exts/contest";
 import { FontExtension } from "./exts/font";
+import { HeatmapExtension } from "./exts/heatmap";
 import { RemoteStyleExtension } from "./exts/remote-style";
 import { ThemeExtension } from "./exts/theme";
 import { Config } from "./types";
@@ -43,6 +44,7 @@ export {
     AnimationExtension,
     ContestExtension,
     FontExtension,
-    ThemeExtension,
+    HeatmapExtension,
     RemoteStyleExtension,
+    ThemeExtension,
 };
