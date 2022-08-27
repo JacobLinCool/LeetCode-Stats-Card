@@ -18,6 +18,7 @@ LeetCode and LeetCode CN are both supported.
 - ⚡️ Fast and global edge network - [Cloudflare Workers](https://workers.cloudflare.com/)
 - 🚫 No tracking, controlable cache - [Cache](#cache-default-60)
 - 🍀 Open source - [MIT License](./LICENSE)
+- ⚙️ Extended-cards: `activity`, `contest`, `heatmap`
 
 It also has a [NPM package](https://www.npmjs.com/package/leetcode-card) and a [highly extensible system](./src/core/index.ts), so you can easily customize it to your needs.
 
@@ -133,11 +134,9 @@ Hide elements on the card, it is a comma-separated list of element ids.
 
 Extension, it is a comma-separated list of extension names.
 
-Now there is only two notable extension: `activity` and `contest`.
+NOTICE: You can only use one of extended-card extensions (`activity`, `contest`, `heatmap`) at a time now, maybe they can be used together in the future.
 
-NOTICE: You can only use one of `activity` and `contest` at a time now, maybe they can be used together in the future.
-
-> But actually animation, font, theme, and external stylesheet are all implemented by extensions and enabled by default.
+> Animation, font, theme, and external stylesheet are all implemented by extensions and enabled by default.
 
 Want to contribute a `nyan-cat` extension? PR is welcome!
 
@@ -152,6 +151,12 @@ Want to contribute a `nyan-cat` extension? PR is welcome!
 ```
 
 [![](https://leetcard.jacoblin.cool/lapor?ext=contest)](https://leetcard.jacoblin.cool/lapor?ext=contest)
+
+```md
+![](https://leetcard.jacoblin.cool/lapor?ext=heatmap)
+```
+
+[![](https://leetcard.jacoblin.cool/lapor?ext=heatmap)](https://leetcard.jacoblin.cool/lapor?ext=heatmap)
 
 #### `cache` (default: `60`)
 
@@ -273,11 +278,9 @@ Some examples:
 
 Extension, it is a comma-separated list of extension names.
 
-Now there is only two notable extension: `activity` and `contest`.
+NOTICE: You can only use one of extended-card extensions (`activity`, `contest`, `heatmap`) at a time now, maybe they can be used together in the future.
 
-NOTICE: You can only use one of `activity` and `contest` at a time now, maybe they can be used together in the future.
-
-> But actually animation, font, theme, and external stylesheet are all implemented by extensions and enabled by default.
+> Animation, font, theme, and external stylesheet are all implemented by extensions and enabled by default.
 
 Want to contribute a `nyan-cat` extension? PR is welcome!
 
@@ -300,3 +303,13 @@ Show your contest rating history.
 ```
 
 [![Leetcode Stats](https://leetcard.jacoblin.cool/lapor?ext=contest)](https://leetcard.jacoblin.cool/lapor?ext=contest)
+
+#### `heatmap`
+
+Show heatmap in the past 52 weeks.
+
+```md
+![Leetcode Stats](https://leetcard.jacoblin.cool/lapor?ext=heatmap)
+```
+
+[![Leetcode Stats](https://leetcard.jacoblin.cool/lapor?ext=heatmap)](https://leetcard.jacoblin.cool/lapor?ext=heatmap)

@@ -4,6 +4,7 @@ import {
     Config,
     ContestExtension,
     FontExtension,
+    HeatmapExtension,
     RemoteStyleExtension,
     ThemeExtension,
 } from "../core";
@@ -72,6 +73,8 @@ export function sanitize(config: Record<string, string>): Config {
         sanitized.extensions.push(ActivityExtension);
     } else if (config.ext === "contest" || config.extension === "contest") {
         sanitized.extensions.push(ContestExtension);
+    } else if (config.ext === "heatmap" || config.extension === "heatmap") {
+        sanitized.extensions.push(HeatmapExtension);
     }
 
     if (config.border) {
