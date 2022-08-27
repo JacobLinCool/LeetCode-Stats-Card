@@ -29,6 +29,10 @@
             <option value="contest">Contest</option>
             <option value="heatmap">Heatmap</option>
         </select>
+        <select id="site">
+            <option value="us" selected>Source: LeetCode</option>
+            <option value="cn">Source: LeetCode CN</option>
+        </select>
         <div>
             <button onclick="preview()">Preview</button>
             <button onclick="go()">Go</button>
@@ -97,7 +101,8 @@
                     encodeURIComponent(value("theme")) +
                     "&font=" +
                     encodeURIComponent(value("font")) +
-                    (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "")
+                    (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "") +
+                    (value("site") === "cn" ? "&site=cn" : "")
                 );
             }
             function preview() {
