@@ -10,7 +10,7 @@ specifiers:
   esbuild: ^0.14.44
   eslint: ^8.17.0
   eslint-config-prettier: ^8.5.0
-  itty-router: 2.6.1
+  itty-router: 2.6.3
   jest: 28.1.1
   leetcode-query: 0.2.5
   nano-font: 0.3.1
@@ -21,7 +21,7 @@ specifiers:
   wrangler: ^2.0.12
 
 dependencies:
-  itty-router: 2.6.1
+  itty-router: 2.6.3
   leetcode-query: 0.2.5
   nano-font: 0.3.1
 
@@ -2576,8 +2576,8 @@ packages:
       istanbul-lib-report: 3.0.0
     dev: true
 
-  /itty-router/2.6.1:
-    resolution: {integrity: sha512-l9gxWe5TOLUESYnBn85Jxd6tIZLWdRX5YKkHIBfSgbNQ7UFPNUGuWihRV+LlEbfJJIzgLmhwAbaWRi5yWJm8kg==}
+  /itty-router/2.6.3:
+    resolution: {integrity: sha512-w9aELaE7U/vH5ykJ2wacgNe0hOa1z4XdiSgYgAuEg1eZ+G8wZvURWIa3Vib2UhrFY2r+hZgVIjP1mFO+Vkhk5Q==}
     dev: false
 
   /javascript-natural-sort/0.7.1:
