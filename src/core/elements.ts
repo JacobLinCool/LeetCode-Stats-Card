@@ -93,7 +93,7 @@ export function Username(username: string, site: string) {
             href:
                 username === "User Not Found"
                     ? "https://github.com/JacobLinCool/LeetCode-Stats-Card"
-                    : `https://leetcode.${site === "us" ? "com" : "cn"}/u/${username}/`,
+                    : `https://leetcode.${site === "us" ? "com" : "cn"}/${username}/`,
             target: "_blank",
         },
         style: {
