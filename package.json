@@ -1,6 +1,6 @@
 {
     "name": "leetcode-card",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Show your dynamically generated LeetCode stats on your GitHub profile or your website!",
     "license": "MIT",
     "type": "module",
@@ -19,7 +19,7 @@
         "build:worker": "esbuild src/cloudflare-worker/index.ts --outfile=dist/worker.js --bundle --minify --format=esm --loader:.html=text --external:events --keep-names",
         "build:package": "esbuild src/core/index.ts --outfile=lib/index.js --bundle --format=esm --external:events --keep-names",
         "build": "npm run build:worker && npm run build:package",
-        "format": "prettier --write '**/*.{js,ts,jsx,tsx,json,yml,yaml,md,html}' '!dist' '!coverage'",
+        "format": "prettier --write . --ignore-path .gitignore",
         "lint": "eslint .",
         "push": "wrangler publish"
     },
