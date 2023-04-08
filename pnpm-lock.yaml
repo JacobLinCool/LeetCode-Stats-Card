@@ -46,8 +46,8 @@ devDependencies:
     specifier: ^2.8.3
     version: 2.8.3
   ts-jest:
-    specifier: 28.0.5
-    version: 28.0.5(@babel/core@7.18.5)(esbuild@0.15.18)(jest@28.1.1)(typescript@4.9.4)
+    specifier: 28.0.8
+    version: 28.0.8(@babel/core@7.18.5)(esbuild@0.15.18)(jest@28.1.1)(typescript@4.9.4)
   tsup:
     specifier: 6.1.2
     version: 6.1.2(typescript@4.9.4)
@@ -4091,18 +4091,21 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /ts-jest@28.0.5(@babel/core@7.18.5)(esbuild@0.15.18)(jest@28.1.1)(typescript@4.9.4):
-    resolution: {integrity: sha512-Sx9FyP9pCY7pUzQpy4FgRZf2bhHY3za576HMKJFs+OnQ9jS96Du5vNsDKkyedQkik+sEabbKAnCliv9BEsHZgQ==}
+  /ts-jest@28.0.8(@babel/core@7.18.5)(esbuild@0.15.18)(jest@28.1.1)(typescript@4.9.4):
+    resolution: {integrity: sha512-5FaG0lXmRPzApix8oFG8RKjAz4ehtm8yMKOTy5HX3fY6W8kmvOrmcY0hKDElW52FJov+clhUbrKAqofnj4mXTg==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
       '@babel/core': '>=7.0.0-beta.0 <8'
+      '@jest/types': ^28.0.0
       babel-jest: ^28.0.0
       esbuild: '*'
       jest: ^28.0.0
       typescript: '>=4.3'
     peerDependenciesMeta:
       '@babel/core':
+        optional: true
+      '@jest/types':
         optional: true
       babel-jest:
         optional: true
