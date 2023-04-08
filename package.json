@@ -68,5 +68,6 @@
     "bugs": {
         "url": "https://github.com/JacobLinCool/LeetCode-Stats-Card/issues"
     },
-    "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme"
+    "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme",
+    "packageManager": "pnpm@8.1.1"
 }
