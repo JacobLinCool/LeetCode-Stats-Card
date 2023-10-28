@@ -118,7 +118,7 @@ export function Username(username: string, site: string) {
 export function Ranking(ranking: number) {
     const item = new Item("text", {
         id: "ranking",
-        content: "#" + (ranking >= 100000 ? "100000+" : ranking.toString()),
+        content: "#" + (ranking.toString()),
         style: {
             transform: "translate(480px, 40px)",
             fill: "var(--text-1)",
