@@ -116,9 +116,11 @@ export function Username(username: string, site: string) {
 }
 
 export function Ranking(ranking: number) {
+    const formattedRanking = ranking.toLocaleString("en-US");
+
     const item = new Item("text", {
         id: "ranking",
-        content: "#" + (ranking.toString()),
+        content: "# " + formattedRanking,
         style: {
             transform: "translate(480px, 40px)",
             fill: "var(--text-1)",
@@ -130,6 +132,7 @@ export function Ranking(ranking: number) {
 
     return item;
 }
+
 
 export function TotalSolved(total: number, solved: number) {
     return new Item("g", {
