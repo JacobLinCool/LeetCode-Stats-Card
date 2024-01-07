@@ -24,7 +24,7 @@ export class Query {
                         country: countryName 
                         ranking
                     }
-                    submits: submitStats {
+                    submits: submitStatsGlobal {
                         ac: acSubmissionNum { difficulty count }
                     }
                 }
