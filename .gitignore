@@ -78,3 +78,5 @@ typings/
 dist/
 lib/
 **/.DS_Store
+.wrangler/
+

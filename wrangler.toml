@@ -1,10 +1,11 @@
 name = "leetcode"
 main = "dist/worker.js"
-account_id = "e7477191007081e167a2b188734c4e81"
 workers_dev = true
 compatibility_date = "2022-05-26"
-kv_namespaces = []
 node_compat = true
+
+[limits]
+cpu_ms = 50
 
 [build]
 command = "npm run -s build:worker"
