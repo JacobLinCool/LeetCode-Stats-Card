@@ -4,7 +4,7 @@ import { Extension } from "../types";
 
 const keyframe = `@keyframes fade_in{from{opacity:0}to{opacity:1}}`;
 
-const order: typeof selectors[number][] = [
+const order: (typeof selectors)[number][] = [
     "#icon",
     "#username",
     "#ranking",

@@ -158,9 +158,9 @@ export function ContestExtension(generator: Generator): Extension {
                     result.ranking.badge.name === "Guardian"
                         ? guardian_icon()
                         : // @ts-ignore
-                        result.ranking.badge.name === "Knight"
-                        ? knight_icon()
-                        : "";
+                          result.ranking.badge.name === "Knight"
+                          ? knight_icon()
+                          : "";
 
                 extension.children?.push(
                     new Item("image", {
