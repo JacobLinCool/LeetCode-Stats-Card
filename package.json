@@ -14,7 +14,7 @@
     ],
     "scripts": {
         "test": "vitest --coverage --coverage.include src",
-        "prepare": "npm run build",
+        "prepare": "husky",
         "dev": "wrangler dev",
         "build:worker": "esbuild src/cloudflare-worker/index.ts --outfile=dist/worker.js --bundle --minify --format=esm --loader:.html=text --keep-names",
         "build:package": "esbuild src/core/index.ts --outfile=lib/index.js --bundle --format=esm --keep-names",
@@ -29,17 +29,6 @@
         "stats",
         "card"
     ],
-    "eslintConfig": {
-        "root": true,
-        "extends": [
-            "typescript",
-            "prettier"
-        ],
-        "ignorePatterns": [
-            "dist/**.js",
-            "lib/**.js"
-        ]
-    },
     "dependencies": {
         "itty-router": "4.0.27",
         "leetcode-query": "1.0.0",
@@ -54,6 +43,8 @@
         "esbuild": "^0.20.1",
         "eslint": "^8.57.0",
         "eslint-config-prettier": "^9.1.0",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
         "prettier": "^3.2.5",
         "prettier-plugin-organize-imports": "^3.2.4",
         "selflare": "^1.0.0",
@@ -70,5 +61,22 @@
         "url": "https://github.com/JacobLinCool/LeetCode-Stats-Card/issues"
     },
     "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme",
-    "packageManager": "pnpm@8.15.4"
+    "packageManager": "pnpm@8.15.4",
+    "eslintConfig": {
+        "root": true,
+        "extends": [
+            "typescript",
+            "prettier"
+        ],
+        "ignorePatterns": [
+            "dist/**.js",
+            "lib/**.js"
+        ]
+    },
+    "lint-staged": {
+        "*.{js,ts}": [
+            "eslint --fix",
+            "prettier --write"
+        ]
+    }
 }
