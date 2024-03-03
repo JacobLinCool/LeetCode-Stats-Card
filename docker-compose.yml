@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+    worker:
+        build: .
+        image: jacoblincool/leetcode-stats-card
+        volumes:
+            - ./.storage/cache:/worker/cache
+        ports:
+            - "8080:8080"

@@ -2,11 +2,7 @@ import { handle } from "./handler";
 import Header from "./headers";
 
 export default {
-    async fetch(
-        request: Request,
-        environment: unknown,
-        context: ExecutionContext,
-    ): Promise<Response> {
+    async fetch(request: Request): Promise<Response> {
         try {
             return await handle(request);
         } catch (err) {
@@ -16,12 +12,5 @@ export default {
                 headers: new Header().add("cors", "text"),
             });
         }
-    },
-    async scheduled(
-        controller: ScheduledController,
-        environment: unknown,
-        context: ExecutionContext,
-    ): Promise<void> {
-        // await dosomething();
     },
 };

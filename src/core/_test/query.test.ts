@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import query from "../query";
 import { FetchedData } from "../types";
 

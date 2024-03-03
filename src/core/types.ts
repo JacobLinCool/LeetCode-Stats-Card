@@ -1,7 +1,8 @@
 import { Generator } from "./card";
 
 export interface Cache {
-    put: (key: string, value: any, options?: Record<string, unknown>) => Promise<void>;
+    put: (key: string, value: unknown, options?: Record<string, unknown>) => Promise<void>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     get: (key: string) => Promise<any | null>;
 }
 
@@ -16,6 +17,7 @@ export interface Config {
 
     extensions: ExtensionInit[];
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 

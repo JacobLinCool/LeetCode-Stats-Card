@@ -37,14 +37,14 @@ export async function generate(config: Partial<Config>): Promise<string> {
 
 export default generate;
 export {
-    MemoryCache,
-    Generator,
-    Config,
     ActivityExtension,
     AnimationExtension,
+    Config,
     ContestExtension,
     FontExtension,
+    Generator,
     HeatmapExtension,
+    MemoryCache,
     RemoteStyleExtension,
     ThemeExtension,
 };

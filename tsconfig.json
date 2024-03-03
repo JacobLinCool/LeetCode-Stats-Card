@@ -10,7 +10,7 @@
         "moduleResolution": "node",
         "sourceMap": true,
         "esModuleInterop": true,
-        "types": ["@cloudflare/workers-types", "@types/jest"]
+        "types": ["@cloudflare/workers-types"]
     },
     "include": ["src"],
     "exclude": ["node_modules", "dist", "tsup.config.ts"]

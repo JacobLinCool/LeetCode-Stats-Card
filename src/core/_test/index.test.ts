@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import generate from "../";
 import { ActivityExtension } from "../exts/activity";
 import { AnimationExtension } from "../exts/animation";

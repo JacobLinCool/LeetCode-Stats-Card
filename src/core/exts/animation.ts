@@ -1,10 +1,9 @@
-import { Generator } from "../card";
 import { selectors } from "../elements";
 import { Extension } from "../types";
 
 const keyframe = `@keyframes fade_in{from{opacity:0}to{opacity:1}}`;
 
-const order: typeof selectors[number][] = [
+const order: (typeof selectors)[number][] = [
     "#icon",
     "#username",
     "#ranking",
@@ -25,7 +24,7 @@ const order: typeof selectors[number][] = [
     "#hard-solved-progress",
 ];
 
-export function AnimationExtension(generator: Generator): Extension {
+export function AnimationExtension(): Extension {
     return async function Animation(generator, data, body, styles) {
         if (generator.config.animation === false) {
             return;

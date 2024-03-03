@@ -26,7 +26,7 @@ export function ContestExtension(generator: Generator): Extension {
         },
     );
 
-    return async function Contest(generator, data, body, styles) {
+    return async function Contest(generator, data, body) {
         const result = await pre_result;
 
         if (result) {
@@ -154,13 +154,11 @@ export function ContestExtension(generator: Generator): Extension {
 
             if (result.ranking.badge) {
                 const image =
-                    // @ts-ignore
                     result.ranking.badge.name === "Guardian"
                         ? guardian_icon()
-                        : // @ts-ignore
-                        result.ranking.badge.name === "Knight"
-                        ? knight_icon()
-                        : "";
+                        : result.ranking.badge.name === "Knight"
+                          ? knight_icon()
+                          : "";
 
                 extension.children?.push(
                     new Item("image", {

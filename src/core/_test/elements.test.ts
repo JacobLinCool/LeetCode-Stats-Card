@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { Icon, Ranking, Solved, TotalSolved, Username } from "../elements";
 
 describe("elements", () => {

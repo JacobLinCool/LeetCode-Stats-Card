@@ -22,8 +22,15 @@ LeetCode and LeetCode CN are both supported.
 
 It also has a [NPM package](https://www.npmjs.com/package/leetcode-card) and a [highly extensible system](./src/core/index.ts), so you can easily customize it to your needs.
 
-CLI tool will be created if I have time.
 Want to contribute? Feel free to open a pull request!
+
+## Self-hosting
+
+You can also self-host this service using the [`jacoblincool/leetcode-stats-card`](https://hub.docker.com/r/jacoblincool/leetcode-stats-card) Docker image.
+
+To build the image by yourself, use `pnpm build:image` script.
+
+See [docker-compose.yml](./docker-compose.yml) for an example.
 
 ## Usage
 

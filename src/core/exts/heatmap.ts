@@ -45,7 +45,7 @@ export async function HeatmapExtension(generator: Generator): Promise<Extension>
         }
     });
 
-    return async function Heatmap(generator, data, body, styles) {
+    return async function Heatmap(generator, data, body) {
         if (generator.config.height < 320) {
             generator.config.height = 320;
         }

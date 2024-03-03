@@ -1,7 +1,0 @@
-{
-    "transform": {
-        "^.+\\.(t|j)sx?$": "ts-jest"
-    },
-    "testRegex": "src/core/_test/.*\\.test\\.ts$",
-    "collectCoverageFrom": ["src/core/**/*.{ts,js}"]
-}

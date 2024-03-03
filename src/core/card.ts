@@ -107,6 +107,7 @@ export class Generator {
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     protected body(): Record<string, (...args: any[]) => Item> {
         const icon = Icon;
         const username = Username;
