@@ -1,4 +1,3 @@
-import { Generator } from "../card";
 import { Gradient } from "../elements";
 import { Item } from "../item";
 import { Extension } from "../types";
@@ -37,8 +36,8 @@ const langs: Record<string, string> = {
     elixir: "Elixir",
 };
 
-export function ActivityExtension(generator: Generator): Extension {
-    return async function Activity(generator, data, body, styles) {
+export function ActivityExtension(): Extension {
+    return async function Activity(generator, data, body) {
         if (generator.config.height < 400) {
             generator.config.height = 400;
         }

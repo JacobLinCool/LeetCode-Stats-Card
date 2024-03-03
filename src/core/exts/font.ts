@@ -36,7 +36,7 @@ export async function FontExtension(generator: Generator): Promise<Extension> {
                 } else {
                     const res = await fetch(url);
                     if (res.ok) {
-                        const data = await res.json<{ name: string; base64: string }>();
+                        const data = (await res.json()) as { name: string; base64: string };
                         supported[name.toLowerCase()] = { name, base64: data.base64 };
                         generator.log(`loaded remote font "${name}"`);
                         generator.cache.put(url, data);
@@ -44,7 +44,9 @@ export async function FontExtension(generator: Generator): Promise<Extension> {
                         return;
                     }
                 }
-            } catch {}
+            } catch {
+                // do nothing
+            }
         }),
     );
 

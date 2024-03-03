@@ -1,4 +1,3 @@
-import { Generator } from "../card";
 import { Theme } from "../theme/_theme";
 import dark from "../theme/dark";
 import forest from "../theme/forest";
@@ -17,7 +16,7 @@ export const supported: Record<string, Theme> = {
     wtf,
 };
 
-export function ThemeExtension(generator: Generator): Extension {
+export function ThemeExtension(): Extension {
     return async function Theme(generator, data, body, styles) {
         if (!generator.config?.theme) {
             return;

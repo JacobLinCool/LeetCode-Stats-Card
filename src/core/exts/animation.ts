@@ -1,4 +1,3 @@
-import { Generator } from "../card";
 import { selectors } from "../elements";
 import { Extension } from "../types";
 
@@ -25,7 +24,7 @@ const order: (typeof selectors)[number][] = [
     "#hard-solved-progress",
 ];
 
-export function AnimationExtension(generator: Generator): Extension {
+export function AnimationExtension(): Extension {
     return async function Animation(generator, data, body, styles) {
         if (generator.config.animation === false) {
             return;

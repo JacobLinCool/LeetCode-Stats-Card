@@ -4,7 +4,7 @@ import { Cache } from "./types";
  * The default in-memory cache.
  */
 export class MemoryCache implements Cache {
-    private cache = new Map<string, { value: any; expire: number }>();
+    private cache = new Map<string, { value: unknown; expire: number }>();
 
     /**
      * Store an item
@@ -13,7 +13,7 @@ export class MemoryCache implements Cache {
      * @param options The options of caching
      * @param options.expire The expire time of the item, in milliseconds
      */
-    async put(key: string, value: any, { expire = 5 * 60 * 1000 } = {}): Promise<void> {
+    async put(key: string, value: unknown, { expire = 5 * 60 * 1000 } = {}): Promise<void> {
         this.cache.set(key, { value, expire: Date.now() + expire });
     }
 
@@ -22,7 +22,7 @@ export class MemoryCache implements Cache {
      * @param key The key of the item
      * @returns The item
      */
-    async get(key: string): Promise<any | null> {
+    async get(key: string): Promise<unknown | null> {
         const item = this.cache.get(key);
 
         if (item) {

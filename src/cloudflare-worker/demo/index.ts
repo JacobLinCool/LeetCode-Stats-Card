@@ -9,7 +9,7 @@ export default html
         "${theme_options}",
         Object.keys(themes)
             .map(
-                (theme, i) =>
+                (theme) =>
                     `<option value="${theme}" ${
                         theme === "light" ? "selected" : ""
                     }>${theme}</option>`,

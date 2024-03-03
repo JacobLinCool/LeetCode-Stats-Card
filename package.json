@@ -36,6 +36,7 @@
     },
     "devDependencies": {
         "@cloudflare/workers-types": "^4.20240222.0",
+        "@eslint/js": "^8.57.0",
         "@types/node": "^20.11.24",
         "@typescript-eslint/eslint-plugin": "^7.1.0",
         "@typescript-eslint/parser": "^7.1.0",
@@ -50,6 +51,7 @@
         "selflare": "^1.0.0",
         "tsup": "8.0.2",
         "typescript": "^5.3.3",
+        "typescript-eslint": "^7.1.0",
         "vitest": "^1.3.1",
         "wrangler": "^3.30.1"
     },
@@ -62,17 +64,6 @@
     },
     "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme",
     "packageManager": "pnpm@8.15.4",
-    "eslintConfig": {
-        "root": true,
-        "extends": [
-            "typescript",
-            "prettier"
-        ],
-        "ignorePatterns": [
-            "dist/**.js",
-            "lib/**.js"
-        ]
-    },
     "lint-staged": {
         "*.{js,ts}": [
             "eslint --fix",

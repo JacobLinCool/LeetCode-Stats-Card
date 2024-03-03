@@ -7,7 +7,7 @@ export class Cache implements Base {
         this.cache = caches.open("leetcode");
     }
 
-    async put(key: string, value: any, options?: { expire?: number }) {
+    async put(key: string, value: unknown, options?: { expire?: number }) {
         key = this.urlify(key);
 
         if (value instanceof Response) {
