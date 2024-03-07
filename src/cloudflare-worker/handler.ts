@@ -14,7 +14,7 @@ router.get("/favicon.ico", async () => {
     );
 });
 
-async function generate(config: Record<string, string>): Promise<Response> {
+async function generate(config: Record<string, string>, req: Request): Promise<Response> {
     let sanitized: Config;
     try {
         sanitized = sanitize(config);
@@ -29,7 +29,9 @@ async function generate(config: Record<string, string>): Promise<Response> {
     const cache_header =
         `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : ", public");
 
-    const generator = new Generator(new Cache(sanitized.cache));
+    const generator = new Generator(new Cache(cache_time), {
+        "user-agent": req.headers.get("user-agent") || "Unknown",
+    });
     generator.verbose = true;
 
     const headers = new Header().add("cors", "svg");
@@ -39,23 +41,20 @@ async function generate(config: Record<string, string>): Promise<Response> {
 }
 
 // handle path variable
-router.get(
-    "/:username",
-    async ({ params, query }: { params: { username: string }; query: Record<string, string> }) => {
-        query.username = params.username;
-        return await generate(query);
-    },
-);
+router.get("/:username", async (request) => {
+    request.query.username = request.params.username;
+    return await generate(request.query as never, request);
+});
 
 // handle query string
-router.get("*", async ({ query }: { query: Record<string, string> }) => {
-    if (!query.username) {
+router.get("*", async (req: { query: Record<string, string> }) => {
+    if (!req.query.username) {
         return new Response(demo, {
             headers: new Header().add("cors", "html"),
         });
     }
 
-    return await generate(query);
+    return await generate(req.query, req as unknown as Request);
 });
 
 router.delete("/:site/:username", async ({ params }) => {

@@ -4,7 +4,7 @@ import { CN_LANGS_MAP, CN_RESULTS_MAP } from "./constants";
 import { FetchedData } from "./types";
 
 export class Query {
-    async us(username: string): Promise<FetchedData> {
+    async us(username: string, headers?: Record<string, string>): Promise<FetchedData> {
         const lc = new LeetCode();
         const { data } = await lc.graphql({
             operationName: "data",
@@ -45,6 +45,7 @@ export class Query {
                     }
                 }
             }`,
+            headers,
         });
 
         if (!data?.user) {
@@ -94,7 +95,8 @@ export class Query {
 
         return result;
     }
-    async cn(username: string): Promise<FetchedData> {
+
+    async cn(username: string, headers?: Record<string, string>): Promise<FetchedData> {
         const lc = new LeetCodeCN();
         const { data } = await lc.graphql({
             operationName: "data",
@@ -128,6 +130,7 @@ export class Query {
                     }
                 }
             }`,
+            headers,
         });
 
         if (!data?.user) {

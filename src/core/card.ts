@@ -14,9 +14,11 @@ export class Generator {
         extensions: [],
     };
     public cache: Cache;
+    public headers: Record<string, string>;
 
-    constructor(cache: Cache) {
+    constructor(cache: Cache, headers?: Record<string, string>) {
         this.cache = cache;
+        this.headers = headers ?? {};
     }
 
     async generate(config: Config): Promise<string> {
@@ -34,8 +36,8 @@ export class Generator {
             }) ?? [];
         const data = (async () => {
             const start = Date.now();
-            const data = await this.fetch(config.username, config.site);
-            this.log(`user data fetched in ${Date.now() - start} ms`);
+            const data = await this.fetch(config.username, config.site, this.headers);
+            this.log(`user data fetched in ${Date.now() - start} ms`, data);
             return data;
         })();
         const body = this.body();
@@ -47,7 +49,7 @@ export class Generator {
 
     protected async fetch(username: string, site: "us" | "cn"): Promise<FetchedData> {
         this.log("fetching", username, site);
-        const cache_key = `data-${username.toLowerCase()}-${site.toLowerCase()}`;
+        const cache_key = `data-${username.toLowerCase()}-${site}`;
 
         const cached: FetchedData | null = await this.cache.get(cache_key);
         if (cached) {
@@ -60,18 +62,19 @@ export class Generator {
         try {
             if (site === "us") {
                 const data = await query.us(username);
-                await this.cache.put(cache_key, data);
+                this.cache.put(cache_key, data).catch(console.error);
                 return data;
             } else {
                 const data = await query.cn(username);
-                await this.cache.put(cache_key, data);
+                this.cache.put(cache_key, data).catch(console.error);
                 return data;
             }
         } catch (err) {
+            console.error(err);
             const message = (err as Error).message;
             return {
                 profile: {
-                    username: message,
+                    username: message.slice(0, 32),
                     realname: "",
                     about: "",
                     avatar: "",

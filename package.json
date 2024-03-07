@@ -22,7 +22,8 @@
         "build": "npm run build:worker && npm run build:package",
         "format": "prettier --write . --ignore-path .gitignore",
         "lint": "eslint .",
-        "push": "wrangler deploy"
+        "deploy": "wrangler deploy",
+        "tail": "wrangler tail"
     },
     "keywords": [
         "leetcode",
@@ -31,7 +32,7 @@
     ],
     "dependencies": {
         "itty-router": "4.0.27",
-        "leetcode-query": "1.0.0",
+        "leetcode-query": "1.1.0",
         "nano-font": "0.3.1"
     },
     "devDependencies": {

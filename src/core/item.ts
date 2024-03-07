@@ -42,12 +42,15 @@ export class Item implements Base {
             this.attr.id = `_${(++counter).toString(36)}`;
         }
         const attr = Object.entries(this.attr)
-            .map(([key, value]) => `${key}="${Array.isArray(value) ? value.join(" ") : value}"`)
+            .map(
+                ([key, value]) =>
+                    `${key}="${escape(Array.isArray(value) ? value.join(" ") : value.toString())}"`,
+            )
             .join(" ");
         const children = this.children?.map((child) => child.stringify()).join("") || "";
         return this.single
             ? `<${this.type} ${attr} />`
-            : `<${this.type} ${attr}>${this.content || ""}${children}</${this.type}>`;
+            : `<${this.type} ${attr}>${this.content ? escape(this.content) : ""}${children}</${this.type}>`;
     }
 
     public css(): string {
@@ -70,3 +73,7 @@ export const svg_attrs = {
     xmlns: "http://www.w3.org/2000/svg",
     "xmlns:xlink": "http://www.w3.org/1999/xlink",
 };
+
+function escape(str: string): string {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
