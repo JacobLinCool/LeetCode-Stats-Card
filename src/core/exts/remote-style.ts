@@ -8,9 +8,9 @@ export function RemoteStyleExtension(generator: Generator): Extension {
     if (Array.isArray(urls)) {
         externals.push(
             ...urls.map(async (url) => {
-                const cahced = await generator.cache.get(url);
+                const cahced = await generator.cache?.match(url);
                 if (cahced) {
-                    return cahced;
+                    return cahced.text();
                 }
 
                 const data = await fetch(url)
@@ -21,7 +21,7 @@ export function RemoteStyleExtension(generator: Generator): Extension {
                     )
                     .catch((err) => `/* ${url} ${err} */`);
 
-                generator.cache.put(url, data);
+                generator.cache?.put(url, new Response(data));
                 return data;
             }),
         );

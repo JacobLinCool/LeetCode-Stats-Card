@@ -29,17 +29,18 @@ export async function FontExtension(generator: Generator): Promise<Extension> {
         names.map(async (name) => {
             try {
                 const url = `${remote_base}${name.replace(/\s+/g, "_")}.json`;
-                const cached = await generator.cache.get(url);
+                const cached = await generator.cache?.match(url);
                 if (cached) {
-                    supported[name.toLowerCase()] = cached;
+                    supported[name.toLowerCase()] = await cached.json();
                     generator.log(`Loaded cached font ${name}`);
                 } else {
                     const res = await fetch(url);
                     if (res.ok) {
-                        const data = (await res.json()) as { name: string; base64: string };
+                        const data = (await res.clone().json()) as { name: string; base64: string };
                         supported[name.toLowerCase()] = { name, base64: data.base64 };
                         generator.log(`loaded remote font "${name}"`);
-                        generator.cache.put(url, data);
+                        // @ts-expect-error Response not match
+                        generator.cache?.put(url, res);
                     } else {
                         return;
                     }
