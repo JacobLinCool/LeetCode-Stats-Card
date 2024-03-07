@@ -15,6 +15,7 @@ export class Generator {
     };
     public cache: Cache;
     public headers: Record<string, string>;
+    public count = 0;
 
     constructor(cache: Cache, headers?: Record<string, string>) {
         this.cache = cache;
@@ -54,7 +55,9 @@ export class Generator {
     ): Promise<FetchedData> {
         this.log("fetching", username, site);
         const cache_key = `data-${username.toLowerCase()}-${site}`;
+        console.log("cache_key", cache_key);
 
+        await new Promise((resolve) => setTimeout(resolve, 200 * (this.count++ % 5)));
         const cached: FetchedData | null = await this.cache.get(cache_key);
         if (cached) {
             this.log("fetch cache hit");
