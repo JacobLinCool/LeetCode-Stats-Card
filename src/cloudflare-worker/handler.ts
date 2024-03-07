@@ -1,6 +1,5 @@
 import { Router } from "itty-router";
 import { Config, Generator } from "../core";
-import { Cache } from "./cache";
 import demo from "./demo";
 import Header from "./headers";
 import { sanitize } from "./sanitize";
@@ -25,17 +24,16 @@ async function generate(config: Record<string, string>, req: Request): Promise<R
     }
     console.log("sanitized config", JSON.stringify(sanitized, null, 4));
 
-    const cache_time = parseInt(config.cache || "60") ?? 60;
-    const cache_header =
-        `max-age=${cache_time}` + (cache_time <= 0 ? ", no-store, no-cache" : ", public");
+    const cache_time = parseInt(config.cache || "300") ?? 300;
+    const cache = await caches.open("leetcode");
 
-    const generator = new Generator(new Cache(cache_time), {
+    const generator = new Generator(cache, {
         "user-agent": req.headers.get("user-agent") || "Unknown",
     });
     generator.verbose = true;
 
     const headers = new Header().add("cors", "svg");
-    headers.set("cache-control", cache_header);
+    headers.set("cache-control", `public, max-age=${cache_time}`);
 
     return new Response(await generator.generate(sanitized), { headers });
 }
@@ -55,18 +53,6 @@ router.get("*", async (req: { query: Record<string, string> }) => {
     }
 
     return await generate(req.query, req as unknown as Request);
-});
-
-router.delete("/:site/:username", async ({ params }) => {
-    if (params?.site && params?.username) {
-        const site = params.site.toLowerCase();
-        const username = params.username.toLowerCase();
-        const cache = new Cache(60);
-        return new Response(
-            JSON.stringify({ success: await cache.delete(`data-${username}-${site}`) }, null, 4),
-            { headers: new Header().add("cors", "json") },
-        );
-    }
 });
 
 // 404 for all other routes

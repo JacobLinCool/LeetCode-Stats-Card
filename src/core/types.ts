@@ -1,11 +1,5 @@
 import { Generator } from "./card";
 
-export interface Cache {
-    put: (key: string, value: unknown, options?: Record<string, unknown>) => Promise<void>;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    get: (key: string) => Promise<any | null>;
-}
-
 export interface Config {
     username: string;
     site: "us" | "cn";

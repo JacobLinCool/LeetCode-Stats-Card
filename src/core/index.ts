@@ -1,4 +1,3 @@
-import { MemoryCache } from "./cache";
 import { Generator } from "./card";
 import { ActivityExtension } from "./exts/activity";
 import { AnimationExtension } from "./exts/animation";
@@ -10,17 +9,12 @@ import { ThemeExtension } from "./exts/theme";
 import { Config } from "./types";
 
 /**
- * The default in-memory cache instance.
- */
-export const cache = new MemoryCache();
-
-/**
  * Generate a card.
  * @param config The configuration of the card
  * @returns The card (svg)
  */
 export async function generate(config: Partial<Config>): Promise<string> {
-    const generator = new Generator(cache);
+    const generator = new Generator();
     return await generator.generate({
         username: "jacoblincool",
         site: "us",
@@ -44,7 +38,6 @@ export {
     FontExtension,
     Generator,
     HeatmapExtension,
-    MemoryCache,
     RemoteStyleExtension,
     ThemeExtension,
 };

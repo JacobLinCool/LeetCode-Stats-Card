@@ -1,7 +1,7 @@
 import { Icon, Ranking, Root, Solved, TotalSolved, Username } from "./elements";
 import { Item } from "./item";
 import query from "./query";
-import { Cache, Config, Extension, FetchedData } from "./types";
+import { Config, Extension, FetchedData } from "./types";
 
 export class Generator {
     public verbose = false;
@@ -13,11 +13,11 @@ export class Generator {
         css: [],
         extensions: [],
     };
-    public cache: Cache;
+    public cache?: Cache;
     public headers: Record<string, string>;
-    public count = 0;
+    public fetches: Record<string, Promise<FetchedData>> = {};
 
-    constructor(cache: Cache, headers?: Record<string, string>) {
+    constructor(cache?: Cache, headers?: Record<string, string>) {
         this.cache = cache;
         this.headers = headers ?? {};
     }
@@ -38,7 +38,7 @@ export class Generator {
         const data = (async () => {
             const start = Date.now();
             const data = await this.fetch(config.username, config.site, this.headers);
-            this.log(`user data fetched in ${Date.now() - start} ms`, data);
+            this.log(`user data fetched in ${Date.now() - start} ms`, data.profile);
             return data;
         })();
         const body = this.body();
@@ -54,14 +54,30 @@ export class Generator {
         headers: Record<string, string>,
     ): Promise<FetchedData> {
         this.log("fetching", username, site);
-        const cache_key = `data-${username.toLowerCase()}-${site}`;
+        const cache_key = `https://leetcode-stats-card.local/data-${username.toLowerCase()}-${site}`;
         console.log("cache_key", cache_key);
 
-        await new Promise((resolve) => setTimeout(resolve, 200 * (this.count++ % 5)));
-        const cached: FetchedData | null = await this.cache.get(cache_key);
+        if (cache_key in this.fetches) {
+            return this.fetches[cache_key];
+        }
+        this.fetches[cache_key] = this._fetch(username, site, headers, cache_key);
+        this.fetches[cache_key].finally(() => {
+            delete this.fetches[cache_key];
+        });
+        return this.fetches[cache_key];
+    }
+
+    protected async _fetch(
+        username: string,
+        site: "us" | "cn",
+        headers: Record<string, string>,
+        cache_key: string,
+    ): Promise<FetchedData> {
+        this.log("fetching", username, site);
+        const cached = await this.cache?.match(cache_key);
         if (cached) {
             this.log("fetch cache hit");
-            return cached;
+            return cached.json();
         } else {
             this.log("fetch cache miss");
         }
@@ -69,11 +85,25 @@ export class Generator {
         try {
             if (site === "us") {
                 const data = await query.us(username, headers);
-                this.cache.put(cache_key, data).catch(console.error);
+                await this.cache
+                    ?.put(
+                        cache_key,
+                        new Response(JSON.stringify(data), {
+                            headers: { "cache-control": "max-age=300" },
+                        }),
+                    )
+                    .catch(console.error);
                 return data;
             } else {
                 const data = await query.cn(username, headers);
-                this.cache.put(cache_key, data).catch(console.error);
+                await this.cache
+                    ?.put(
+                        cache_key,
+                        new Response(JSON.stringify(data), {
+                            headers: { "cache-control": "max-age=300" },
+                        }),
+                    )
+                    .catch(console.error);
                 return data;
             }
         } catch (err) {
