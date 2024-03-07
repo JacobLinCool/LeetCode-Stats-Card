@@ -2,6 +2,10 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card/badge)](https://www.codefactor.io/repository/github/jacoblincool/leetcode-stats-card)
 
+> [!IMPORTANT]  
+> At around 2024/03/07, LeetCode has employed a Cloudflare Bot Protection against requests from Cloudflare Workers.
+> As a temporary solution, this service is running on my own server. If you want to host it by yourself, please refer to the [Self-hosting](#self-hosting) section.
+
 Show your dynamically generated LeetCode stats on your GitHub profile or your website!
 
 LeetCode and LeetCode CN are both supported.
