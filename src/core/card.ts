@@ -47,7 +47,11 @@ export class Generator {
         return result;
     }
 
-    protected async fetch(username: string, site: "us" | "cn"): Promise<FetchedData> {
+    protected async fetch(
+        username: string,
+        site: "us" | "cn",
+        headers: Record<string, string>,
+    ): Promise<FetchedData> {
         this.log("fetching", username, site);
         const cache_key = `data-${username.toLowerCase()}-${site}`;
 
@@ -61,11 +65,11 @@ export class Generator {
 
         try {
             if (site === "us") {
-                const data = await query.us(username);
+                const data = await query.us(username, headers);
                 this.cache.put(cache_key, data).catch(console.error);
                 return data;
             } else {
-                const data = await query.cn(username);
+                const data = await query.cn(username, headers);
                 this.cache.put(cache_key, data).catch(console.error);
                 return data;
             }
