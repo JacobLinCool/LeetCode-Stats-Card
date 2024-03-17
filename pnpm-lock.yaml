@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   itty-router:
-    specifier: 4.0.27
-    version: 4.0.27
+    specifier: 4.2.2
+    version: 4.2.2
   leetcode-query:
     specifier: 1.1.0
     version: 1.1.0
@@ -2243,8 +2243,8 @@ packages:
       istanbul-lib-report: 3.0.1
     dev: true
 
-  /itty-router@4.0.27:
-    resolution: {integrity: sha512-Q3/GOE2EJvyu3hhxGN3WDWh3QNg4v7h1KFx/jSLcIOOkpSI1jUFTgGefEESXon4j5YwqCIf0DEemjiVAFSBiUw==}
+  /itty-router@4.2.2:
+    resolution: {integrity: sha512-KegPW0l9SNPadProoFT07AB84uOqLUwzlXQ7HsqkS31WUrxkjdhcemRpTDUuetbMJ89uBtWeQSVoiEmUAu31uw==}
     dev: false
 
   /joycon@3.1.1:
