@@ -31,7 +31,7 @@
         "card"
     ],
     "dependencies": {
-        "itty-router": "4.0.27",
+        "itty-router": "4.2.2",
         "leetcode-query": "1.1.0",
         "nano-font": "0.3.1"
     },
