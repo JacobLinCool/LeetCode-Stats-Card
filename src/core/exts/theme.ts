@@ -3,6 +3,7 @@ import dark from "../theme/dark";
 import forest from "../theme/forest";
 import light from "../theme/light";
 import nord from "../theme/nord";
+import transparent from "../theme/transparent";
 import unicorn from "../theme/unicorn";
 import wtf from "../theme/wtf";
 import { Extension, Item } from "../types";
@@ -14,6 +15,7 @@ export const supported: Record<string, Theme> = {
     nord,
     unicorn,
     wtf,
+    transparent,
 };
 
 export function ThemeExtension(): Extension {
