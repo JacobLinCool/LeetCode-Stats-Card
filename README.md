@@ -251,6 +251,14 @@ Now we have 6 themes. If you have any great idea, please feel free to open a PR!
 
 [![Leetcode Stats](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn)](https://leetcard.jacoblin.cool/JacobLinCool?theme=unicorn)
 
+#### Transparent
+
+```md
+![Leetcode Stats](https://leetcard.jacoblin.cool/JacobLinCool?theme=transparent)
+```
+
+[![Leetcode Stats](https://leetcard.jacoblin.cool/JacobLinCool?theme=transparent)](https://leetcard.jacoblin.cool/JacobLinCool?theme=transparent)
+
 ### Fonts
 
 You can now use almost all fonts on [Google Fonts](https://fonts.google.com/).
