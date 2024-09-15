@@ -2,6 +2,8 @@ import { Item, svg_attrs } from "./item";
 import { Config, FetchedData } from "./types";
 
 export function Root(config: Config, data: FetchedData) {
+    config.width = Math.max(config.width, 500);
+    config.height = Math.max(config.height, 800);
     return new Item("svg", {
         id: "root",
         attr: {

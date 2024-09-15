@@ -75,6 +75,12 @@ export function sanitize(config: Record<string, string>): Config {
         sanitized.extensions.push(ContestExtension);
     } else if (config.ext === "heatmap" || config.extension === "heatmap") {
         sanitized.extensions.push(HeatmapExtension);
+    } else if (config.ext === "all" || config.extension === "all") {
+        sanitized.extensions.push(ActivityExtension);
+
+        sanitized.extensions.push(ContestExtension);
+
+        sanitized.extensions.push(HeatmapExtension);
     }
 
     if (config.border) {
