@@ -56,7 +56,7 @@ export function ContestExtension(generator: Generator): Extension {
 
             const extension = new Item("g", {
                 id: "ext-contest",
-                style: { transform: `translate(500px, 1px)` },
+                style: { transform: `translate(500px, 0px)` },
                 children: [
                     new Item("line", {
                         attr: { x1: 10, y1: 0, x2: generator.config.width - 10, y2: 0 },
