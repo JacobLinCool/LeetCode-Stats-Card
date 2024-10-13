@@ -1,12 +1,13 @@
 import { Theme } from "../theme/_theme";
+import charteuseDark from "../theme/chartreuseDark";
 import dark from "../theme/dark";
 import forest from "../theme/forest";
 import light from "../theme/light";
 import nord from "../theme/nord";
+import radical from "../theme/radical";
 import transparent from "../theme/transparent";
 import unicorn from "../theme/unicorn";
 import wtf from "../theme/wtf";
-import radical from "../theme/radical";
 import { Extension, Item } from "../types";
 
 export const supported: Record<string, Theme> = {
@@ -18,6 +19,7 @@ export const supported: Record<string, Theme> = {
     wtf,
     transparent,
     radical,
+    charteuseDark,
 };
 
 export function ThemeExtension(): Extension {
