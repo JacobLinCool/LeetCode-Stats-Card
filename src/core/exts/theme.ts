@@ -6,6 +6,7 @@ import nord from "../theme/nord";
 import transparent from "../theme/transparent";
 import unicorn from "../theme/unicorn";
 import wtf from "../theme/wtf";
+import radical from "../theme/radical";
 import { Extension, Item } from "../types";
 
 export const supported: Record<string, Theme> = {
@@ -16,6 +17,7 @@ export const supported: Record<string, Theme> = {
     unicorn,
     wtf,
     transparent,
+    radical,
 };
 
 export function ThemeExtension(): Extension {
