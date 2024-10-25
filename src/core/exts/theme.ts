@@ -8,6 +8,7 @@ import unicorn from "../theme/unicorn";
 import wtf from "../theme/wtf";
 import radical from "../theme/radical";
 import chartreuse from "../theme/chartreuse";
+import catppuccinMocha from "../theme/catppuccin-mocha";
 import { Extension, Item } from "../types";
 
 export const supported: Record<string, Theme> = {
@@ -19,7 +20,8 @@ export const supported: Record<string, Theme> = {
     wtf,
     transparent,
     radical,
-    chartreuse
+    chartreuse,
+    catppuccinMocha
 };
 
 export function ThemeExtension(): Extension {
