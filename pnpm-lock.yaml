@@ -9,8 +9,8 @@ dependencies:
     specifier: 4.0.27
     version: 4.0.27
   leetcode-query:
-    specifier: 1.1.0
-    version: 1.1.0
+    specifier: 1.2.3
+    version: 1.2.3
   nano-font:
     specifier: 0.3.1
     version: 0.3.1
@@ -866,6 +866,20 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
     dev: true
+
+  /@fetch-impl/cross-fetch@1.0.0(@fetch-impl/fetcher@1.0.0)(cross-fetch@4.0.0):
+    resolution: {integrity: sha512-vNvwtCQ7yruvpYnp1i/4paVi/icrGYx9O4eHNDYorjTAFg78bhitO0l39opJSVfsTKqyWqj3+2+YenoGhZOCJA==}
+    peerDependencies:
+      '@fetch-impl/fetcher': ^1.0.0
+      cross-fetch: '*'
+    dependencies:
+      '@fetch-impl/fetcher': 1.0.0
+      cross-fetch: 4.0.0
+    dev: false
+
+  /@fetch-impl/fetcher@1.0.0:
+    resolution: {integrity: sha512-UPUN9Yfjnk513Vc08iNW8/9L1nSwQMsTx6nOvmjPNfU2Rtbew/2KgAbQDPuoL6PrNgEmEmmyeM29BkcVBpt3gQ==}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.14:
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -2275,9 +2289,11 @@ packages:
     resolution: {integrity: sha512-AilxAyFOAcK5wA1+LeaySVBrHsGQvUFCDWXKpZjzaL0PqW+xfBOttn8GNtWKFWqneyMZj41MWF9Kl6iPWLwgOA==}
     dev: true
 
-  /leetcode-query@1.1.0:
-    resolution: {integrity: sha512-InV0mQeq5rxEYY6SEXi8dryREspuGVNHAdWBxSJg2vOM6TJWhgHeAhIOZt0wU9Nm0DOA7gkISJratnXBMtWUYw==}
+  /leetcode-query@1.2.3:
+    resolution: {integrity: sha512-J73ehmjgIfDd3Ugg1ee83bDALNaGh78nQwDS5qyPOsgGahK55a2lcl9Q/iaByKi6AUMMxsHEyEsUNGBX4Lmn2Q==}
     dependencies:
+      '@fetch-impl/cross-fetch': 1.0.0(@fetch-impl/fetcher@1.0.0)(cross-fetch@4.0.0)
+      '@fetch-impl/fetcher': 1.0.0
       cross-fetch: 4.0.0
       eventemitter3: 5.0.1
     transitivePeerDependencies:
