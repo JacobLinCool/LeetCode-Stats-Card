@@ -1,19 +1,23 @@
-import { Router } from "itty-router";
-import { Config, Generator } from "../core";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { Config, Generator } from "leetcode-card";
 import demo from "./demo";
 import Header from "./headers";
 import { sanitize } from "./sanitize";
 
-const router = Router();
+const app = new Hono().use("*", cors());
 
-router.get("/favicon.ico", async () => {
-    return Response.redirect(
+app.get("/favicon.ico", (c) => {
+    return c.redirect(
         "https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico",
         301,
     );
 });
 
-async function generate(config: Record<string, string>, req: Request): Promise<Response> {
+async function generate(
+    config: Record<string, string>,
+    header: Record<string, string>,
+): Promise<Response> {
     let sanitized: Config;
     try {
         sanitized = sanitize(config);
@@ -27,9 +31,7 @@ async function generate(config: Record<string, string>, req: Request): Promise<R
     const cache_time = parseInt(config.cache || "300") ?? 300;
     const cache = await caches.open("leetcode");
 
-    const generator = new Generator(cache, {
-        "user-agent": req.headers.get("user-agent") || "Unknown",
-    });
+    const generator = new Generator(cache, header);
     generator.verbose = true;
 
     const headers = new Header().add("cors", "svg");
@@ -39,26 +41,34 @@ async function generate(config: Record<string, string>, req: Request): Promise<R
 }
 
 // handle path variable
-router.get("/:username", async (request) => {
-    request.query.username = request.params.username;
-    return await generate(request.query as never, request);
+app.get("/:username", async (c) => {
+    const username = c.req.param("username");
+    const query = Object.fromEntries(new URL(c.req.url).searchParams);
+    query.username = username;
+    return await generate(query, {
+        "user-agent": c.req.header("user-agent") || "Unknown",
+    });
 });
 
 // handle query string
-router.get("*", async (req: { query: Record<string, string> }) => {
-    if (!req.query.username) {
+app.get("*", async (c) => {
+    const query = Object.fromEntries(new URL(c.req.url).searchParams);
+
+    if (!query.username) {
         return new Response(demo, {
             headers: new Header().add("cors", "html"),
         });
     }
 
-    return await generate(req.query, req as unknown as Request);
+    return await generate(query, {
+        "user-agent": c.req.header("user-agent") || "Unknown",
+    });
 });
 
 // 404 for all other routes
-router.all("*", () => new Response("Not Found.", { status: 404 }));
+app.all("*", () => new Response("Not Found.", { status: 404 }));
 
 export async function handle(request: Request): Promise<Response> {
     console.log(`${request.method} ${request.url}`);
-    return router.handle(request);
+    return app.fetch(request);
 }

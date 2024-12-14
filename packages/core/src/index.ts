@@ -5,7 +5,7 @@ import { ContestExtension } from "./exts/contest";
 import { FontExtension } from "./exts/font";
 import { HeatmapExtension } from "./exts/heatmap";
 import { RemoteStyleExtension } from "./exts/remote-style";
-import { ThemeExtension } from "./exts/theme";
+import { ThemeExtension, supported } from "./exts/theme";
 import { Config } from "./types";
 
 /**
@@ -40,4 +40,5 @@ export {
     HeatmapExtension,
     RemoteStyleExtension,
     ThemeExtension,
+    supported,
 };

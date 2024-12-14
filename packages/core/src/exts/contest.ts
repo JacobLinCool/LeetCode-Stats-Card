@@ -3,7 +3,7 @@ import { Generator } from "../card";
 import { Item } from "../item";
 import { Extension } from "../types";
 
-export function ContestExtension(generator: Generator): Extension {
+export async function ContestExtension(generator: Generator): Promise<Extension> {
     const pre_result = new Promise<null | { ranking: ContestRanking; history: ContestInfo[] }>(
         (resolve) => {
             const lc = new LeetCode();
@@ -19,6 +19,7 @@ export function ContestExtension(generator: Generator): Extension {
 
                     resolve({ ranking: data.userContestRanking, history });
                 } catch (e) {
+                    console.error(e);
                     resolve(null);
                 }
             });
