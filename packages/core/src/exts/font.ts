@@ -39,7 +39,6 @@ export async function FontExtension(generator: Generator): Promise<Extension> {
                         const data = (await res.clone().json()) as { name: string; base64: string };
                         supported[name.toLowerCase()] = { name, base64: data.base64 };
                         generator.log(`loaded remote font "${name}"`);
-                        // @ts-expect-error Response not match
                         generator.cache?.put(url, res);
                     } else {
                         return;

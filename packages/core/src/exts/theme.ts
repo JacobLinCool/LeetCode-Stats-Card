@@ -1,14 +1,14 @@
 import { Theme } from "../theme/_theme";
+import catppuccinMocha from "../theme/catppuccin-mocha";
+import chartreuse from "../theme/chartreuse";
 import dark from "../theme/dark";
 import forest from "../theme/forest";
 import light from "../theme/light";
 import nord from "../theme/nord";
+import radical from "../theme/radical";
 import transparent from "../theme/transparent";
 import unicorn from "../theme/unicorn";
 import wtf from "../theme/wtf";
-import radical from "../theme/radical";
-import chartreuse from "../theme/chartreuse";
-import catppuccinMocha from "../theme/catppuccin-mocha";
 import { Extension, Item } from "../types";
 
 export const supported: Record<string, Theme> = {
@@ -21,7 +21,7 @@ export const supported: Record<string, Theme> = {
     transparent,
     radical,
     chartreuse,
-    catppuccinMocha
+    catppuccinMocha,
 };
 
 export function ThemeExtension(): Extension {

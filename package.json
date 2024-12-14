@@ -1,5 +1,6 @@
 {
-    "name": "leetcode-card",
+    "private": true,
+    "name": "leetcode-card-monorepo",
     "version": "1.0.1",
     "description": "Show your dynamically generated LeetCode stats on your GitHub profile or your website!",
     "license": "MIT",
@@ -13,48 +14,37 @@
         "lib"
     ],
     "scripts": {
-        "test": "vitest --coverage --coverage.include src",
         "prepare": "husky",
-        "dev": "wrangler dev",
-        "build:worker": "esbuild src/cloudflare-worker/index.ts --outfile=dist/worker.js --bundle --minify --format=esm --loader:.html=text --keep-names",
-        "build:package": "esbuild src/core/index.ts --outfile=lib/index.js --bundle --format=esm --keep-names",
-        "build:image": "selflare compile --script dist/worker.js && docker compose build",
-        "build": "npm run build:worker && npm run build:package",
+        "test": "vitest --coverage --coverage.include packages/*/src",
+        "build:worker": "pnpm run --filter cloudflare-worker build",
+        "build:package": "pnpm run --filter leetcode-card build",
+        "build:image": "selflare compile --script packages/cloudflare-worker/dist/worker.js && docker compose build",
+        "build": "pnpm -r build",
         "format": "prettier --write . --ignore-path .gitignore",
-        "lint": "eslint .",
-        "deploy": "wrangler deploy",
-        "tail": "wrangler tail"
+        "lint": "eslint ."
     },
     "keywords": [
         "leetcode",
         "stats",
         "card"
     ],
-    "dependencies": {
-        "itty-router": "4.0.27",
-        "leetcode-query": "1.1.0",
-        "nano-font": "0.3.1"
-    },
     "devDependencies": {
-        "@cloudflare/workers-types": "^4.20240222.0",
-        "@eslint/js": "^8.57.0",
-        "@types/node": "^20.11.24",
-        "@typescript-eslint/eslint-plugin": "^7.1.0",
-        "@typescript-eslint/parser": "^7.1.0",
-        "@vitest/coverage-v8": "^1.3.1",
-        "esbuild": "^0.20.1",
-        "eslint": "^8.57.0",
+        "@eslint/js": "^9.17.0",
+        "@types/node": "^22.10.2",
+        "@typescript-eslint/eslint-plugin": "^8.18.0",
+        "@typescript-eslint/parser": "^8.18.0",
+        "@vitest/coverage-v8": "^2.1.8",
+        "eslint": "^9.17.0",
         "eslint-config-prettier": "^9.1.0",
-        "husky": "^9.0.11",
-        "lint-staged": "^15.2.2",
-        "prettier": "^3.2.5",
-        "prettier-plugin-organize-imports": "^3.2.4",
-        "selflare": "^1.0.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.2.11",
+        "prettier": "^3.4.2",
+        "prettier-plugin-organize-imports": "^4.1.0",
+        "selflare": "^1.1.2",
         "tsup": "8.0.2",
-        "typescript": "^5.3.3",
-        "typescript-eslint": "^7.1.0",
-        "vitest": "^1.3.1",
-        "wrangler": "^3.30.1"
+        "typescript": "^5.7.2",
+        "typescript-eslint": "^8.18.0",
+        "vitest": "^2.1.8"
     },
     "repository": {
         "type": "git",
@@ -64,7 +54,7 @@
         "url": "https://github.com/JacobLinCool/LeetCode-Stats-Card/issues"
     },
     "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme",
-    "packageManager": "pnpm@8.15.4",
+    "packageManager": "pnpm@9.15.0",
     "lint-staged": {
         "*.{js,ts}": [
             "eslint --fix",

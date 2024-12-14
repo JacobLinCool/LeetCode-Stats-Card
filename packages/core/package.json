@@ -1,0 +1,47 @@
+{
+    "name": "leetcode-card",
+    "version": "1.0.1",
+    "description": "Show your dynamically generated LeetCode stats on your GitHub profile or your website!",
+    "license": "MIT",
+    "type": "module",
+    "author": {
+        "name": "JacobLinCool",
+        "email": "jacoblincool@gmail.com"
+    },
+    "keywords": [
+        "leetcode",
+        "stats",
+        "card"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "leetcode-query": "1.1.0",
+        "nano-font": "0.3.1"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.20241205.0",
+        "tsup": "8.0.2",
+        "typescript": "^5.7.2"
+    },
+    "scripts": {
+        "build": "tsup"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/JacobLinCool/LeetCode-Stats-Card.git"
+    },
+    "bugs": {
+        "url": "https://github.com/JacobLinCool/LeetCode-Stats-Card/issues"
+    },
+    "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme"
+}

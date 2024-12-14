@@ -14,6 +14,7 @@ export async function HeatmapExtension(generator: Generator): Promise<Extension>
                     };
                     resolve(JSON.parse(data.user.calendar.calendar));
                 } catch (e) {
+                    console.error(e);
                     resolve({});
                 }
             });
@@ -31,6 +32,7 @@ export async function HeatmapExtension(generator: Generator): Promise<Extension>
                     };
                     resolve(JSON.parse(data.calendar.calendar));
                 } catch (e) {
+                    console.error(e);
                     resolve({});
                 }
             });

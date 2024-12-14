@@ -19,6 +19,7 @@ export function ContestExtension(generator: Generator): Extension {
 
                     resolve({ ranking: data.userContestRanking, history });
                 } catch (e) {
+                    console.error(e);
                     resolve(null);
                 }
             });

@@ -1,4 +1,4 @@
-import { supported as themes } from "../../core/exts/theme";
+import { supported as themes } from "leetcode-card";
 import html from "./demo.html";
 import { fonts } from "./google-fonts";
 

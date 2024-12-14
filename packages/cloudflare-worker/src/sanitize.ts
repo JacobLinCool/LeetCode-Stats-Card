@@ -7,7 +7,7 @@ import {
     HeatmapExtension,
     RemoteStyleExtension,
     ThemeExtension,
-} from "../core";
+} from "leetcode-card";
 import { booleanize, normalize } from "./utils";
 
 export function sanitize(config: Record<string, string>): Config {
