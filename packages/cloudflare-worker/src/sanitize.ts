@@ -10,73 +10,81 @@ import {
 } from "leetcode-card";
 import { booleanize, normalize } from "./utils";
 
+// Helper functions to reduce complexity
+function handleExtension(config: Record<string, string>): Config["extensions"] {
+    const extensions = [FontExtension, AnimationExtension, ThemeExtension];
+
+    const extName = config.ext || config.extension;
+    if (extName === "activity") {
+        extensions.push(ActivityExtension);
+    } else if (extName === "contest") {
+        extensions.push(ContestExtension);
+    } else if (extName === "heatmap") {
+        extensions.push(HeatmapExtension);
+    }
+
+    if (config.sheets) {
+        extensions.push(RemoteStyleExtension);
+    }
+
+    return extensions;
+}
+
+function handleCssRules(config: Record<string, string>): string[] {
+    const css: string[] = [];
+
+    // Handle border radius (backward compatibility)
+    if (config.border_radius) {
+        css.push(`#background{rx:${parseFloat(config.border_radius) ?? 1}px}`);
+    }
+
+    // Handle show_rank (backward compatibility)
+    if (config.show_rank && booleanize(config.show_rank) === false) {
+        css.push(`#ranking{display:none}`);
+    }
+
+    // Handle radius
+    if (config.radius) {
+        css.push(`#background{rx:${parseFloat(config.radius) ?? 4}px}`);
+    }
+
+    // Handle hide elements
+    if (config.hide) {
+        const targets = config.hide.split(",").map((x) => x.trim());
+        css.push(...targets.map((x) => `#${x}{display:none}`));
+    }
+
+    return css;
+}
+
 export function sanitize(config: Record<string, string>): Config {
+    if (!config.username?.trim()) {
+        throw new Error("Missing username");
+    }
+
     const sanitized: Config = {
-        username: "jacoblincool",
-        site: "us",
-        width: 500,
-        height: 200,
+        username: config.username.trim(),
+        site: config.site?.trim().toLowerCase() === "cn" ? "cn" : "us",
+        width: parseInt(config.width?.trim()) || 500,
+        height: parseInt(config.height?.trim()) || 200,
         css: [],
-        extensions: [FontExtension, AnimationExtension, ThemeExtension],
-        font: "baloo_2",
-        animation: true,
+        extensions: handleExtension(config),
+        font: normalize(config.font?.trim()) || "baloo_2",
+        animation: config.animation ? booleanize(config.animation.trim()) : true,
         theme: { light: "light", dark: "dark" },
         cache: 60,
     };
 
-    if (!config.username?.trim()) {
-        throw new Error("Missing username");
-    }
-    sanitized.username = config.username.trim();
-
-    // #region backward compatibility
-    if (config.border_radius) {
-        const size = parseFloat(config.border_radius) ?? 1;
-        sanitized.css.push(`#background{rx:${size}px}`);
-    }
-
-    if (config.show_rank && booleanize(config.show_rank) === false) {
-        sanitized.css.push(`#ranking{display:none}`);
-    }
-    // #endregion
-
-    if (config.site?.trim().toLowerCase() === "cn") {
-        sanitized.site = "cn";
-    }
-
-    if (config.width?.trim()) {
-        sanitized.width = parseInt(config.width.trim()) ?? 500;
-    }
-
-    if (config.height?.trim()) {
-        sanitized.height = parseInt(config.height.trim()) ?? 200;
-    }
-
+    // Handle theme
     if (config.theme?.trim()) {
         const themes = config.theme.trim().split(",");
-        if (themes.length === 1 || themes[1] === "") {
-            sanitized.theme = themes[0].trim();
-        } else {
-            sanitized.theme = { light: themes[0].trim(), dark: themes[1].trim() };
-        }
+        sanitized.theme =
+            themes.length === 1 || themes[1] === ""
+                ? themes[0].trim()
+                : { light: themes[0].trim(), dark: themes[1].trim() };
     }
 
-    if (config.font?.trim()) {
-        sanitized.font = normalize(config.font.trim());
-    }
-
-    if (config.animation?.trim()) {
-        sanitized.animation = booleanize(config.animation.trim());
-    }
-
-    if (config.ext === "activity" || config.extension === "activity") {
-        sanitized.extensions.push(ActivityExtension);
-    } else if (config.ext === "contest" || config.extension === "contest") {
-        sanitized.extensions.push(ContestExtension);
-    } else if (config.ext === "heatmap" || config.extension === "heatmap") {
-        sanitized.extensions.push(HeatmapExtension);
-    }
-
+    // Handle border
     if (config.border) {
         const size = parseFloat(config.border) ?? 1;
         sanitized.extensions.push(() => (generator, data, body, styles) => {
@@ -88,23 +96,20 @@ export function sanitize(config: Record<string, string>): Config {
         });
     }
 
-    if (config.radius) {
-        const size = parseFloat(config.radius) ?? 4;
-        sanitized.css.push(`#background{rx:${size}px}`);
-    }
+    // Handle CSS rules
+    sanitized.css = handleCssRules(config);
 
-    if (config.hide) {
-        const targets = config.hide.split(",").map((x) => x.trim());
-        sanitized.css.push(...targets.map((x) => `#${x}{display:none}`));
-    }
-
+    // Handle remote style sheets
     if (config.sheets) {
         sanitized.sheets = config.sheets.split(",").map((x) => x.trim());
-        sanitized.extensions.push(RemoteStyleExtension);
     }
 
-    if (config.cache && parseInt(config.cache) >= 0 && parseInt(config.cache) <= 60 * 60 * 24 * 7) {
-        sanitized.cache = parseInt(config.cache);
+    // Handle cache
+    if (config.cache) {
+        const cacheValue = parseInt(config.cache);
+        if (cacheValue >= 0 && cacheValue <= 60 * 60 * 24 * 7) {
+            sanitized.cache = cacheValue;
+        }
     }
 
     return sanitized;

@@ -3,6 +3,41 @@ import { LeetCode, LeetCodeCN } from "leetcode-query";
 import { CN_LANGS_MAP, CN_RESULTS_MAP } from "./constants";
 import { FetchedData } from "./types";
 
+interface ProblemCount {
+    difficulty: string;
+    count: number;
+}
+
+interface DifficultyStats {
+    solved: number;
+    total: number;
+}
+
+function getProblemStats(
+    difficulty: string,
+    acCounts: ProblemCount[],
+    totalCounts: ProblemCount[],
+): DifficultyStats {
+    return {
+        solved: acCounts.find((x) => x.difficulty === difficulty)?.count || 0,
+        total: totalCounts.find((x) => x.difficulty === difficulty)?.count || 0,
+    };
+}
+
+function getCNProblemStats(
+    difficulty: string,
+    progress: Record<string, ProblemCount[]>,
+): DifficultyStats {
+    return {
+        solved: progress.ac.find((x) => x.difficulty === difficulty.toUpperCase())?.count || 0,
+        total: (Object.values(progress) as ProblemCount[][]).reduce(
+            (acc, arr) =>
+                acc + (arr.find((x) => x.difficulty === difficulty.toUpperCase())?.count || 0),
+            0,
+        ),
+    };
+}
+
 export class Query {
     async us(username: string, headers?: Record<string, string>): Promise<FetchedData> {
         const lc = new LeetCode();
@@ -62,35 +97,20 @@ export class Query {
                 country: data.user.profile.country,
             },
             problem: {
-                easy: {
-                    solved:
-                        data.user.submits.ac.find((x: any) => x.difficulty === "Easy")?.count || 0,
-                    total: data.problems.find((x: any) => x.difficulty === "Easy")?.count || 0,
-                },
-                medium: {
-                    solved:
-                        data.user.submits.ac.find((x: any) => x.difficulty === "Medium")?.count ||
-                        0,
-                    total: data.problems.find((x: any) => x.difficulty === "Medium")?.count || 0,
-                },
-                hard: {
-                    solved:
-                        data.user.submits.ac.find((x: any) => x.difficulty === "Hard")?.count || 0,
-                    total: data.problems.find((x: any) => x.difficulty === "Hard")?.count || 0,
-                },
+                easy: getProblemStats("Easy", data.user.submits.ac, data.problems),
+                medium: getProblemStats("Medium", data.user.submits.ac, data.problems),
+                hard: getProblemStats("Hard", data.user.submits.ac, data.problems),
                 ranking: data.user.profile.ranking,
             },
-            submissions: data.submissions.map((x: any) => ({
+            submissions: data.submissions.map((x: { time: string }) => ({
                 ...x,
                 time: parseInt(x.time) * 1000,
             })),
-            contest: data.contest
-                ? {
-                      rating: data.contest.rating,
-                      ranking: data.contest.ranking,
-                      badge: data.contest.badge?.name || "",
-                  }
-                : undefined,
+            contest: data.contest && {
+                rating: data.contest.rating,
+                ranking: data.contest.ranking,
+                badge: data.contest.badge?.name || "",
+            },
         };
 
         return result;
@@ -147,38 +167,27 @@ export class Query {
                 country: data.user.profile.country,
             },
             problem: {
-                easy: {
-                    solved: data.progress.ac.find((x: any) => x.difficulty === "EASY")?.count || 0,
-                    total: (Object.values(data.progress) as any[]).reduce(
-                        (acc, arr) => acc + arr.find((x: any) => x.difficulty === "EASY").count,
-                        0,
-                    ),
-                },
-                medium: {
-                    solved:
-                        data.progress.ac.find((x: any) => x.difficulty === "MEDIUM")?.count || 0,
-                    total: (Object.values(data.progress) as any[]).reduce(
-                        (acc, arr) => acc + arr.find((x: any) => x.difficulty === "MEDIUM").count,
-                        0,
-                    ),
-                },
-                hard: {
-                    solved: data.progress.ac.find((x: any) => x.difficulty === "HARD")?.count || 0,
-                    total: (Object.values(data.progress) as any[]).reduce(
-                        (acc, arr) => acc + arr.find((x: any) => x.difficulty === "HARD").count,
-                        0,
-                    ),
-                },
+                easy: getCNProblemStats("EASY", data.progress),
+                medium: getCNProblemStats("MEDIUM", data.progress),
+                hard: getCNProblemStats("HARD", data.progress),
                 ranking: data.user.ranking,
             },
-            submissions: data.submissions.map((x: any) => ({
-                title: x.question.title,
-                time: x.time * 1000,
-                status: CN_RESULTS_MAP[x.status] || "",
-                lang: CN_LANGS_MAP[x.lang] || "",
-                slug: x.question.slug,
-                id: x.id,
-            })),
+            submissions: data.submissions.map(
+                (x: {
+                    question: { title: any; slug: any };
+                    time: number;
+                    status: string | number;
+                    lang: string | number;
+                    id: any;
+                }) => ({
+                    title: x.question.title,
+                    time: x.time * 1000,
+                    status: CN_RESULTS_MAP[x.status] || "",
+                    lang: CN_LANGS_MAP[x.lang] || "",
+                    slug: x.question.slug,
+                    id: x.id,
+                }),
+            ),
         };
 
         return result;

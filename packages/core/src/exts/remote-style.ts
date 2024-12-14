@@ -1,7 +1,7 @@
 import { Generator } from "../card";
 import { Extension } from "../types";
 
-export function RemoteStyleExtension(generator: Generator): Extension {
+export async function RemoteStyleExtension(generator: Generator): Promise<Extension> {
     const urls = generator.config.sheets;
 
     const externals: Promise<string>[] = [];
