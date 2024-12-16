@@ -16,11 +16,11 @@ LeetCode and LeetCode CN are both supported.
 - 🎨 Multiple themes and 1,300+ fonts - [Theme](#theme-default-lightdark), [Font](#font-default-baloo_2)
 - 🪄 Fully customizable using CSS - [Custom Stylesheets](#sheets-default-)
 - ⚡️ Fast and global edge network - [Cloudflare Workers](https://workers.cloudflare.com/)
-- 🚫 No tracking, controlable cache - [Cache](#cache-default-60)
+- 🚫 No tracking, controllable cache - [Cache](#cache-default-60)
 - 🍀 Open source - [MIT License](./LICENSE)
 - ⚙️ Extended-cards: `activity`, `contest`, `heatmap`
 
-It also has a [NPM package](https://www.npmjs.com/package/leetcode-card) and a [highly extensible system](./src/core/index.ts), so you can easily customize it to your needs.
+It also has a [NPM package](https://www.npmjs.com/package/leetcode-card) and a [highly extensible system](./packages/core/src/index.ts), so you can easily customize it to your needs.
 
 Want to contribute? Feel free to open a pull request!
 
