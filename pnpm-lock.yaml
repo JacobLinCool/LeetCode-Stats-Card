@@ -87,8 +87,8 @@ importers:
     packages/core:
         dependencies:
             leetcode-query:
-                specifier: 1.1.0
-                version: 1.1.0
+                specifier: 1.2.3
+                version: 1.2.3
             nano-font:
                 specifier: 0.3.1
                 version: 0.3.1
@@ -943,6 +943,21 @@ packages:
                 integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==,
             }
         engines: { node: ">=14" }
+
+    "@fetch-impl/cross-fetch@1.0.0":
+        resolution:
+            {
+                integrity: sha512-vNvwtCQ7yruvpYnp1i/4paVi/icrGYx9O4eHNDYorjTAFg78bhitO0l39opJSVfsTKqyWqj3+2+YenoGhZOCJA==,
+            }
+        peerDependencies:
+            "@fetch-impl/fetcher": ^1.0.0
+            cross-fetch: "*"
+
+    "@fetch-impl/fetcher@1.0.0":
+        resolution:
+            {
+                integrity: sha512-UPUN9Yfjnk513Vc08iNW8/9L1nSwQMsTx6nOvmjPNfU2Rtbew/2KgAbQDPuoL6PrNgEmEmmyeM29BkcVBpt3gQ==,
+            }
 
     "@humanfs/core@0.19.1":
         resolution:
@@ -2375,10 +2390,10 @@ packages:
                 integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==,
             }
 
-    leetcode-query@1.1.0:
+    leetcode-query@1.2.3:
         resolution:
             {
-                integrity: sha512-InV0mQeq5rxEYY6SEXi8dryREspuGVNHAdWBxSJg2vOM6TJWhgHeAhIOZt0wU9Nm0DOA7gkISJratnXBMtWUYw==,
+                integrity: sha512-J73ehmjgIfDd3Ugg1ee83bDALNaGh78nQwDS5qyPOsgGahK55a2lcl9Q/iaByKi6AUMMxsHEyEsUNGBX4Lmn2Q==,
             }
 
     levn@0.4.1:
@@ -3973,6 +3988,13 @@ snapshots:
 
     "@fastify/busboy@2.1.1": {}
 
+    "@fetch-impl/cross-fetch@1.0.0(@fetch-impl/fetcher@1.0.0)(cross-fetch@4.0.0)":
+        dependencies:
+            "@fetch-impl/fetcher": 1.0.0
+            cross-fetch: 4.0.0
+
+    "@fetch-impl/fetcher@1.0.0": {}
+
     "@humanfs/core@0.19.1": {}
 
     "@humanfs/node@0.16.6":
@@ -4846,8 +4868,10 @@ snapshots:
         dependencies:
             json-buffer: 3.0.1
 
-    leetcode-query@1.1.0:
+    leetcode-query@1.2.3:
         dependencies:
+            "@fetch-impl/cross-fetch": 1.0.0(@fetch-impl/fetcher@1.0.0)(cross-fetch@4.0.0)
+            "@fetch-impl/fetcher": 1.0.0
             cross-fetch: 4.0.0
             eventemitter3: 5.0.1
         transitivePeerDependencies:
