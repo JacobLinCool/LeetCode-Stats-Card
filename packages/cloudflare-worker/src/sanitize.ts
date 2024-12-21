@@ -69,7 +69,7 @@ export function sanitize(config: Record<string, string>): Config {
         height: parseInt(config.height?.trim()) || 200,
         css: [],
         extensions: handleExtension(config),
-        font: normalize(config.font?.trim()) || "baloo_2",
+        font: normalize(config.font?.trim() || "baloo_2"),
         animation: config.animation ? booleanize(config.animation.trim()) : true,
         theme: { light: "light", dark: "dark" },
         cache: 60,
