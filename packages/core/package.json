@@ -25,7 +25,7 @@
         "dist"
     ],
     "dependencies": {
-        "leetcode-query": "1.1.0",
+        "leetcode-query": "1.2.3",
         "nano-font": "0.3.1"
     },
     "devDependencies": {
