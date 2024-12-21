@@ -1,4 +1,4 @@
-import { ContestInfo, ContestRanking, LeetCode, UserContestInfo } from "leetcode-query";
+import { ContestInfo, ContestRanking, LeetCode } from "leetcode-query";
 import { Generator } from "../card";
 import { Item } from "../item";
 import { Extension } from "../types";
@@ -7,23 +7,23 @@ export async function ContestExtension(generator: Generator): Promise<Extension>
     const pre_result = new Promise<null | { ranking: ContestRanking; history: ContestInfo[] }>(
         (resolve) => {
             const lc = new LeetCode();
-            lc.once("receive-graphql", async (res) => {
-                try {
-                    const { data } = (await res.json()) as { data: UserContestInfo };
-                    const history = data.userContestRankingHistory.filter((x) => x.attended);
+            lc.user_contest_info(generator.config.username)
+                .then((data) => {
+                    try {
+                        const history = data.userContestRankingHistory.filter((x) => x.attended);
 
-                    if (history.length === 0) {
+                        if (history.length === 0) {
+                            resolve(null);
+                            return;
+                        }
+
+                        resolve({ ranking: data.userContestRanking, history });
+                    } catch (e) {
+                        console.error(e);
                         resolve(null);
-                        return;
                     }
-
-                    resolve({ ranking: data.userContestRanking, history });
-                } catch (e) {
-                    console.error(e);
-                    resolve(null);
-                }
-            });
-            lc.user_contest_info(generator.config.username).catch(() => resolve(null));
+                })
+                .catch(() => resolve(null));
         },
     );
 
