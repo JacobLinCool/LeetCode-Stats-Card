@@ -2,37 +2,42 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <link
-            rel="icon"
-            href="https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico"
-        />
+        <link rel="icon" href="https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>LeetCode Stats Card</title>
         <meta property="og:title" content="LeetCode Stats Card" />
-        <meta
-            property="og:description"
-            content="A simple tool for every leetcoder. Show your leetcode stats on your GitHub profile or your website!"
-        />
+        <meta property="og:description" content="A simple tool for every leetcoder. Show your leetcode stats on your GitHub profile or your website!" />
     </head>
     <body>
         <h1>LeetCode Stats Card</h1>
-        <input id="username" placeholder="Your LeetCode Username" />
-        <select id="theme">
-            ${theme_options}
-        </select>
-        <select id="font">
-            ${font_options}
-        </select>
-        <select id="extension">
-            <option value="" selected>No Extension</option>
-            <option value="activity">Activity</option>
-            <option value="contest">Contest</option>
-            <option value="heatmap">Heatmap</option>
-        </select>
-        <select id="site">
-            <option value="us" selected>Source: LeetCode</option>
-            <option value="cn">Source: LeetCode CN</option>
-        </select>
+        <div class="input-group">
+            <label for="username">Username:</label>
+            <input id="username" placeholder="Your LeetCode Username" />
+        </div>
+        <div class="input-group">
+            <label for="theme">Theme:</label>
+            <select id="theme">${theme_options}</select>
+        </div>
+        <div class="input-group">
+            <label for="font">Font:</label>
+            <select id="font">${font_options}</select>
+        </div>
+        <div class="input-group">
+            <label for="extension">Extension:</label>
+            <select id="extension">
+                <option value="" selected>No Extension</option>
+                <option value="activity">Activity</option>
+                <option value="contest">Contest</option>
+                <option value="heatmap">Heatmap</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="site">Source:</label>
+            <select id="site">
+                <option value="us" selected>Source: LeetCode</option>
+                <option value="cn">Source: LeetCode CN</option>
+            </select>
+        </div>
         <div>
             <button onclick="preview()">Preview</button>
             <button onclick="go()">Go</button>
@@ -40,35 +45,51 @@
         </div>
         <div><img id="preview" /></div>
         <div style="margin-top: 20px">
-            <a
-                href="https://github.com/JacobLinCool/LeetCode-Stats-Card"
-                target="_blank"
-                style="color: royalblue; text-decoration: none"
-                >Documentation on GitHub</a
-            >
+            <a href="https://github.com/JacobLinCool/LeetCode-Stats-Card" target="_blank" style="color: royalblue; text-decoration: none">Documentation on GitHub</a>
+        </div>
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5"></circle>
+                <path d="M12 1v2"></path>
+                <path d="M12 21v2"></path>
+                <path d="M4.22 4.22l1.42 1.42"></path>
+                <path d="M18.36 18.36l1.42 1.42"></path>
+                <path d="M1 12h2"></path>
+                <path d="M21 12h2"></path>
+                <path d="M4.22 19.78l1.42-1.42"></path>
+                <path d="M18.36 5.64l1.42-1.42"></path>
+            </svg>
         </div>
         <style>
-            html,
-            body {
+            html, body {
                 width: 100%;
                 height: 100%;
                 margin: 0;
                 padding: 0;
-
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-
                 font-family: sans-serif;
+                background-color: var(--bg-color);
+                color: var(--text-color);
             }
             h1 {
                 margin: 8px 0;
             }
-            input,
-            select {
+            .input-group {
+                display: flex;
+                align-items: center;
                 width: 320px;
                 margin: 8px 0;
+            }
+            .input-group label {
+                width: 100px;
+                text-align: left;
+                font-weight: 600;
+            }
+            input, select {
+                flex-grow: 1;
                 padding: 2px;
             }
             button {
@@ -78,7 +99,6 @@
             div {
                 width: 320px;
                 margin: 8px 0;
-
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -88,9 +108,26 @@
                 width: 100%;
                 min-height: 128px;
             }
+            .theme-toggle {
+                cursor: pointer;
+                margin-top: 10px;
+            }
+            :root {
+                --bg-color: white;
+                --text-color: black;
+            }
+            .dark-mode {
+                --bg-color: black;
+                --text-color: white;
+            }
         </style>
         <script>
-            preview();
+            function toggleTheme() {
+                document.body.classList.toggle('dark-mode');
+            }
+            function preview() {
+                document.querySelector("#preview").src = url();
+            }
             function url() {
                 if (!value("username")) document.querySelector("#username").value = "JacobLinCool";
                 return (
@@ -104,9 +141,6 @@
                     (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "") +
                     (value("site") === "cn" ? "&site=cn" : "")
                 );
-            }
-            function preview() {
-                document.querySelector("#preview").src = url();
             }
             function go() {
                 let win = window.open();
