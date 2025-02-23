@@ -2,53 +2,83 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" href="https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico" />
+        <link
+            rel="icon"
+            href="https://raw.githubusercontent.com/JacobLinCool/leetcode-stats-card/main/favicon/leetcode.ico"
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>LeetCode Stats Card</title>
         <meta property="og:title" content="LeetCode Stats Card" />
-        <meta property="og:description" content="A simple tool for every leetcoder. Show your leetcode stats on your GitHub profile or your website!" />
+        <meta
+            property="og:description"
+            content="A simple tool for every leetcoder. Show your leetcode stats on your GitHub profile or your website!"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
-        <h1>LeetCode Stats Card</h1>
-        <div class="input-group">
-            <label for="username">Username:</label>
-            <input id="username" placeholder="Your LeetCode Username" />
+        <div class="container">
+            <h1>LeetCode Stats Card</h1>
+            <div class="card">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input id="username" placeholder="Your LeetCode Username" />
+                </div>
+                <div class="input-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        ${theme_options}
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="font">Font</label>
+                    <select id="font">
+                        ${font_options}
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="extension">Extension</label>
+                    <select id="extension">
+                        <option value="" selected>No Extension</option>
+                        <option value="activity">Activity</option>
+                        <option value="contest">Contest</option>
+                        <option value="heatmap">Heatmap</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="site">Source</label>
+                    <select id="site">
+                        <option value="us" selected>LeetCode</option>
+                        <option value="cn">LeetCode CN</option>
+                    </select>
+                </div>
+                <div class="button-group">
+                    <button onclick="preview()">Preview</button>
+                    <button onclick="go()">Go</button>
+                    <button onclick="md()">Markdown</button>
+                </div>
+            </div>
+            <div class="preview-container">
+                <div class="loading-spinner"></div>
+                <img id="preview" onload="this.classList.add('loaded')" />
+            </div>
+            <div class="footer">
+                <a href="https://github.com/JacobLinCool/LeetCode-Stats-Card" target="_blank">
+                    Documentation on GitHub
+                </a>
+            </div>
         </div>
-        <div class="input-group">
-            <label for="theme">Theme:</label>
-            <select id="theme">${theme_options}</select>
-        </div>
-        <div class="input-group">
-            <label for="font">Font:</label>
-            <select id="font">${font_options}</select>
-        </div>
-        <div class="input-group">
-            <label for="extension">Extension:</label>
-            <select id="extension">
-                <option value="" selected>No Extension</option>
-                <option value="activity">Activity</option>
-                <option value="contest">Contest</option>
-                <option value="heatmap">Heatmap</option>
-            </select>
-        </div>
-        <div class="input-group">
-            <label for="site">Source:</label>
-            <select id="site">
-                <option value="us" selected>Source: LeetCode</option>
-                <option value="cn">Source: LeetCode CN</option>
-            </select>
-        </div>
-        <div>
-            <button onclick="preview()">Preview</button>
-            <button onclick="go()">Go</button>
-            <button onclick="md()">Markdown</button>
-        </div>
-        <div><img id="preview" /></div>
-        <div style="margin-top: 20px">
-            <a href="https://github.com/JacobLinCool/LeetCode-Stats-Card" target="_blank" style="color: royalblue; text-decoration: none">Documentation on GitHub</a>
-        </div>
-        <div class="theme-toggle" onclick="toggleTheme()">
-            <svg id="theme-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+            <svg
+                id="theme-icon"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
                 <circle cx="12" cy="12" r="5"></circle>
                 <path d="M12 1v2"></path>
                 <path d="M12 21v2"></path>
@@ -61,75 +91,313 @@
             </svg>
         </div>
         <style>
-            html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-family: sans-serif;
+            :root {
+                --bg-color: #f5f5f5;
+                --card-bg: white;
+                --text-color: #2c3e50;
+                --border-color: #e0e0e0;
+                --hover-color: #f0f0f0;
+                --accent-color: #3498db;
+            }
+
+            .dark-mode {
+                --bg-color: #1a1a1a;
+                --card-bg: #2d2d2d;
+                --text-color: #ecf0f1;
+                --border-color: #404040;
+                --hover-color: #353535;
+                --accent-color: #3498db;
+            }
+
+            * {
+                box-sizing: border-box;
+                transition:
+                    background-color 0.3s,
+                    color 0.3s;
+            }
+
+            body {
                 background-color: var(--bg-color);
                 color: var(--text-color);
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+                    Cantarell, sans-serif;
+                line-height: 1.6;
+                padding: 1rem;
             }
-            h1 {
-                margin: 8px 0;
+
+            .container {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
             }
+
+            .card {
+                background: var(--card-bg);
+                border-radius: 12px;
+                padding: 2rem;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                margin: 2rem 0;
+            }
+
             .input-group {
                 display: flex;
                 align-items: center;
-                width: 320px;
-                margin: 8px 0;
+                margin: 1rem 0;
+                gap: 1rem;
             }
+
             .input-group label {
-                width: 100px;
-                text-align: left;
+                min-width: 100px;
+                text-align: right;
                 font-weight: 600;
             }
-            input, select {
-                flex-grow: 1;
-                padding: 2px;
+
+            input,
+            select {
+                flex: 1;
+                padding: 8px 12px;
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                background: var(--card-bg);
+                color: var(--text-color);
+                font-size: 14px;
             }
-            button {
-                width: 100px;
-                margin: 8px;
+
+            input:focus,
+            select:focus {
+                outline: none;
+                border-color: var(--accent-color);
             }
-            div {
-                width: 320px;
-                margin: 8px 0;
+
+            .button-group {
                 display: flex;
-                flex-direction: row;
+                gap: 1rem;
                 justify-content: center;
-                align-items: center;
+                margin-top: 2rem;
             }
-            img {
-                width: 100%;
-                min-height: 128px;
-            }
-            .theme-toggle {
+
+            button {
+                padding: 8px 16px;
+                border: none;
+                border-radius: 6px;
+                background: var(--accent-color);
+                color: white;
                 cursor: pointer;
-                margin-top: 10px;
+                font-weight: 600;
+                transition:
+                    transform 0.2s,
+                    opacity 0.2s;
             }
-            :root {
-                --bg-color: white;
-                --text-color: black;
+
+            button:hover {
+                transform: translateY(-1px);
+                opacity: 0.9;
             }
-            .dark-mode {
-                --bg-color: black;
-                --text-color: white;
+
+            .preview-container {
+                position: relative;
+                min-height: 128px;
+                background: var(--card-bg);
+                border-radius: 12px;
+                padding: 1rem;
+                margin: 2rem 0;
+            }
+
+            .loading-spinner {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 40px;
+                height: 40px;
+                border: 4px solid var(--border-color);
+                border-top-color: var(--accent-color);
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                opacity: 0;
+            }
+
+            .preview-container:has(img:not(.loaded)) .loading-spinner {
+                opacity: 1;
+            }
+
+            @keyframes spin {
+                to {
+                    transform: translate(-50%, -50%) rotate(360deg);
+                }
+            }
+
+            #preview {
+                width: 100%;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            #preview.loaded {
+                opacity: 1;
+            }
+
+            .theme-toggle {
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                cursor: pointer;
+                padding: 10px;
+                border-radius: 50%;
+                background: var(--card-bg);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition:
+                    background-color 0.3s,
+                    transform 0.2s,
+                    box-shadow 0.2s;
+            }
+
+            .theme-toggle:hover {
+                background: var(--hover-color);
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .theme-toggle svg {
+                width: 20px;
+                height: 20px;
+                color: var(--text-color);
+            }
+
+            .footer a {
+                color: var(--accent-color);
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+            .footer a:hover {
+                text-decoration: underline;
+            }
+
+            @media (max-width: 600px) {
+                body {
+                    padding: 0.5rem;
+                    font-size: 14px;
+                }
+
+                .container {
+                    max-width: 100%;
+                }
+
+                h1 {
+                    font-size: 1.5rem;
+                    margin: 0.5rem 0;
+                }
+
+                .card {
+                    padding: 1rem;
+                    margin: 1rem 0;
+                }
+
+                .input-group {
+                    flex-direction: column;
+                    align-items: stretch;
+                    gap: 0.25rem;
+                    margin: 0.5rem 0;
+                }
+
+                .input-group label {
+                    text-align: left;
+                    font-size: 0.9rem;
+                }
+
+                input,
+                select {
+                    padding: 6px 10px;
+                    font-size: 0.9rem;
+                }
+
+                .button-group {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    margin-top: 1rem;
+                    gap: 0.5rem;
+                }
+
+                button {
+                    flex: 1;
+                    min-width: 80px;
+                    padding: 6px 12px;
+                    font-size: 0.9rem;
+                }
+
+                .preview-container {
+                    min-height: 96px;
+                    padding: 0.5rem;
+                    margin: 1rem 0;
+                }
+
+                #preview {
+                    max-height: 240px;
+                    object-fit: contain;
+                }
+
+                .theme-toggle {
+                    top: 10px;
+                    right: 10px;
+                    width: 32px;
+                    height: 32px;
+                }
+
+                .theme-toggle svg {
+                    width: 16px;
+                    height: 16px;
+                }
+
+                .footer {
+                    font-size: 0.9rem;
+                    margin: 1rem 0;
+                }
             }
         </style>
         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                document.querySelector("#username").value = "JacobLinCool";
+                preview();
+                setupAutoPreview();
+            });
+
+            function debounce(func, wait) {
+                let timeout;
+                return function (...args) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => func.apply(this, args), wait);
+                };
+            }
+
+            function setupAutoPreview() {
+                // Debounced preview for username input
+                const debouncedPreview = debounce(preview, 1000);
+                document.querySelector("#username").addEventListener("input", debouncedPreview);
+
+                // Immediate preview for other inputs
+                ["theme", "font", "extension", "site"].forEach((id) => {
+                    document.querySelector("#" + id).addEventListener("change", preview);
+                });
+            }
+
             function toggleTheme() {
-                document.body.classList.toggle('dark-mode');
+                document.body.classList.toggle("dark-mode");
             }
             function preview() {
-                document.querySelector("#preview").src = url();
+                const img = document.querySelector("#preview");
+                img.classList.remove("loaded");
+                img.src = url() || img.src;
             }
             function url() {
-                if (!value("username")) document.querySelector("#username").value = "JacobLinCool";
+                if (!value("username")) {
+                    return "";
+                }
                 return (
                     location.origin +
                     "/" +
@@ -147,8 +415,37 @@
                 win.location = url();
             }
             function md() {
-                let code = "![LeetCode Stats](" + url() + ")";
-                prompt("Markdown Code: ", code);
+                const code = "![LeetCode Stats](" + url() + ")";
+                Swal.fire({
+                    title: "Markdown Code",
+                    html: `<textarea readonly style="width: 100%; height: 100px; padding: 8px; margin-top: 10px; resize: none;">${code}</textarea>`,
+                    confirmButtonText: "Copy",
+                    showCancelButton: true,
+                    cancelButtonText: "Close",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigator.clipboard
+                            .writeText(code)
+                            .then(() => {
+                                Swal.fire({
+                                    title: "Copied!",
+                                    text: "The markdown code has been copied to your clipboard",
+                                    icon: "success",
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                });
+                            })
+                            .catch(() => {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Failed to copy to clipboard",
+                                    icon: "error",
+                                    timer: 1500,
+                                    showConfirmButton: false,
+                                });
+                            });
+                    }
+                });
             }
             function value(id) {
                 return document.querySelector("#" + id).value.trim() || "";
