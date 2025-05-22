@@ -12,9 +12,10 @@ export async function HeatmapExtension(generator: Generator): Promise<Extension>
                     const { data } = (await res.json()) as {
                         data: { user: { calendar: { calendar: string } } };
                     };
-                    resolve(JSON.parse(data.user.calendar.calendar));
+                    const calendar = data?.user?.calendar?.calendar;
+                    resolve(calendar ? JSON.parse(calendar) : {});
                 } catch (e) {
-                    console.error(e);
+                    console.warn("Failed to parse calendar", e);
                     resolve({});
                 }
             });
@@ -30,9 +31,10 @@ export async function HeatmapExtension(generator: Generator): Promise<Extension>
                     const { data } = (await res.json()) as {
                         data: { calendar: { calendar: string } };
                     };
-                    resolve(JSON.parse(data.calendar.calendar));
+                    const calendar = data?.calendar?.calendar;
+                    resolve(calendar ? JSON.parse(calendar) : {});
                 } catch (e) {
-                    console.error(e);
+                    console.warn("Failed to parse calendar", e);
                     resolve({});
                 }
             });
