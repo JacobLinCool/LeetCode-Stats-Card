@@ -10,7 +10,9 @@ export async function ContestExtension(generator: Generator): Promise<Extension>
             lc.user_contest_info(generator.config.username)
                 .then((data) => {
                     try {
-                        const history = data.userContestRankingHistory.filter((x) => x.attended);
+                        const history = Array.isArray(data.userContestRankingHistory)
+                            ? data.userContestRankingHistory.filter((x) => x.attended)
+                            : [];
 
                         if (history.length === 0) {
                             resolve(null);
