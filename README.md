@@ -34,7 +34,7 @@ See [docker-compose.yml](./docker-compose.yml) for an example.
 
 ## Usage
 
-Simply copy the code below, paste it into your `README.md`, and change the path to your leetcode username (case-insensitive).
+Simply copy the code below, paste it into your `README.md`, and change the path to your leetcode id (case-insensitive).
 
 ```md
 ![Leetcode Stats](https://leetcard.jacoblin.cool/JacobLinCool)
