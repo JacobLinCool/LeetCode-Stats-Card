@@ -83,6 +83,23 @@ Use a comma to separate the light and dark theme.
 
 [![](https://leetcard.jacoblin.cool/jacoblincool?theme=unicorn)](https://leetcode.com/jacoblincool)
 
+#### `colors` (default: `""`)
+
+Override the card's theme palette with your own comma-separated list of hex colors.
+
+Format:  
+`colors=bg0,bg1,text0,text1,color0,color1,color2,color3`
+
+You can provide fewer values; missing values will be padded by repeating the last provided one.
+
+Example (Blue Palette):
+
+```md
+![](https://leetcard.jacoblin.cool/jacoblincool?colors=012a4a,013a63,a9d6e5,ffffff,0077b6,0096c7,00b4d8,90e0ef)
+```
+
+When both `theme` and `colors` are provided, `colors` takes precedence.
+
 #### `font` (default: `Baloo_2`)
 
 Card font, you can use almost all fonts on [Google Fonts](https://fonts.google.com/).

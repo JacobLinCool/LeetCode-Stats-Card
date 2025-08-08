@@ -4,6 +4,7 @@ import { ActivityExtension } from "../exts/activity";
 import { AnimationExtension } from "../exts/animation";
 import { FontExtension } from "../exts/font";
 import { ThemeExtension } from "../exts/theme";
+import type { Config } from "../types";
 
 describe("generate", () => {
     test("should work (us)", async () => {
@@ -48,5 +49,35 @@ describe("generate", () => {
         expect(svg.length).toBeGreaterThan(1000);
         expect(svg.includes("#2e3440")).toBeTruthy();
         expect(svg.includes("Source Code Pro")).toBeTruthy();
+    });
+
+    test("applies custom colors via `colors` option", async () => {
+        const svg = await generate({
+            username: "jacoblincool",
+            extensions: [ThemeExtension],
+            colors: [
+                "#111111",
+                "#222222",
+                "#333333",
+                "#444444",
+                "#aa0000",
+                "#00aa00",
+                "#0000aa",
+                "#ffaa00",
+            ],
+        } as unknown as Config);
+
+        // Background and text variables
+        expect(svg).toContain("--bg-0:#111111");
+        expect(svg).toContain("--bg-1:#222222");
+        expect(svg).toContain("--text-0:#333333");
+        expect(svg).toContain("--text-1:#444444");
+
+        // Accent colors
+        expect(svg).toContain("--color-0:#aa0000");
+        expect(svg).toContain("--color-3:#ffaa00");
+
+        // Make sure they affect an element
+        expect(svg).toMatch(/stroke:var\(--color-0\)/);
     });
 });

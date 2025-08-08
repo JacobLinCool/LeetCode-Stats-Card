@@ -36,6 +36,10 @@
                     </select>
                 </div>
                 <div class="input-group">
+                    <label for="colors">Colors</label>
+                    <input id="colors" placeholder="#1e1e2e,#45475a,#cdd6f4,#bac2de,#fab387,#a6e3a1,#f9e2af,#f38ba8" />
+                </div>
+                <div class="input-group">
                     <label for="extension">Extension</label>
                     <select id="extension">
                         <option value="" selected>No Extension</option>
@@ -381,8 +385,10 @@
                 document.querySelector("#username").addEventListener("input", debouncedPreview);
 
                 // Immediate preview for other inputs
-                ["theme", "font", "extension", "site"].forEach((id) => {
-                    document.querySelector("#" + id).addEventListener("change", preview);
+                ["theme","font","extension","site","colors"].forEach((id) => {
+                    const el = document.querySelector("#" + id);
+                    el.addEventListener("change", preview);
+                    if (id === "colors") el.addEventListener("input", preview);
                 });
             }
 
@@ -406,6 +412,7 @@
                     encodeURIComponent(value("theme")) +
                     "&font=" +
                     encodeURIComponent(value("font")) +
+                    (value("colors") ? "&colors=" + encodeURIComponent(value("colors")) : "") +
                     (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "") +
                     (value("site") === "cn" ? "&site=cn" : "")
                 );

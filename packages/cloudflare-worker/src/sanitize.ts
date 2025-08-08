@@ -84,6 +84,21 @@ export function sanitize(config: Record<string, string>): Config {
                 : { light: themes[0].trim(), dark: themes[1].trim() };
     }
 
+    // Handle custom colors (comma-separated hex values)
+    if (config.colors) {
+        const raw = config.colors
+            .split(",")
+            .map((x) => x.trim())
+            .filter(Boolean);
+        const hex = raw
+            .map((c) => (c.startsWith("#") ? c : `#${c}`))
+            .map((c) => c.toLowerCase())
+            .filter((c) => /^#([0-9a-f]{3}|[0-9a-f]{6})$/.test(c));
+        if (hex.length > 0) {
+            sanitized.colors = hex;
+        }
+    }
+
     // Handle border
     if (config.border) {
         const size = parseFloat(config.border) ?? 1;
