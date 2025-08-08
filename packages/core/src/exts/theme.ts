@@ -9,7 +9,15 @@ import radical from "../theme/radical";
 import transparent from "../theme/transparent";
 import unicorn from "../theme/unicorn";
 import wtf from "../theme/wtf";
-import { Extension, Item } from "../types";
+import { Config, Extension, Item } from "../types";
+
+function themeFromColors(list: string[]): Theme {
+    // Map: first 2 -> bg, next 2 -> text, next 4 -> accent colors
+    const bg = list.slice(0, 2);
+    const text = list.slice(2, 4);
+    const color = list.slice(4, 8);
+    return Theme({ palette: { bg, text, color } });
+}
 
 export const supported: Record<string, Theme> = {
     dark,
@@ -58,6 +66,13 @@ export function ThemeExtension(): Extension {
             if (theme.extends) {
                 body["theme-ext-dark"] = () => theme.extends as Item;
             }
+        }
+
+        // If explicit colors are provided, apply them as an overriding theme
+        const colors = (generator.config as Config | undefined)?.colors;
+        if (Array.isArray(colors) && colors.length > 0) {
+            const t = themeFromColors(colors);
+            styles.push(css(t)); // push LAST = highest precedence
         }
     };
 }
