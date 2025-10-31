@@ -54,7 +54,7 @@
         "url": "https://github.com/JacobLinCool/LeetCode-Stats-Card/issues"
     },
     "homepage": "https://github.com/JacobLinCool/LeetCode-Stats-Card#readme",
-    "packageManager": "pnpm@9.15.0",
+    "packageManager": "pnpm@9.15.9",
     "lint-staged": {
         "*.{js,ts}": [
             "eslint --fix",
