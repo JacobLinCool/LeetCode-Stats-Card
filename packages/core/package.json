@@ -25,13 +25,13 @@
         "dist"
     ],
     "dependencies": {
-        "leetcode-query": "1.2.3",
+        "leetcode-query": "2.0.1",
         "nano-font": "0.3.1"
     },
     "devDependencies": {
-        "@cloudflare/workers-types": "^4.20241205.0",
-        "tsup": "8.0.2",
-        "typescript": "^5.7.2"
+        "@cloudflare/workers-types": "^4.20251014.0",
+        "tsup": "8.5.0",
+        "typescript": "^5.9.3"
     },
     "scripts": {
         "build": "tsup"
