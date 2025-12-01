@@ -36,7 +36,16 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label>Colors</label>
+                    <label for="use-custom-colors">Colors</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="use-custom-colors" />
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text toggle-text-off">Off</span>
+                        <span class="toggle-text toggle-text-on">On</span>
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label> </label>
                     <div class="colors-grid">
                         <div class="color-field">
                             <span>bg0</span>
@@ -385,6 +394,73 @@
                 appearance: none;
             }
 
+            .toggle-switch {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            .toggle-switch input {
+                display: none;
+            }
+
+            .toggle-slider {
+                position: relative;
+                width: 42px;
+                height: 22px;
+                background: var(--border-color);
+                border-radius: 999px;
+                transition: background-color 0.2s;
+            }
+
+            .toggle-slider::before {
+                content: "";
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: var(--card-bg);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                transition: transform 0.2s;
+            }
+
+            .toggle-switch input:checked + .toggle-slider {
+                background: var(--accent-color);
+            }
+
+            .toggle-switch input:checked + .toggle-slider::before {
+                transform: translateX(20px);
+            }
+
+            .toggle-text {
+                font-size: 0.75rem;
+                opacity: 0.6;
+            }
+
+            .toggle-switch input:not(:checked) ~ .toggle-text-off {
+                opacity: 1;
+                font-weight: 600;
+            }
+
+            .toggle-switch input:checked ~ .toggle-text-on {
+                opacity: 1;
+                font-weight: 600;
+            }
+
+            .color-input:disabled {
+                opacity: 0;
+                cursor: not-allowed;
+            }
+
+            .color-field.disabled span {
+                opacity: 0;
+            }
+
             @media (max-width: 600px) {
                 body {
                     padding: 0.5rem;
@@ -473,8 +549,21 @@
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector("#username").value = "JacobLinCool";
-                preview();
                 setupAutoPreview();
+
+                // Custom colors toggle: default OFF
+                const customColorsToggle = document.querySelector("#use-custom-colors");
+                if (customColorsToggle) {
+                    customColorsToggle.checked = false;
+                    toggleCustomColors(false);
+
+                    customColorsToggle.addEventListener("change", function () {
+                        toggleCustomColors(this.checked);
+                        preview();
+                    });
+                }
+
+                preview();
             });
 
             function debounce(func, wait) {
@@ -500,6 +589,21 @@
                 });
             }
 
+            function toggleCustomColors(enabled) {
+                document.querySelectorAll(".color-input").forEach((el) => {
+                    el.disabled = !enabled;
+
+                    const parent = el.closest(".color-field");
+                    if (parent) {
+                        if (enabled) {
+                            parent.classList.remove("disabled");
+                        } else {
+                            parent.classList.add("disabled");
+                        }
+                    }
+                });
+            }
+
             function getColors() {
                 const order = ["bg0", "bg1", "text0", "text1", "color0", "color1", "color2", "color3"];
                 return order
@@ -518,12 +622,15 @@
                 img.classList.remove("loaded");
                 img.src = url() || img.src;
             }
+
             function url() {
                 if (!value("username")) {
                     return "";
                 }
 
-                const colors = getColors();
+                const useCustomColorsEl = document.querySelector("#use-custom-colors");
+                const useCustomColors = useCustomColorsEl ? useCustomColorsEl.checked : false;
+                const colors = useCustomColors ? getColors() : "";
 
                 return (
                     location.origin +
@@ -533,11 +640,12 @@
                     encodeURIComponent(value("theme")) +
                     "&font=" +
                     encodeURIComponent(value("font")) +
-                    (colors ? "&colors=" + encodeURIComponent(colors) : "") +
+                    (useCustomColors && colors ? "&colors=" + encodeURIComponent(colors) : "") +
                     (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "") +
                     (value("site") === "cn" ? "&site=cn" : "")
                 );
             }
+
             function go() {
                 let win = window.open();
                 win.location = url();
