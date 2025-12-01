@@ -36,8 +36,90 @@
                     </select>
                 </div>
                 <div class="input-group">
-                    <label for="colors">Colors</label>
-                    <input id="colors" placeholder="#1e1e2e,#45475a,#cdd6f4,#bac2de,#fab387,#a6e3a1,#f9e2af,#f38ba8" />
+                    <label for="use-custom-colors">Colors</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="use-custom-colors" />
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-text toggle-text-off">Off</span>
+                        <span class="toggle-text toggle-text-on">On</span>
+                    </label>
+                </div>
+                <div class="input-group">
+                    <label> </label>
+                    <div class="colors-grid">
+                        <div class="color-field">
+                            <span>bg0</span>
+                            <input
+                                type="color"
+                                id="color-bg0"
+                                class="color-input"
+                                value="#1e1e2e"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>bg1</span>
+                            <input
+                                type="color"
+                                id="color-bg1"
+                                class="color-input"
+                                value="#45475a"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>text0</span>
+                            <input
+                                type="color"
+                                id="color-text0"
+                                class="color-input"
+                                value="#cdd6f4"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>text1</span>
+                            <input
+                                type="color"
+                                id="color-text1"
+                                class="color-input"
+                                value="#bac2de"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>color0</span>
+                            <input
+                                type="color"
+                                id="color-color0"
+                                class="color-input"
+                                value="#fab387"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>color1</span>
+                            <input
+                                type="color"
+                                id="color-color1"
+                                class="color-input"
+                                value="#a6e3a1"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>color2</span>
+                            <input
+                                type="color"
+                                id="color-color2"
+                                class="color-input"
+                                value="#f9e2af"
+                            />
+                        </div>
+                        <div class="color-field">
+                            <span>color3</span>
+                            <input
+                                type="color"
+                                id="color-color3"
+                                class="color-input"
+                                value="#f38ba8"
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div class="input-group">
                     <label for="extension">Extension</label>
@@ -283,6 +365,102 @@
                 text-decoration: underline;
             }
 
+            .colors-grid {
+                display: grid;
+                grid-template-columns: repeat(8, minmax(0, 1fr));
+                gap: 0.5rem;
+            }
+
+            .color-field {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                font-size: 12px;
+                gap: 0.25rem;
+            }
+
+            .color-field span {
+                opacity: 0.8;
+            }
+
+            .color-field input[type="color"] {
+                width: 100%;
+                aspect-ratio: 1 / 1;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                background: none;
+                padding: 0;
+                appearance: none;
+            }
+
+            .toggle-switch {
+                position: relative;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                cursor: pointer;
+                user-select: none;
+            }
+
+            .toggle-switch input {
+                display: none;
+            }
+
+            .toggle-slider {
+                position: relative;
+                width: 42px;
+                height: 22px;
+                background: var(--border-color);
+                border-radius: 999px;
+                transition: background-color 0.2s;
+            }
+
+            .toggle-slider::before {
+                content: "";
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                background: var(--card-bg);
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+                transition: transform 0.2s;
+            }
+
+            .toggle-switch input:checked + .toggle-slider {
+                background: var(--accent-color);
+            }
+
+            .toggle-switch input:checked + .toggle-slider::before {
+                transform: translateX(20px);
+            }
+
+            .toggle-text {
+                font-size: 0.75rem;
+                opacity: 0.6;
+            }
+
+            .toggle-switch input:not(:checked) ~ .toggle-text-off {
+                opacity: 1;
+                font-weight: 600;
+            }
+
+            .toggle-switch input:checked ~ .toggle-text-on {
+                opacity: 1;
+                font-weight: 600;
+            }
+
+            .color-input:disabled {
+                opacity: 0;
+                cursor: not-allowed;
+            }
+
+            .color-field.disabled span {
+                opacity: 0;
+            }
+
             @media (max-width: 600px) {
                 body {
                     padding: 0.5rem;
@@ -362,13 +540,30 @@
                     font-size: 0.9rem;
                     margin: 1rem 0;
                 }
+
+                .colors-grid {
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                }
             }
         </style>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector("#username").value = "JacobLinCool";
-                preview();
                 setupAutoPreview();
+
+                // Custom colors toggle: default OFF
+                const customColorsToggle = document.querySelector("#use-custom-colors");
+                if (customColorsToggle) {
+                    customColorsToggle.checked = false;
+                    toggleCustomColors(false);
+
+                    customColorsToggle.addEventListener("change", function () {
+                        toggleCustomColors(this.checked);
+                        preview();
+                    });
+                }
+
+                preview();
             });
 
             function debounce(func, wait) {
@@ -380,15 +575,32 @@
             }
 
             function setupAutoPreview() {
-                // Debounced preview for username input
                 const debouncedPreview = debounce(preview, 1000);
                 document.querySelector("#username").addEventListener("input", debouncedPreview);
 
-                // Immediate preview for other inputs
-                ["theme","font","extension","site","colors"].forEach((id) => {
+                ["theme", "font", "extension", "site"].forEach((id) => {
                     const el = document.querySelector("#" + id);
                     el.addEventListener("change", preview);
-                    if (id === "colors") el.addEventListener("input", preview);
+                });
+
+                document.querySelectorAll(".color-input").forEach((el) => {
+                    el.addEventListener("input", preview);
+                    el.addEventListener("change", preview);
+                });
+            }
+
+            function toggleCustomColors(enabled) {
+                document.querySelectorAll(".color-input").forEach((el) => {
+                    el.disabled = !enabled;
+
+                    const parent = el.closest(".color-field");
+                    if (parent) {
+                        if (enabled) {
+                            parent.classList.remove("disabled");
+                        } else {
+                            parent.classList.add("disabled");
+                        }
+                    }
                 });
             }
 
@@ -400,23 +612,41 @@
                 img.classList.remove("loaded");
                 img.src = url() || img.src;
             }
+
+            function getColors() {
+                const order = ["bg0", "bg1", "text0", "text1", "color0", "color1", "color2", "color3"];
+                return order
+                    .map((key) => {
+                        const el = document.querySelector("#color-" + key);
+                        if (!el) return "";
+                        let val = el.value.trim();
+
+                        // Ensure we keep valid #, &, , but still make it URL-safe later
+                        // Replace commas inside color values to avoid splitting issues
+                        return val.replace(/,/g, "%2C");
+                    })
+                    .join(",");
+            }
+
             function url() {
                 if (!value("username")) {
                     return "";
                 }
-                return (
-                    location.origin +
-                    "/" +
-                    encodeURIComponent(value("username")) +
-                    "?theme=" +
-                    encodeURIComponent(value("theme")) +
-                    "&font=" +
-                    encodeURIComponent(value("font")) +
-                    (value("colors") ? "&colors=" + encodeURIComponent(value("colors")) : "") +
-                    (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "") +
-                    (value("site") === "cn" ? "&site=cn" : "")
-                );
+
+                const useCustomColorsEl = document.querySelector("#use-custom-colors");
+                const useCustomColors = useCustomColorsEl ? useCustomColorsEl.checked : false;
+                const colors = useCustomColors ? getColors() : "";
+
+                const params = new URLSearchParams();
+                params.set("theme", value("theme"));
+                params.set("font", value("font"));
+                if (useCustomColors && colors) params.set("colors", colors);
+                if (value("extension")) params.set("ext", value("extension"));
+                if (value("site") === "cn") params.set("site", "cn");
+
+                return `${location.origin}/${encodeURIComponent(value("username"))}?${params.toString()}`;
             }
+
             function go() {
                 let win = window.open();
                 win.location = url();
