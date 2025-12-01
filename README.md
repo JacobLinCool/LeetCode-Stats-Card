@@ -95,7 +95,7 @@ You can provide fewer values; missing values will be padded by repeating the las
 Example (Blue Palette):
 
 ```md
-![](https://leetcard.jacoblin.cool/jacoblincool?colors=012a4a,013a63,a9d6e5,ffffff,0077b6,0096c7,00b4d8,90e0ef)
+![](https://leetcard.jacoblin.cool/JacobLinCool?theme=light&font=Noto%20Serif%20Kannada&colors=%231e1e2e%2C%2345475a%2C%23cdd6f4%2C%23bac2de%2C%23fab387%2C%23a6e3a1%2C%23f9e2af%2C%23f38ba8)
 ```
 
 When both `theme` and `colors` are provided, `colors` takes precedence.

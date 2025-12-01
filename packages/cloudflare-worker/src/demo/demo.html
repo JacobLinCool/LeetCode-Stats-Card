@@ -604,16 +604,6 @@
                 });
             }
 
-            function getColors() {
-                const order = ["bg0", "bg1", "text0", "text1", "color0", "color1", "color2", "color3"];
-                return order
-                    .map((key) => {
-                        const el = document.querySelector("#color-" + key);
-                        return el ? el.value.trim() : "";
-                    })
-                    .join(",");
-            }
-
             function toggleTheme() {
                 document.body.classList.toggle("dark-mode");
             }
@@ -621,6 +611,21 @@
                 const img = document.querySelector("#preview");
                 img.classList.remove("loaded");
                 img.src = url() || img.src;
+            }
+
+            function getColors() {
+                const order = ["bg0", "bg1", "text0", "text1", "color0", "color1", "color2", "color3"];
+                return order
+                    .map((key) => {
+                        const el = document.querySelector("#color-" + key);
+                        if (!el) return "";
+                        let val = el.value.trim();
+
+                        // Ensure we keep valid #, &, , but still make it URL-safe later
+                        // Replace commas inside color values to avoid splitting issues
+                        return val.replace(/,/g, "%2C");
+                    })
+                    .join(",");
             }
 
             function url() {
@@ -632,18 +637,14 @@
                 const useCustomColors = useCustomColorsEl ? useCustomColorsEl.checked : false;
                 const colors = useCustomColors ? getColors() : "";
 
-                return (
-                    location.origin +
-                    "/" +
-                    encodeURIComponent(value("username")) +
-                    "?theme=" +
-                    encodeURIComponent(value("theme")) +
-                    "&font=" +
-                    encodeURIComponent(value("font")) +
-                    (useCustomColors && colors ? "&colors=" + encodeURIComponent(colors) : "") +
-                    (value("extension") ? "&ext=" + encodeURIComponent(value("extension")) : "") +
-                    (value("site") === "cn" ? "&site=cn" : "")
-                );
+                const params = new URLSearchParams();
+                params.set("theme", value("theme"));
+                params.set("font", value("font"));
+                if (useCustomColors && colors) params.set("colors", colors);
+                if (value("extension")) params.set("ext", value("extension"));
+                if (value("site") === "cn") params.set("site", "cn");
+
+                return `${location.origin}/${encodeURIComponent(value("username"))}?${params.toString()}`;
             }
 
             function go() {
