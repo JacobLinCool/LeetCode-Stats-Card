@@ -61,7 +61,7 @@ importers:
     dependencies:
       hono:
         specifier: ^4.10.4
-        version: 4.10.4
+        version: 4.11.0
       leetcode-card:
         specifier: workspace:*
         version: link:../core
@@ -1580,8 +1580,8 @@ packages:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
     engines: {node: '>=8'}
 
-  hono@4.10.4:
-    resolution: {integrity: sha512-YG/fo7zlU3KwrBL5vDpWKisLYiM+nVstBQqfr7gCPbSYURnNEP9BDxEMz8KfsDR9JX0lJWDRNc6nXX31v7ZEyg==}
+  hono@4.11.0:
+    resolution: {integrity: sha512-Jg8uZzN2ul8/qlyid5FO8O624F3AK0wKtkgoeEON1qBum1rM1itYBxoMKu/1SPJC7F1+xlIZsJMmc4HHhJ1AWg==}
     engines: {node: '>=16.9.0'}
 
   html-escaper@2.0.2:
@@ -3640,7 +3640,7 @@ snapshots:
 
   has-flag@4.0.0: {}
 
-  hono@4.10.4: {}
+  hono@4.11.0: {}
 
   html-escaper@2.0.2: {}
 
