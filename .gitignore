@@ -82,3 +82,4 @@ lib/
 
 worker.capnp
 .storage/
+packages/vercel/api/

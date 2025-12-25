@@ -1,0 +1,18 @@
+{
+    "private": true,
+    "name": "vercel-edge",
+    "version": "0.0.0",
+    "scripts": {
+        "build": "esbuild src/index.ts --outfile=\"api/[[...path]].js\" --bundle --format=esm --target=es2021 --loader:.html=text",
+        "test": "vitest"
+    },
+    "dependencies": {
+        "hono": "^4.10.4",
+        "leetcode-card": "workspace:*"
+    },
+    "devDependencies": {
+        "esbuild": "^0.25.11",
+        "typescript": "^5.9.3",
+        "vitest": "^3.2.4"
+    }
+}

@@ -32,6 +32,10 @@ To build the image by yourself, use `pnpm build:image` script.
 
 See [docker-compose.yml](./docker-compose.yml) for an example.
 
+### Deploy on Vercel
+
+An Edge Function version is available under [`packages/vercel`](./packages/vercel/README.md). Set the project root to that folder and use `pnpm --filter vercel-edge build` as the build command to produce the `api/[[...path]].js` entrypoint for Vercel.
+
 ## Usage
 
 Simply copy the code below, paste it into your `README.md`, and change the path to your leetcode username (case-insensitive).

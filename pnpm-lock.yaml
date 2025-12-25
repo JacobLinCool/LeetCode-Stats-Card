@@ -104,6 +104,25 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
+  packages/vercel:
+    dependencies:
+      hono:
+        specifier: ^4.10.4
+        version: 4.10.4
+      leetcode-card:
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      esbuild:
+        specifier: ^0.25.11
+        version: 0.25.11
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.2.4
+        version: 3.2.4(@types/node@24.9.2)(yaml@2.8.1)
+
 packages:
 
   '@ampproject/remapping@2.3.0':
